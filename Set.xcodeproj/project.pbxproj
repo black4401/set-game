@@ -7,19 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB492FDF28FACC1C00BDA277 /* PlayingSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB492FDE28FACC1C00BDA277 /* PlayingSet.swift */; };
+		BB492FE128FD7CC100BDA277 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB492FE028FD7CC100BDA277 /* CardView.swift */; };
+		BB89C5492902961A00F174A2 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB89C5482902961A00F174A2 /* CardModel.swift */; };
 		BBDA40B828FA315A00F9903F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDA40B728FA315A00F9903F /* AppDelegate.swift */; };
 		BBDA40BA28FA315A00F9903F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDA40B928FA315A00F9903F /* SceneDelegate.swift */; };
-		BBDA40BC28FA315A00F9903F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDA40BB28FA315A00F9903F /* ViewController.swift */; };
+		BBDA40BC28FA315A00F9903F /* SetGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDA40BB28FA315A00F9903F /* SetGameViewController.swift */; };
 		BBDA40BF28FA315A00F9903F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40BD28FA315A00F9903F /* Main.storyboard */; };
 		BBDA40C128FA315B00F9903F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40C028FA315B00F9903F /* Assets.xcassets */; };
 		BBDA40C428FA315B00F9903F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40C228FA315B00F9903F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB492FDE28FACC1C00BDA277 /* PlayingSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingSet.swift; sourceTree = "<group>"; };
+		BB492FE028FD7CC100BDA277 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		BB89C5482902961A00F174A2 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		BBDA40B428FA315A00F9903F /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDA40B728FA315A00F9903F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBDA40B928FA315A00F9903F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BBDA40BB28FA315A00F9903F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BBDA40BB28FA315A00F9903F /* SetGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameViewController.swift; sourceTree = "<group>"; };
 		BBDA40BE28FA315A00F9903F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BBDA40C028FA315B00F9903F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBDA40C328FA315B00F9903F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,9 +62,12 @@
 		BBDA40B628FA315A00F9903F /* Set */ = {
 			isa = PBXGroup;
 			children = (
+				BB89C5482902961A00F174A2 /* CardModel.swift */,
+				BB492FE028FD7CC100BDA277 /* CardView.swift */,
 				BBDA40B728FA315A00F9903F /* AppDelegate.swift */,
 				BBDA40B928FA315A00F9903F /* SceneDelegate.swift */,
-				BBDA40BB28FA315A00F9903F /* ViewController.swift */,
+				BBDA40BB28FA315A00F9903F /* SetGameViewController.swift */,
+				BB492FDE28FACC1C00BDA277 /* PlayingSet.swift */,
 				BBDA40BD28FA315A00F9903F /* Main.storyboard */,
 				BBDA40C028FA315B00F9903F /* Assets.xcassets */,
 				BBDA40C228FA315B00F9903F /* LaunchScreen.storyboard */,
@@ -138,9 +147,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBDA40BC28FA315A00F9903F /* ViewController.swift in Sources */,
+				BBDA40BC28FA315A00F9903F /* SetGameViewController.swift in Sources */,
+				BB492FDF28FACC1C00BDA277 /* PlayingSet.swift in Sources */,
 				BBDA40B828FA315A00F9903F /* AppDelegate.swift in Sources */,
 				BBDA40BA28FA315A00F9903F /* SceneDelegate.swift in Sources */,
+				BB492FE128FD7CC100BDA277 /* CardView.swift in Sources */,
+				BB89C5492902961A00F174A2 /* CardModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
