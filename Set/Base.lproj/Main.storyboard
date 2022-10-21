@@ -19,14 +19,17 @@
                                 <rect key="frame" x="270.66666666666669" y="759.66666666666663" width="103.33333333333331" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="NewGame"/>
+                                <connections>
+                                    <action selector="tapOnNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZTe-Zv-YaR"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Zc-iB-6Ue">
                                 <rect key="frame" x="10" y="47" width="370" height="663"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="n0U-uM-0y2">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="n0U-uM-0y2">
                                         <rect key="frame" x="0.0" y="0.0" width="370" height="102.33333333333333"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPW-5p-Yxn" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPW-5p-Yxn">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -35,7 +38,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j8q-hS-Ahg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAc-Zx-oYN" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAc-Zx-oYN">
                                                 <rect key="frame" x="94.333333333333343" y="0.0" width="87.333333333333343" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -44,7 +47,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O7g-ez-SwV"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwv-0b-w39" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwv-0b-w39">
                                                 <rect key="frame" x="188.66666666666666" y="0.0" width="86.999999999999972" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -53,7 +56,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h1w-En-ukw"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gp-0H-F8P" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gp-0H-F8P">
                                                 <rect key="frame" x="282.66666666666669" y="0.0" width="87.333333333333314" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -67,7 +70,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="z0i-Xc-86v">
                                         <rect key="frame" x="0.0" y="112.33333333333334" width="370" height="102"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YxO-2X-AYW" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YxO-2X-AYW">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -76,7 +79,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Brr-V1-cvN"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puv-gD-XwP" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puv-gD-XwP">
                                                 <rect key="frame" x="94.333333333333343" y="0.0" width="87.333333333333343" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -85,7 +88,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mQ6-wQ-lTq"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPU-DD-IOp" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPU-DD-IOp">
                                                 <rect key="frame" x="188.66666666666666" y="0.0" width="86.999999999999972" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -94,7 +97,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="21U-X4-Hfo"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfV-mR-aQm" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfV-mR-aQm">
                                                 <rect key="frame" x="282.66666666666669" y="0.0" width="87.333333333333314" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -105,10 +108,10 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="cwF-Yt-98F">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="cwF-Yt-98F">
                                         <rect key="frame" x="0.0" y="224.33333333333334" width="370" height="102.33333333333334"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dix-JE-Ew0" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dix-JE-Ew0">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -117,7 +120,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7mM-ts-BVh"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMX-S9-LJA" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMX-S9-LJA">
                                                 <rect key="frame" x="94.333333333333343" y="0.0" width="87.333333333333343" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -126,7 +129,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5jt-p5-l8k"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0S-fO-AGu" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0S-fO-AGu">
                                                 <rect key="frame" x="188.66666666666666" y="0.0" width="86.999999999999972" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -135,7 +138,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="izc-Ek-IMy"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdY-uq-DlS" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdY-uq-DlS">
                                                 <rect key="frame" x="282.66666666666669" y="0.0" width="87.333333333333314" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -146,10 +149,10 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-DU-sO7">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-DU-sO7">
                                         <rect key="frame" x="0.0" y="336.66666666666669" width="370" height="102"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOe-st-h8x" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOe-st-h8x">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -158,7 +161,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dEl-kX-akK"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCb-LQ-3WC" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCb-LQ-3WC">
                                                 <rect key="frame" x="94.333333333333343" y="0.0" width="87.333333333333343" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -167,7 +170,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fUv-pW-OKT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D22-Qn-0EE" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D22-Qn-0EE">
                                                 <rect key="frame" x="188.66666666666666" y="0.0" width="86.999999999999972" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -176,7 +179,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uC8-M3-K0J"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-LC-yng" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-LC-yng">
                                                 <rect key="frame" x="282.66666666666669" y="0.0" width="87.333333333333314" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -187,10 +190,10 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="EUm-Gs-uY0">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="EUm-Gs-uY0">
                                         <rect key="frame" x="0.0" y="448.66666666666669" width="370" height="102.33333333333331"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lN4-3U-NRN" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lN4-3U-NRN">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -199,7 +202,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mlT-q4-Xs1"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEG-YM-Egh" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEG-YM-Egh">
                                                 <rect key="frame" x="94.333333333333343" y="0.0" width="87.333333333333343" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -208,7 +211,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xH9-SZ-9xW"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8n-OW-FGb" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8n-OW-FGb">
                                                 <rect key="frame" x="188.66666666666666" y="0.0" width="86.999999999999972" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -217,7 +220,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ajW-dW-Kgx"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pey-vY-l14" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pey-vY-l14">
                                                 <rect key="frame" x="282.66666666666669" y="0.0" width="87.333333333333314" height="102.33333333333333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -228,10 +231,10 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="s7s-ow-7qN">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="s7s-ow-7qN">
                                         <rect key="frame" x="0.0" y="561" width="370" height="102"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jea-pY-OuG" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jea-pY-OuG">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -240,7 +243,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jwz-1e-qIa"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfx-lP-xb5" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfx-lP-xb5">
                                                 <rect key="frame" x="94.333333333333343" y="0.0" width="87.333333333333343" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -249,7 +252,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sud-so-SWi"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRZ-pr-XPl" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRZ-pr-XPl">
                                                 <rect key="frame" x="188.66666666666666" y="0.0" width="86.999999999999972" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -258,7 +261,7 @@
                                                     <action selector="tapOnCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rk9-Rd-uTk"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pF-co-dkE" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pF-co-dkE">
                                                 <rect key="frame" x="282.66666666666669" y="0.0" width="87.333333333333314" height="102"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -271,21 +274,35 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKu-3O-pHp">
+                                <rect key="frame" x="142" y="759.66666666666663" width="120" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Deal 3 cards"/>
+                                <connections>
+                                    <action selector="tapDealButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qXo-oQ-OlY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qEc-j1-E5u" secondAttribute="bottom" constant="16" id="0co-l3-RbT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qEc-j1-E5u" secondAttribute="trailing" constant="16" id="5Jj-6i-6qd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aKu-3O-pHp" secondAttribute="bottom" constant="16" id="7ZJ-SH-CAm"/>
+                            <constraint firstItem="aKu-3O-pHp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142" id="8bj-pc-Aq5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8Zc-iB-6Ue" secondAttribute="bottom" constant="100" id="BD2-wN-TAd"/>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="270.66666666666669" id="ONG-hd-X45"/>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="712" id="YQC-qE-1a0"/>
                             <constraint firstItem="8Zc-iB-6Ue" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="fX7-vi-4Dj"/>
                             <constraint firstItem="8Zc-iB-6Ue" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hB3-9R-O3m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Zc-iB-6Ue" secondAttribute="trailing" constant="10" id="jVz-NS-bf9"/>
+                            <constraint firstItem="aKu-3O-pHp" firstAttribute="top" secondItem="8Zc-iB-6Ue" secondAttribute="bottom" constant="49.666666666666629" id="lR6-FZ-dFU"/>
+                            <constraint firstItem="qEc-j1-E5u" firstAttribute="leading" secondItem="aKu-3O-pHp" secondAttribute="trailing" constant="8.6666666666666856" id="ozy-p6-Anb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Deal3Button" destination="aKu-3O-pHp" id="8Cp-V3-6XU"/>
+                        <outlet property="newGameButton" destination="qEc-j1-E5u" id="L6V-40-ex3"/>
                         <outletCollection property="cardButtons" destination="MPW-5p-Yxn" collectionClass="NSMutableArray" id="sqF-OO-BqE"/>
                         <outletCollection property="cardButtons" destination="9gp-0H-F8P" collectionClass="NSMutableArray" id="vnD-bx-P60"/>
                         <outletCollection property="cardButtons" destination="nwv-0b-w39" collectionClass="NSMutableArray" id="EZk-vd-WeJ"/>

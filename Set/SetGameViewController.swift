@@ -9,68 +9,150 @@ import UIKit
 
 class SetGameViewController: UIViewController {
     
-    private var game = PlayingSet()
+    private var game = SetGame()
+    var card = SetGame.Card(id: 1, numberOfShapes: .two, shape: .square, color: .red, shading: .filled)
+    
+    var dealtCards: [SetGame.Card] {
+        game.dealtCards
+    }
+    
+    var isDeckEmpty: Bool {
+        game.noCardsInDeck
+    }
+    
+    func chooseCard(card: SetGame.Card) {
+        game.chooseCard(card: card)
+        updateViewFromModel()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dealStartingCards()
-        //cardButtons[1].setAttributedTitle(NSAttributedString(string: "ASGGASG"), for: UIControl.State.normal)
+        game.startNewGame()
+        updateViewFromModel()
         // Do any additional setup after loading the view. 90/116
     }
     
-    var cardButtonsSelected: [Int] = []
-    var matchingCardsIndexes: [Int] = []
+    var selectedCardsCount = 0
     
-    @IBAction func tapOnCard(_ sender: CardView) {
-        if cardButtonsSelected.count < 3 {
-            if !sender.card.isSelected {
-                sender.isSelected = true
-                sender.layer.borderWidth = 3.0
-                sender.layer.borderColor = UIColor.green.cgColor
-                
-                var indexes = game.chooseCard(card: sender.card)
-                
-                if indexes != nil {
-                    matchingCardsIndexes = indexes!
-                    matchingCardsIndexes.forEach { index in
-                        vizualizeCard(index: index)
-                    }
-                } else {
-                    cardButtonsSelected.append(sender.card.indexOnField)
-                }
-            } else {
-                sender.isSelected = false
-                sender.layer.borderColor = UIColor.white.cgColor
-                cardButtonsSelected.remove(at: cardButtonsSelected.firstIndex(of: sender.card.indexOnField)!)
-            }
+    @IBAction func tapOnCard(_ sender: UIButton) {
+        
+        if selectedCardsCount <= 2 && sender.isSelected == true {
+            selectedCardsCount -= 1
+            sender.isSelected = false
+            sender.layer.borderColor = UIColor.white.cgColor
+        } else if selectedCardsCount < 3 {
+            selectedCardsCount += 1
+            sender.isSelected = true
+            sender.layer.borderWidth = 3.0
+            sender.layer.borderColor = UIColor.green.cgColor
+        } else {
+            print("3 cards are already selected - can`t deselect")
         }
         
+        if selectedCardsCount == 3 {
+            dealtCards.forEach { card in
+                chooseCard(card: card)
+            }
+        }
+        updateViewFromModel()
     }
     
-    @IBOutlet var cardButtons: [CardView]!
+    @IBAction func tapOnNewGame(_ sender: UIButton) {
+        game.startNewGame()
+        updateViewFromModel()
+    }
     
-    private func updateViewFromModal() {
-        //implement
-        game.cardsOnTheField.forEach{ card in
-            if card.isSelected {
-                cardButtons[card.indexOnField].isSelected = false
+    @IBAction func tapDealButton(_ sender: UIButton) {
+        game.dealExtraCards(3)
+        updateViewFromModel()
+    }
+    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet weak var newGameButton: UIButton!
+    @IBOutlet weak var Deal3Button: UIButton!
+    
+    func updateViewFromModel() {
+        if dealtCards.count != 0 {
+            for index in dealtCards.indices{
+                card = dealtCards[index]
+                let cardView = cardButtons[index]
+                cardView.setAttributedTitle(buildAttributedString(), for: UIControl.State.normal)
+            }
+            if dealtCards.count >= 24{
+                print("No more room on the field")
+            } else {
+                for index in dealtCards.count...23 {
+                    cardButtons[index].setTitle(" ", for: UIControl.State())
+                }
             }
         }
     }
     
-    private func vizualizeCard(index: Int) {
-        var cardView = CardView()
-        cardView.card = game.dealCard()
-        //var card = game.dealCard()
-        //var thing = CardView.buildAttributedString()
-        cardButtons[index].setAttributedTitle(cardView.buildAttributedString(), for: UIControl.State.normal)
-    }
-    func dealStartingCards() {
-        for index in 0...11 {
-            vizualizeCard(index: index)
+    func getColor() -> UIColor {
+        switch card.color {
+            case .red:
+                return UIColor.red
+            case .blue:
+                return UIColor.blue
+            case .purple:
+                return UIColor.purple
         }
     }
+    func getShape() -> String {
+        switch card.shape {
+            case .triangle:
+                return "▲"
+            case .oval:
+                return "●"
+            case .square:
+                return "■"
+        }
+    }
+    func getCount() -> Int {
+        switch card.numberOfShapes {
+            case .one:
+                return 1
+            case .two:
+                return 2
+            case .three:
+                return 3
+        }
+    }
+    func buildAttributedString() -> NSAttributedString {
+        let string = buildString(count: getCount(), shape: getShape())
+        let attributes = colorShadeAttributes(color: getColor())
+        
+        return NSAttributedString(string: string, attributes: attributes)
+    }
     
-    
+    func buildString(count: Int, shape: String) -> String {
+        var result = "\n"
+        for _ in 1...count {
+            result.append(shape)
+            result.append("\n")
+            if count == 1 {
+                result.append("\n")
+            }
+        }
+        return result
+    }
+    func colorShadeAttributes(color: UIColor) -> [NSAttributedString.Key : Any] {
+        switch card.shading {
+            case .filled:
+                return [
+                    .strokeWidth : -1.0,
+                    .foregroundColor : color.withAlphaComponent(1),
+                    .font: UIFont.boldSystemFont(ofSize: 30)]
+            case .empty:
+                return [
+                    .strokeWidth : 10.0,
+                    .foregroundColor : color.withAlphaComponent(1),
+                    .font: UIFont.boldSystemFont(ofSize: 30)]
+            case .striped:
+                return [
+                    .strokeWidth : -1.0,
+                    .foregroundColor : color.withAlphaComponent(0.15),
+                    .font: UIFont.boldSystemFont(ofSize: 30)]
+        }
+    }
 }
 
