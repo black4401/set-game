@@ -12,7 +12,6 @@ struct SetGame {
     private(set) var dealtCards: [Card] = []
     private(set) var points = 0
     
-    
     var noCardsInDeck: Bool {
         deck.count == 0
     }
@@ -30,11 +29,8 @@ struct SetGame {
     
     mutating func checkIfCardsMatch() {
         
-        print(selectedCards.count)
-        print(dealtCards.count)
-        
         if selectedCards.count == 3 {
-            let state: SetGame.Card.MatchState = getMatchState(of: selectedCards)
+            let state: Card.MatchState = getMatchState(of: selectedCards)
             
             switch state {
                 case .Match:
@@ -46,13 +42,12 @@ struct SetGame {
                 default:
                     break
             }
-            
         } else {
             print("selected cards are not 3")
         }
     }
     
-   mutating func invertMatchState(card: Card) {
+    mutating func invertMatchState(card: Card) {
         if let cardIndex = dealtCards.firstIndex(matching: card) {
             
             dealtCards[cardIndex].isSelected = !dealtCards[cardIndex].isSelected
@@ -99,9 +94,9 @@ struct SetGame {
     
     private func getMatchState(of cards: [Card]) -> Card.MatchState {
         
-//        if cards.count == 3 {
-//            return .MissMatch
-//        }
+        //        if cards.count == 3 {
+        //            return .MissMatch
+        //        }
         if cards.count != 3 {
             return .NotSetYet
         }
@@ -158,52 +153,7 @@ struct SetGame {
         }
     }
     
-    class Card: Identifiable { // move to separate
-        
-        var id: Int = 0
-        var isSelected: Bool = false
-        var isMatch: MatchState = .NotSetYet
-        
-        let numberOfShapes: NumberOfShapes
-        let shape: Shape
-        let color: Color
-        let shading: Shading
-        
-        init(id: Int, numberOfShapes: NumberOfShapes, shape: Shape, color: Color, shading: Shading) {
-            self.id = id
-            self.numberOfShapes = numberOfShapes
-            self.shape = shape
-            self.color = color
-            self.shading = shading
-        }
-        
-        enum MatchState {
-            case Match
-            case MissMatch
-            case NotSetYet
-        }
-        
-        enum NumberOfShapes: Int, CaseIterable {
-            case one = 1
-            case two = 2
-            case three = 3
-        }
-        enum Shape: CaseIterable {
-            case triangle
-            case square
-            case oval
-        }
-        enum Color: CaseIterable {
-            case red
-            case blue
-            case purple
-        }
-        enum Shading: CaseIterable {
-            case filled
-            case striped
-            case empty
-        }
-    }
+    
 }
 
 extension Array where Element: Identifiable {

@@ -10,25 +10,20 @@ import UIKit
 class SetGameViewController: UIViewController {
     
     private var game = SetGame()
-    var card = SetGame.Card(id: 1, numberOfShapes: .two, shape: .square, color: .red, shading: .filled)
+    var card = Card(id: 1, numberOfShapes: .two, shape: .square, color: .red, shading: .filled)
+    var cardDictionary = [UIButton: Card]()
+    private var selectedCardsCount = 0
     
-    var cardDictionary = [UIButton: SetGame.Card]()
-    
-    var dealtCards: [SetGame.Card] {
+    var dealtCards: [Card] {
         game.dealtCards
     }
-    var selectedCards: [SetGame.Card] {
+    var selectedCards: [Card] {
         game.dealtCards.filter({$0.isSelected == true}) //?
     }
     
     var isDeckEmpty: Bool {
         game.noCardsInDeck
     }
-    
-//    func chooseCard(card: SetGame.Card) {
-//        //game.checkIfCardsMatch(card: card)
-//        updateViewFromModel()
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +32,7 @@ class SetGameViewController: UIViewController {
         // Do any additional setup after loading the view. 90/116
     }
     
-    var selectedCardsCount = 0
-    
     @IBAction func tapOnCard(_ sender: UIButton) {
-        
         for index in cardButtons.indices {
             if index < dealtCards.count {
                 cardButtons[index].isEnabled = true
@@ -78,7 +70,7 @@ class SetGameViewController: UIViewController {
         }
         updateViewFromModel()
     }
- 
+    
     @IBAction func tapOnNewGame(_ sender: UIButton) {
         cardButtons.forEach{ cardView in
             cardView.isSelected = false
