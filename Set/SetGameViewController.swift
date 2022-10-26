@@ -14,17 +14,6 @@ class SetGameViewController: UIViewController {
     var cardDictionary = [UIButton: Card]()
     private var selectedCardsCount = 0
     
-    var dealtCards: [Card] {
-        game.dealtCards
-    }
-    var selectedCards: [Card] {
-        game.dealtCards.filter({$0.isSelected == true}) //?
-    }
-    
-    var isDeckEmpty: Bool {
-        game.noCardsInDeck
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         game.startNewGame()
@@ -34,7 +23,7 @@ class SetGameViewController: UIViewController {
     
     @IBAction func tapOnCard(_ sender: UIButton) {
         for index in cardButtons.indices {
-            if index < dealtCards.count {
+            if index < game.dealtCards.count {
                 cardButtons[index].isEnabled = true
             } else {
                 cardButtons[index].isEnabled = false
@@ -53,11 +42,11 @@ class SetGameViewController: UIViewController {
         }
         
         if selectedCardsCount == 3 {
-            for index in dealtCards.indices {
+            for index in game.dealtCards.indices {
                 if cardButtons[index].isSelected == true {
-                    dealtCards[index].isSelected = true
+                    game.dealtCards[index].isSelected = true
                 } else {
-                    dealtCards[index].isSelected = false
+                    game.dealtCards[index].isSelected = false
                 }
             }
             game.checkIfCardsMatch()
@@ -79,9 +68,7 @@ class SetGameViewController: UIViewController {
             cardView.setTitle("", for: UIControl.State())
         }
         game.startNewGame()
-        print(dealtCards.count)
         selectedCardsCount = 0
-        
         updateViewFromModel()
     }
     
@@ -96,11 +83,11 @@ class SetGameViewController: UIViewController {
     
     func updateViewFromModel() {
         let cardbuttonCount = cardButtons.count
-        let dealtCardsCount = dealtCards.count
+        let dealtCardsCount = game.dealtCards.count
         for index in 0..<cardbuttonCount {
             if index < dealtCardsCount {
-                for index in dealtCards.indices{
-                    card = dealtCards[index]
+                for index in game.dealtCards.indices{
+                    card = game.dealtCards[index]
                     let cardView = cardButtons[index]
                     cardView.setAttributedTitle(buildAttributedString(), for: UIControl.State())
                     cardButtons[index].isEnabled = true
@@ -159,9 +146,6 @@ class SetGameViewController: UIViewController {
         for _ in 1...count {
             result.append(shape)
             result.append("\n")
-            if count == 1 {
-                result.append("\n")
-            }
         }
         return result
     }

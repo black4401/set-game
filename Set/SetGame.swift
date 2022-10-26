@@ -12,10 +12,6 @@ struct SetGame {
     private(set) var dealtCards: [Card] = []
     private(set) var points = 0
     
-    var noCardsInDeck: Bool {
-        deck.count == 0
-    }
-    
     private var selectedCards: [Card] {
         dealtCards.filter({$0.isSelected == true})
     }
@@ -23,15 +19,12 @@ struct SetGame {
     mutating func startNewGame() {
         deck = createDeck().shuffled()
         dealtCards.removeAll()
-        
         dealCard(12)
     }
     
     mutating func checkIfCardsMatch() {
-        
         if selectedCards.count == 3 {
             let state: Card.MatchState = getMatchState(of: selectedCards)
-            
             switch state {
                 case .Match:
                     points += 3
@@ -58,10 +51,12 @@ struct SetGame {
     }
     
     mutating func dealExtraCards(_ count: Int) {
-        if getMatchState(of: selectedCards) == .Match {
-            replace(cards: selectedCards)
-        } else {
-            dealCard(count)
+        if dealtCards.count < 24 {
+            if getMatchState(of: selectedCards) == .Match {
+                replace(cards: selectedCards)
+            } else {
+                dealCard(count)
+            }
         }
     }
     
@@ -94,9 +89,6 @@ struct SetGame {
     
     private func getMatchState(of cards: [Card]) -> Card.MatchState {
         
-        //        if cards.count == 3 {
-        //            return .MissMatch
-        //        }
         if cards.count != 3 {
             return .NotSetYet
         }
@@ -120,7 +112,6 @@ struct SetGame {
         if uniqueShadings.count == 2 {
             return .MissMatch
         }
-        
         return .Match
     }
     
@@ -152,8 +143,6 @@ struct SetGame {
             }
         }
     }
-    
-    
 }
 
 extension Array where Element: Identifiable {
