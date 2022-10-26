@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-j1-E5u">
-                                <rect key="frame" x="270.66666666666669" y="759.66666666666663" width="103.33333333333331" height="34.333333333333371"/>
+                                <rect key="frame" x="270.66666666666669" y="759.66666666666663" width="113.33333333333331" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="NewGame"/>
                                 <connections>
@@ -274,27 +274,35 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKu-3O-pHp">
-                                <rect key="frame" x="142" y="759.66666666666663" width="120" height="34.333333333333371"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKu-3O-pHp">
+                                <rect key="frame" x="176" y="760" width="86" height="34"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Deal 3 cards"/>
                                 <connections>
                                     <action selector="tapDealButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qXo-oQ-OlY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Points: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KF-dO-vFC">
+                                <rect key="frame" x="16" y="760" width="123" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qEc-j1-E5u" secondAttribute="bottom" constant="16" id="0co-l3-RbT"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qEc-j1-E5u" secondAttribute="trailing" constant="16" id="5Jj-6i-6qd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qEc-j1-E5u" secondAttribute="trailing" constant="6" id="5Jj-6i-6qd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aKu-3O-pHp" secondAttribute="bottom" constant="16" id="7ZJ-SH-CAm"/>
-                            <constraint firstItem="aKu-3O-pHp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142" id="8bj-pc-Aq5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8Zc-iB-6Ue" secondAttribute="bottom" constant="100" id="BD2-wN-TAd"/>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="270.66666666666669" id="ONG-hd-X45"/>
+                            <constraint firstItem="1KF-dO-vFC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="1" id="S45-Yp-KPa"/>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="712" id="YQC-qE-1a0"/>
+                            <constraint firstItem="aKu-3O-pHp" firstAttribute="leading" secondItem="1KF-dO-vFC" secondAttribute="trailing" constant="6" id="fDa-m9-nFJ"/>
                             <constraint firstItem="8Zc-iB-6Ue" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="fX7-vi-4Dj"/>
                             <constraint firstItem="8Zc-iB-6Ue" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hB3-9R-O3m"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1KF-dO-vFC" secondAttribute="bottom" constant="16" id="j0E-Qe-qbG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Zc-iB-6Ue" secondAttribute="trailing" constant="10" id="jVz-NS-bf9"/>
                             <constraint firstItem="aKu-3O-pHp" firstAttribute="top" secondItem="8Zc-iB-6Ue" secondAttribute="bottom" constant="49.666666666666629" id="lR6-FZ-dFU"/>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="leading" secondItem="aKu-3O-pHp" secondAttribute="trailing" constant="8.6666666666666856" id="ozy-p6-Anb"/>
@@ -303,6 +311,7 @@
                     <connections>
                         <outlet property="Deal3Button" destination="aKu-3O-pHp" id="8Cp-V3-6XU"/>
                         <outlet property="newGameButton" destination="qEc-j1-E5u" id="L6V-40-ex3"/>
+                        <outlet property="pointsLabel" destination="1KF-dO-vFC" id="lXH-FR-DHp"/>
                         <outletCollection property="cardButtons" destination="MPW-5p-Yxn" collectionClass="NSMutableArray" id="sqF-OO-BqE"/>
                         <outletCollection property="cardButtons" destination="9gp-0H-F8P" collectionClass="NSMutableArray" id="vnD-bx-P60"/>
                         <outletCollection property="cardButtons" destination="nwv-0b-w39" collectionClass="NSMutableArray" id="EZk-vd-WeJ"/>
@@ -331,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="-26"/>
+            <point key="canvasLocation" x="130.76923076923077" y="-26.303317535545023"/>
         </scene>
     </scenes>
 </document>

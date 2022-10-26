@@ -12,18 +12,23 @@ class SetGameViewController: UIViewController {
     private var game = SetGame()
     var card = SetGame.Card(id: 1, numberOfShapes: .two, shape: .square, color: .red, shading: .filled)
     
+    var cardDictionary = [UIButton: SetGame.Card]()
+    
     var dealtCards: [SetGame.Card] {
         game.dealtCards
+    }
+    var selectedCards: [SetGame.Card] {
+        game.dealtCards.filter({$0.isSelected == true}) //?
     }
     
     var isDeckEmpty: Bool {
         game.noCardsInDeck
     }
     
-    func chooseCard(card: SetGame.Card) {
-        game.chooseCard(card: card)
-        updateViewFromModel()
-    }
+//    func chooseCard(card: SetGame.Card) {
+//        //game.checkIfCardsMatch(card: card)
+//        updateViewFromModel()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +41,14 @@ class SetGameViewController: UIViewController {
     
     @IBAction func tapOnCard(_ sender: UIButton) {
         
+        for index in cardButtons.indices {
+            if index < dealtCards.count {
+                cardButtons[index].isEnabled = true
+            } else {
+                cardButtons[index].isEnabled = false
+            }
+        }
+        
         if selectedCardsCount <= 2 && sender.isSelected == true {
             selectedCardsCount -= 1
             sender.isSelected = false
@@ -45,20 +58,38 @@ class SetGameViewController: UIViewController {
             sender.isSelected = true
             sender.layer.borderWidth = 3.0
             sender.layer.borderColor = UIColor.green.cgColor
-        } else {
-            print("3 cards are already selected - can`t deselect")
         }
         
         if selectedCardsCount == 3 {
-            dealtCards.forEach { card in
-                chooseCard(card: card)
+            for index in dealtCards.indices {
+                if cardButtons[index].isSelected == true {
+                    dealtCards[index].isSelected = true
+                } else {
+                    dealtCards[index].isSelected = false
+                }
+            }
+            game.checkIfCardsMatch()
+            selectedCardsCount = 0
+            cardButtons.forEach { card in
+                card.isSelected = false
+                card.isSelected = false
+                card.layer.borderColor = UIColor.white.cgColor
             }
         }
         updateViewFromModel()
     }
-    
+ 
     @IBAction func tapOnNewGame(_ sender: UIButton) {
+        cardButtons.forEach{ cardView in
+            cardView.isSelected = false
+            cardView.layer.borderColor = UIColor.white.cgColor
+            cardView.isEnabled = false
+            cardView.setTitle("", for: UIControl.State())
+        }
         game.startNewGame()
+        print(dealtCards.count)
+        selectedCardsCount = 0
+        
         updateViewFromModel()
     }
     
@@ -66,25 +97,32 @@ class SetGameViewController: UIViewController {
         game.dealExtraCards(3)
         updateViewFromModel()
     }
+    @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var newGameButton: UIButton!
     @IBOutlet weak var Deal3Button: UIButton!
     
     func updateViewFromModel() {
-        if dealtCards.count != 0 {
-            for index in dealtCards.indices{
-                card = dealtCards[index]
-                let cardView = cardButtons[index]
-                cardView.setAttributedTitle(buildAttributedString(), for: UIControl.State.normal)
-            }
-            if dealtCards.count >= 24{
-                print("No more room on the field")
-            } else {
-                for index in dealtCards.count...23 {
-                    cardButtons[index].setTitle(" ", for: UIControl.State())
+        let cardbuttonCount = cardButtons.count
+        let dealtCardsCount = dealtCards.count
+        for index in 0..<cardbuttonCount {
+            if index < dealtCardsCount {
+                for index in dealtCards.indices{
+                    card = dealtCards[index]
+                    let cardView = cardButtons[index]
+                    cardView.setAttributedTitle(buildAttributedString(), for: UIControl.State())
+                    cardButtons[index].isEnabled = true
+                    if card.isSelected == true {
+                        cardView.isSelected = false
+                        cardView.layer.borderColor = UIColor.white.cgColor
+                    }
                 }
+            } else {
+                cardButtons[index].isEnabled = false
+                cardButtons[index].setAttributedTitle(NSAttributedString(""), for: UIControl.State())
             }
         }
+        pointsLabel.text = "Points: \(game.points)"
     }
     
     func getColor() -> UIColor {

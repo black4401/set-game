@@ -10,15 +10,15 @@ import Foundation
 struct SetGame {
     private var deck: [Card] = []
     private(set) var dealtCards: [Card] = []
+    private(set) var points = 0
+    
     
     var noCardsInDeck: Bool {
         deck.count == 0
     }
     
     private var selectedCards: [Card] {
-        dealtCards.filter { card in
-            card.isSelected
-        }
+        dealtCards.filter({$0.isSelected == true})
     }
     
     mutating func startNewGame() {
@@ -28,18 +28,33 @@ struct SetGame {
         dealCard(12)
     }
     
-    mutating func chooseCard(card: Card) {
-        let state: SetGame.Card.MatchState = .Match //getMatchState(of: selectedCards) //uncomment to play correctly
-        switch state {
-            case .Match:
-                replace(cards: selectedCards)
-            case .MissMatch:
-                deSelect(cards: selectedCards)
-            default:
-                break
-        }
+    mutating func checkIfCardsMatch() {
         
+        print(selectedCards.count)
+        print(dealtCards.count)
+        
+        if selectedCards.count == 3 {
+            let state: SetGame.Card.MatchState = getMatchState(of: selectedCards)
+            
+            switch state {
+                case .Match:
+                    points += 3
+                    replace(cards: selectedCards)
+                case .MissMatch:
+                    points -= 5
+                    deSelect(cards: selectedCards)
+                default:
+                    break
+            }
+            
+        } else {
+            print("selected cards are not 3")
+        }
+    }
+    
+   mutating func invertMatchState(card: Card) {
         if let cardIndex = dealtCards.firstIndex(matching: card) {
+            
             dealtCards[cardIndex].isSelected = !dealtCards[cardIndex].isSelected
             
             let state = getMatchState(of: selectedCards)
@@ -83,6 +98,10 @@ struct SetGame {
     }
     
     private func getMatchState(of cards: [Card]) -> Card.MatchState {
+        
+//        if cards.count == 3 {
+//            return .MissMatch
+//        }
         if cards.count != 3 {
             return .NotSetYet
         }
@@ -112,11 +131,11 @@ struct SetGame {
     
     private mutating func replace(cards: [Card]) {
         for card in cards {
-            if let cardIndex = self.dealtCards.firstIndex(matching: card) {
+            if let cardIndex = dealtCards.firstIndex(matching: card) {
                 if let replaceCard = deck.popLast() {
-                    self.dealtCards[cardIndex] = replaceCard
+                    dealtCards[cardIndex] = replaceCard
                 } else {
-                    self.dealtCards.remove(at: cardIndex)
+                    dealtCards.remove(at: cardIndex)
                 }
             }
         }
@@ -124,24 +143,24 @@ struct SetGame {
     
     private mutating func deSelect(cards: [Card]) {
         for card in cards {
-            if let cardIndex = self.dealtCards.firstIndex(matching: card) {
-                self.dealtCards[cardIndex].isSelected = false
-                self.dealtCards[cardIndex].isMatch = .NotSetYet
+            if let cardIndex = dealtCards.firstIndex(matching: card) {
+                dealtCards[cardIndex].isSelected = false
+                dealtCards[cardIndex].isMatch = .NotSetYet
             }
         }
     }
     
     private mutating func changeMatchState(of cards: [Card], to state: Card.MatchState) {
         for card in cards {
-            if let cardIndex = self.dealtCards.firstIndex(matching: card) {
-                self.dealtCards[cardIndex].isMatch = state
+            if let cardIndex = dealtCards.firstIndex(matching: card) {
+                dealtCards[cardIndex].isMatch = state
             }
         }
     }
     
-    struct Card: Identifiable { // move to separate
-        var id: Int
+    class Card: Identifiable { // move to separate
         
+        var id: Int = 0
         var isSelected: Bool = false
         var isMatch: MatchState = .NotSetYet
         
@@ -150,21 +169,39 @@ struct SetGame {
         let color: Color
         let shading: Shading
         
+        init(id: Int, numberOfShapes: NumberOfShapes, shape: Shape, color: Color, shading: Shading) {
+            self.id = id
+            self.numberOfShapes = numberOfShapes
+            self.shape = shape
+            self.color = color
+            self.shading = shading
+        }
+        
         enum MatchState {
-            case Match, MissMatch, NotSetYet
+            case Match
+            case MissMatch
+            case NotSetYet
         }
         
         enum NumberOfShapes: Int, CaseIterable {
-            case one = 1, two = 2, three = 3
+            case one = 1
+            case two = 2
+            case three = 3
         }
         enum Shape: CaseIterable {
-            case triangle, square, oval
+            case triangle
+            case square
+            case oval
         }
         enum Color: CaseIterable {
-            case red, blue, purple
+            case red
+            case blue
+            case purple
         }
         enum Shading: CaseIterable {
-            case filled, striped, empty
+            case filled
+            case striped
+            case empty
         }
     }
 }
