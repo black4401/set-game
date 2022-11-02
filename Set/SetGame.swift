@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SetGame {
+class SetGame {
     private var deck: [Card] = []
     private(set) var dealtCards: [Card] = []
     private(set) var points = 0
@@ -16,51 +16,55 @@ struct SetGame {
         dealtCards.filter({$0.isSelected == true})
     }
     
-    mutating func startNewGame() {
+    func startNewGame() {
         deck = createDeck().shuffled()
         dealtCards.removeAll()
-        dealCard(12)
+        points = 0
+        dealCards(12)
     }
     
-    mutating func checkIfCardsMatch() {
-        if selectedCards.count == 3 {
-            let state: Card.MatchState = getMatchState(of: selectedCards)
-            switch state {
-                case .Match:
-                    points += 3
-                    replace(cards: selectedCards)
-                case .MissMatch:
-                    points -= 5
-                    deSelect(cards: selectedCards)
-                default:
-                    break
-            }
-        } else {
+    func checkIfCardsMatch() {
+        
+        guard selectedCards.count == 3 else {
             print("selected cards are not 3")
+            return
         }
-    }
-    
-    mutating func invertMatchState(card: Card) {
-        if let cardIndex = dealtCards.firstIndex(matching: card) {
-            
-            dealtCards[cardIndex].isSelected = !dealtCards[cardIndex].isSelected
-            
-            let state = getMatchState(of: selectedCards)
-            changeMatchState(of: selectedCards, to: state)
-        }
-    }
-    
-    mutating func dealExtraCards(_ count: Int) {
-        if dealtCards.count < 24 {
-            if getMatchState(of: selectedCards) == .Match {
+        let state: Card.MatchState = getMatchState(of: selectedCards)
+        switch state {
+            case .Match:
+                points += 3
                 replace(cards: selectedCards)
-            } else {
-                dealCard(count)
-            }
+            case .MissMatch:
+                points -= 5
+                deSelect(cards: selectedCards)
+            default:
+                break
         }
     }
     
-    private mutating func dealCard(_ count: Int) {
+    func invertMatchState(card: Card) {
+        guard let cardIndex = dealtCards.firstIndex(matching: card) else {
+            return
+        }
+        dealtCards[cardIndex].isSelected = !dealtCards[cardIndex].isSelected
+        
+        let state = getMatchState(of: selectedCards)
+        changeMatchState(of: selectedCards, to: state)
+    }
+    
+    func dealExtraCards(_ count: Int) {
+        guard dealtCards.count < 24 else {
+            print("selected cards are not 3")
+            return
+        }
+        if getMatchState(of: selectedCards) == .Match {
+            replace(cards: selectedCards)
+        } else {
+            dealCards(count)
+        }
+    }
+    
+    private func dealCards(_ count: Int) {
         for _ in 0..<count {
             if let card = deck.popLast() {
                 dealtCards.append(card)
@@ -89,6 +93,10 @@ struct SetGame {
     
     private func getMatchState(of cards: [Card]) -> Card.MatchState {
         
+        if cards.count == 3 {
+            return .Match
+        }
+        
         if cards.count != 3 {
             return .NotSetYet
         }
@@ -115,7 +123,7 @@ struct SetGame {
         return .Match
     }
     
-    private mutating func replace(cards: [Card]) {
+    private  func replace(cards: [Card]) {
         for card in cards {
             if let cardIndex = dealtCards.firstIndex(matching: card) {
                 if let replaceCard = deck.popLast() {
@@ -127,7 +135,7 @@ struct SetGame {
         }
     }
     
-    private mutating func deSelect(cards: [Card]) {
+    private  func deSelect(cards: [Card]) {
         for card in cards {
             if let cardIndex = dealtCards.firstIndex(matching: card) {
                 dealtCards[cardIndex].isSelected = false
@@ -136,7 +144,7 @@ struct SetGame {
         }
     }
     
-    private mutating func changeMatchState(of cards: [Card], to state: Card.MatchState) {
+    private  func changeMatchState(of cards: [Card], to state: Card.MatchState) {
         for card in cards {
             if let cardIndex = dealtCards.firstIndex(matching: card) {
                 dealtCards[cardIndex].isMatch = state
