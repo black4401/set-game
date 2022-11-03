@@ -93,10 +93,6 @@ class SetGame {
     
     private func getMatchState(of cards: [Card]) -> Card.MatchState {
         
-        if cards.count == 3 {
-            return .Match
-        }
-        
         if cards.count != 3 {
             return .NotSetYet
         }
