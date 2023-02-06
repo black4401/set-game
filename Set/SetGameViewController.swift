@@ -143,17 +143,17 @@ class SetGameViewController: UIViewController {
                 return [
                     .strokeWidth : -1.0,
                     .foregroundColor : color.withAlphaComponent(1),
-                    .font: UIFont.boldSystemFont(ofSize: 30)]
+                    .font: UIFont.boldSystemFont(ofSize: 15)]
             case .empty:
                 return [
                     .strokeWidth : 10.0,
                     .foregroundColor : color.withAlphaComponent(1),
-                    .font: UIFont.boldSystemFont(ofSize: 30)]
+                    .font: UIFont.boldSystemFont(ofSize: 15)]
             case .striped:
                 return [
                     .strokeWidth : -1.0,
                     .foregroundColor : color.withAlphaComponent(0.15),
-                    .font: UIFont.boldSystemFont(ofSize: 30)]
+                    .font: UIFont.boldSystemFont(ofSize: 15)]
         }
     }
 }
