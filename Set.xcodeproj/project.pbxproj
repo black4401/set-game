@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB18838F299114AA00AC7BDA /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB18838E299114AA00AC7BDA /* Grid.swift */; };
+		BB28048A29954D2E0029DEC2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB28048929954D2E0029DEC2 /* Alert.swift */; };
 		BB492FDF28FACC1C00BDA277 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB492FDE28FACC1C00BDA277 /* SetGame.swift */; };
 		BB492FE128FD7CC100BDA277 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB492FE028FD7CC100BDA277 /* CardView.swift */; };
 		BB89C5492902961A00F174A2 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB89C5482902961A00F174A2 /* CardModel.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		BB18838E299114AA00AC7BDA /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		BB28048929954D2E0029DEC2 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		BB492FDE28FACC1C00BDA277 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		BB492FE028FD7CC100BDA277 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		BB89C5482902961A00F174A2 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				BBDA40B728FA315A00F9903F /* AppDelegate.swift */,
 				BBDA40B928FA315A00F9903F /* SceneDelegate.swift */,
 				BBDA40BB28FA315A00F9903F /* SetGameViewController.swift */,
+				BB28048929954D2E0029DEC2 /* Alert.swift */,
 				BB492FDE28FACC1C00BDA277 /* SetGame.swift */,
 				BB18838E299114AA00AC7BDA /* Grid.swift */,
 				BBDA40BD28FA315A00F9903F /* Main.storyboard */,
@@ -167,6 +170,7 @@
 				BBDA40BA28FA315A00F9903F /* SceneDelegate.swift in Sources */,
 				BB492FE128FD7CC100BDA277 /* CardView.swift in Sources */,
 				BBF0093629950BAC00B90108 /* UIView+setBorder.swift in Sources */,
+				BB28048A29954D2E0029DEC2 /* Alert.swift in Sources */,
 				BB18838F299114AA00AC7BDA /* Grid.swift in Sources */,
 				BB89C5492902961A00F174A2 /* CardModel.swift in Sources */,
 			);
@@ -321,6 +325,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -349,6 +354,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

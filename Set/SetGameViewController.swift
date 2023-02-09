@@ -20,8 +20,9 @@ class SetGameViewController: UIViewController {
         super.viewDidLoad()
         game.startNewGame()
         game.delegate = self
-        //updateViewFromModel()
     }
+    
+    //MARK: Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         game.startNewGame()
@@ -56,54 +57,12 @@ class SetGameViewController: UIViewController {
         }
     }
     
-//    @IBAction func tapOnCard(_ sender: UIButton) {
-//
-//        if selectedCardsCount <= 2 && sender.isSelected {
-//            selectedCardsCount -= 1
-//            sender.isSelected = false
-//            sender.layer.borderColor = UIColor.white.cgColor
-//        } else if selectedCardsCount < 3 {
-//            selectedCardsCount += 1
-//            sender.isSelected = true
-//            sender.layer.borderWidth = 3.0
-//            sender.layer.borderColor = UIColor.green.cgColor
-//        }
-//
-//        if selectedCardsCount == 3 {
-//            for index in game.dealtCards.indices {
-//                if cardButtons[index].isSelected {
-//                    game.dealtCards[index].isSelected = true
-//                } else {
-//                    game.dealtCards[index].isSelected = false
-//                }
-//            }
-//            game.checkIfCardsMatch()
-//            selectedCardsCount = 0
-//            cardButtons.forEach { card in
-//                card.isSelected = false
-//                card.layer.borderColor = UIColor.white.cgColor
-//            }
-//        }
-//        updateViewFromModel()
-//    }
-    
     @IBAction func tapOnNewGame(_ sender: UIButton) {
-//        cardButtons.forEach { cardView in
-//            cardView.isSelected = false
-//            cardView.layer.borderColor = UIColor.white.cgColor
-//            cardView.isEnabled = false
-//            cardView.setTitle("", for: UIControl.State())
-//        }
-//        game.startNewGame()
-//        selectedCardsCount = 0
-//        updateViewFromModel()
+        showNewGameAlert()
     }
     
     @IBAction func tapDealButton(_ sender: UIButton) {
         game.dealThreeCards()
-        print("Attempting to deal 3 cards")
-        //game.dealExtraCards(3)
-        //updateViewFromModel()
     }
     
     
@@ -134,12 +93,39 @@ extension SetGameViewController: SetGameDelegate {
         cardGridView.updateCardViews(with: game.cardsOnField)
     }
     
-    func setGameUpdateCards(_ game: SetGame) {
+    func gameUpdateCards(_ game: SetGame) {
         cardGridView.updateCardViews(with: game.cardsOnField)
     }
     
     func setGame(_ game: SetGame, didSelectCardAt index: Int) {
         cardGridView.updateCardViewBorder(at: index, to: .green)
+    }
+    
+    func gameUpdatePoints(_ setGame: SetGame) {
+        pointsLabel.text = "Points: \(game.points)"
+    }
+    
+    func gameDidEnd(_ setGame: SetGame) {
+        // end game
+    }
+    
+    func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int]) {
+        for index in indices {
+            let color: UIColor = isMatched ? .green : .red
+            cardGridView.updateCardViewBorder(at: index, to: color)
+        }
+    }
+}
+
+extension SetGameViewController {
+    func showNewGameAlert() {
+        let cancelAction = Alert.createAction(.cancel)
+        let newGameAction = Alert.createAction(.newGame() { _ in
+            self.game.startNewGame()
+        })
+        let alert = Alert.create(title: "Do you want to start a new game?", message: "Your game progress will be lost!", actions: [cancelAction, newGameAction])
+        
+        present(alert, animated: true)
     }
 }
 

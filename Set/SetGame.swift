@@ -9,18 +9,24 @@ import Foundation
 
 protocol SetGameDelegate: AnyObject {
     func updateCardsOnField(_ setGame: SetGame)
-    func setGameUpdateCards(_ setGame: SetGame)
+    func gameUpdateCards(_ setGame: SetGame)
+    func gameUpdatePoints(_ setGame: SetGame)
+    func gameDidEnd(_ setGame: SetGame)
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
-    
+    func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int])
 }
 
 class SetGame {
     private var deck: [Card] = []
     private(set) var dealtCards: [Card] = []
-    private(set) var points = 0
     private(set) var selectedCardsIndices: [Int] = []
     private(set) var cardsOnField: [Card] = []
+    private(set) var points = 0 {
+        didSet {
+            delegate?.gameUpdatePoints(self)
+        }
+    }
     
     weak var delegate: SetGameDelegate?
     
@@ -31,13 +37,46 @@ class SetGame {
     func selectCard(at index: Int) {
         if !selectedCardsIndices.contains(index) {
             selectedCardsIndices.append(index)
-            
+            makeASetIfPossible()
         }
-        if checkIfCardsMatch() && selectedCardsIndices.count == 3 {
+        
+        replaceMatchedCardsIfPossible()
+        
+//        if checkIfCardsMatch() && selectedCardsIndices.count == 3 {
+//            delegate?.setGame(self, didCardsMatch: true, at: selectedCardsIndices)
+//            replaceCards(at: selectedCardsIndices)
+//            selectedCardsIndices.removeAll()
+//        } else if selectedCardsIndices.count == 3 {
+//            delegate?.setGame(self, didCardsMatch: checkIfCardsMatch(), at: selectedCardsIndices)
+//            //delegate?.setGame(self, didSelectCardAt: index)
+//        }
+    }
+    
+    func makeASetIfPossible() {
+        guard selectedCardsIndices.count == 3 else {
+            return
+        }
+        if checkIfCardsMatch() {
+            points += 3
+        } else {
+            points -= 5
+        }
+        delegate?.setGame(self, didCardsMatch: checkIfCardsMatch(), at: selectedCardsIndices)
+    }
+    
+    func replaceMatchedCardsIfPossible() {
+        guard selectedCardsIndices.count > 3 else {
+            return
+        }
+        var lastSelectedCardIndex = selectedCardsIndices.removeLast()
+        if checkIfCardsMatch() {
+            moveBackIndex(&lastSelectedCardIndex)
             replaceCards(at: selectedCardsIndices)
-            //replace(cards: selectedCards)
-            selectedCardsIndices.removeAll()
+        } else {
+            delegate?.gameUpdateCards(self)
         }
+        delegate?.setGame(self, didSelectCardAt: lastSelectedCardIndex)
+        selectedCardsIndices = [lastSelectedCardIndex]
     }
     
     func deselectCard(at index: Int) {
@@ -51,16 +90,15 @@ class SetGame {
             } else {
                 delegate?.updateCardsOnField(self)
                 selectedCardsIndices = [index]
-                //delegate?.setGame(self, didSelectCardAt: index)
+                delegate?.setGame(self, didSelectCardAt: index)
             }
         }
     }
     
-
+    
     
     func checkIfCardsMatch() -> Bool {
-        guard selectedCards.count == 3 else {
-            print("Less than 3 cards selected!")
+        guard selectedCardsIndices.count == 3 else { //was selected cards
             return false
         }
         return getMatchState(of: getCards(from: selectedCardsIndices))
@@ -77,38 +115,42 @@ class SetGame {
     func startNewGame() {
         deck = createDeck().shuffled()
         cardsOnField.removeAll()
+        selectedCardsIndices.removeAll()
         points = 0
         dealCards(12)
+        
+        delegate?.updateCardsOnField(self)
+        
     }
     
-//    func checkIfCardsMatch() {
-//
-//        guard selectedCards.count == 3 else {
-//            print("selected cards are not 3")
-//            return
-//        }
-//        let state: Card.MatchState = getMatchState(of: selectedCards)
-//        switch state {
-//            case .Match:
-//                points += 3
-//                replace(cards: selectedCards)
-//            case .MissMatch:
-//                points -= 5
-//                deSelect(cards: selectedCards)
-//            default:
-//                break
-//        }
-//    }
+    //    func checkIfCardsMatch() {
+    //
+    //        guard selectedCards.count == 3 else {
+    //            print("selected cards are not 3")
+    //            return
+    //        }
+    //        let state: Card.MatchState = getMatchState(of: selectedCards)
+    //        switch state {
+    //            case .Match:
+    //                points += 3
+    //                replace(cards: selectedCards)
+    //            case .MissMatch:
+    //                points -= 5
+    //                deSelect(cards: selectedCards)
+    //            default:
+    //                break
+    //        }
+    //    }
     
-//    func invertMatchState(card: Card) {
-//        guard let cardIndex = dealtCards.firstIndex(matching: card) else {
-//            return
-//        }
-//        dealtCards[cardIndex].isSelected = !dealtCards[cardIndex].isSelected
-//
-//        let state = getMatchState(of: selectedCards)
-//        changeMatchState(of: selectedCards, to: state)
-//    }
+    //    func invertMatchState(card: Card) {
+    //        guard let cardIndex = dealtCards.firstIndex(matching: card) else {
+    //            return
+    //        }
+    //        dealtCards[cardIndex].isSelected = !dealtCards[cardIndex].isSelected
+    //
+    //        let state = getMatchState(of: selectedCards)
+    //        changeMatchState(of: selectedCards, to: state)
+    //    }
     
     func dealThreeCards() {
         guard deck.count >= 3 else {
@@ -117,7 +159,7 @@ class SetGame {
         for _ in 0..<3 {
             cardsOnField.append(deck.removeFirst())
         }
-        delegate?.setGameUpdateCards(self)
+        delegate?.gameUpdateCards(self)
     }
     
     private func dealCards(_ count: Int) {
@@ -174,6 +216,18 @@ class SetGame {
             return false
         }
         return true
+    }
+    
+    func moveBackIndex(_ index: inout Int) {
+        guard deck.isEmpty else {
+            return
+        }
+        let originalIndex = index
+        for selectedCardIndex in selectedCardsIndices {
+            if originalIndex > selectedCardIndex {
+                index -= 1
+            }
+        }
     }
     
     func replaceCards(at indices: [Int]) {
