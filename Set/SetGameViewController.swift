@@ -10,8 +10,6 @@ import UIKit
 class SetGameViewController: UIViewController {
     
     private lazy var game = SetGame()
-    var currentCard = Card(id: 1, numberOfShapes: .two, shape: .square, color: .red, shading: .filled)
-    private var selectedCardsCount = 0
     
     @IBOutlet private weak var cardGridView: CardGridView!
     @IBOutlet weak var pointsLabel: UILabel!
@@ -21,17 +19,40 @@ class SetGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         game.startNewGame()
+        game.delegate = self
         //updateViewFromModel()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         game.startNewGame()
-        cardGridView.updateCardViews(with: game.dealtCards)
+        cardGridView.updateCardViews(with: game.cardsOnField)
+        
+        cardGridView.addGestureRecognizer(createTapGesture())
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             self?.cardGridView.updateCardViews(with: self!.game.dealtCards)
+        }
+    }
+    
+    func createTapGesture() -> UITapGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        return tap
+    }
+    
+    @objc func didTap(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: cardGridView)
+        guard let cardView = cardGridView.hitTest(location, with: nil) as? CardView,
+              let index = cardGridView.getIndex(of: cardView) else {
+            return
+        }
+        if !game.selectedCardsIndices.contains(index) {
+            cardGridView.updateCardViewBorder(at: index, to: .green)
+            game.selectCard(at: index)
+        } else {
+            cardGridView.removeCardViewBorder(at: index)
+            game.deselectCard(at: index)
         }
     }
     
@@ -79,6 +100,8 @@ class SetGameViewController: UIViewController {
     }
     
     @IBAction func tapDealButton(_ sender: UIButton) {
+        game.dealThreeCards()
+        print("Attempting to deal 3 cards")
         //game.dealExtraCards(3)
         //updateViewFromModel()
     }
@@ -102,70 +125,21 @@ class SetGameViewController: UIViewController {
 //        }
 //        pointsLabel.text = "Points: \(game.points)"
     }
-    
-    func getColor() -> UIColor {
-        switch currentCard.color {
-            case .red:
-                return UIColor.red
-            case .blue:
-                return UIColor.blue
-            case .purple:
-                return UIColor.purple
-        }
-    }
-    func getShape() -> String {
-        switch currentCard.shape {
-            case .triangle:
-                return "▲"
-            case .oval:
-                return "●"
-            case .square:
-                return "■"
-        }
-    }
-    func getCount() -> Int {
-        switch currentCard.numberOfShapes {
-            case .one:
-                return 1
-            case .two:
-                return 2
-            case .three:
-                return 3
-        }
-    }
-    func buildAttributedString() -> NSAttributedString {
-        let string = buildString(count: getCount(), shape: getShape())
-        let attributes = colorShadeAttributes(color: getColor())
-        
-        return NSAttributedString(string: string, attributes: attributes)
+ 
+}
+
+extension SetGameViewController: SetGameDelegate {
+ 
+    func updateCardsOnField(_ game: SetGame) {
+        cardGridView.updateCardViews(with: game.cardsOnField)
     }
     
-    func buildString(count: Int, shape: String) -> String {
-        var result = "\n"
-        for _ in 1...count {
-            result.append(shape)
-            result.append("\n")
-        }
-        return result
+    func setGameUpdateCards(_ game: SetGame) {
+        cardGridView.updateCardViews(with: game.cardsOnField)
     }
-    func colorShadeAttributes(color: UIColor) -> [NSAttributedString.Key : Any] {
-        switch currentCard.shading {
-            case .filled:
-                return [
-                    .strokeWidth : -1.0,
-                    .foregroundColor : color.withAlphaComponent(1),
-                    .font: UIFont.boldSystemFont(ofSize: 15)]
-            case .empty:
-                return [
-                    .strokeWidth : 10.0,
-                    .foregroundColor : color.withAlphaComponent(1),
-                    .font: UIFont.boldSystemFont(ofSize: 15)]
-            case .striped:
-                return [
-                    .strokeWidth : -1.0,
-                    .foregroundColor : color.withAlphaComponent(0.15),
-                    .font: UIFont.boldSystemFont(ofSize: 15)]
-        }
+    
+    func setGame(_ game: SetGame, didSelectCardAt index: Int) {
+        cardGridView.updateCardViewBorder(at: index, to: .green)
     }
 }
 

@@ -11,6 +11,7 @@ class Card: Identifiable {
     
     var id: Int = 0
     var isSelected: Bool = false
+    var isSet: Bool = false
     var isMatch: MatchState = .NotSetYet
     
     let numberOfShapes: NumberOfShapes

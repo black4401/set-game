@@ -29,5 +29,21 @@ class CardGridView: UIView {
             cardViews.append(cardView)
         }
     }
+    
+    func updateCardViewBorder(at index: Int, to color: UIColor) {
+        cardViews[index].setBorder(borderWidth: CardViewConstant.borderWidth, borderColor: color)
+    }
+    
+    func removeCardViewBorder(at index: Int) {
+        cardViews[index].setBorder(borderWidth: 0, borderColor: .clear)
+    }
+    
+    func updateCardViewBackground(at index: Int, to color: UIColor) {
+        cardViews[index].backgroundColor = color
+    }
+    
+    func getIndex(of cardView: CardView) -> Int? {
+        return cardViews.firstIndex(where: { $0 == cardView })
+    }
 }
 

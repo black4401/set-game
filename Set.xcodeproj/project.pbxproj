@@ -18,6 +18,8 @@
 		BBDA40C128FA315B00F9903F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40C028FA315B00F9903F /* Assets.xcassets */; };
 		BBDA40C428FA315B00F9903F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40C228FA315B00F9903F /* LaunchScreen.storyboard */; };
 		BBF0092A29914EAA00B90108 /* CardGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0092929914EAA00B90108 /* CardGridView.swift */; };
+		BBF0093629950BAC00B90108 /* UIView+setBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0093529950BAC00B90108 /* UIView+setBorder.swift */; };
+		BBF00938299510B600B90108 /* Array+RemoveIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF00937299510B600B90108 /* Array+RemoveIndices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		BBDA40C328FA315B00F9903F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBDA40C528FA315B00F9903F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBF0092929914EAA00B90108 /* CardGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGridView.swift; sourceTree = "<group>"; };
+		BBF0093529950BAC00B90108 /* UIView+setBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+setBorder.swift"; sourceTree = "<group>"; };
+		BBF00937299510B600B90108 /* Array+RemoveIndices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RemoveIndices.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +81,9 @@
 				BBDA40C228FA315B00F9903F /* LaunchScreen.storyboard */,
 				BBDA40C528FA315B00F9903F /* Info.plist */,
 				BBF0092929914EAA00B90108 /* CardGridView.swift */,
+				BBF0093529950BAC00B90108 /* UIView+setBorder.swift */,
 				BB492FE028FD7CC100BDA277 /* CardView.swift */,
+				BBF00937299510B600B90108 /* Array+RemoveIndices.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -154,11 +160,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBF0092A29914EAA00B90108 /* CardGridView.swift in Sources */,
+				BBF00938299510B600B90108 /* Array+RemoveIndices.swift in Sources */,
 				BBDA40BC28FA315A00F9903F /* SetGameViewController.swift in Sources */,
 				BB492FDF28FACC1C00BDA277 /* SetGame.swift in Sources */,
 				BBDA40B828FA315A00F9903F /* AppDelegate.swift in Sources */,
 				BBDA40BA28FA315A00F9903F /* SceneDelegate.swift in Sources */,
 				BB492FE128FD7CC100BDA277 /* CardView.swift in Sources */,
+				BBF0093629950BAC00B90108 /* UIView+setBorder.swift in Sources */,
 				BB18838F299114AA00AC7BDA /* Grid.swift in Sources */,
 				BB89C5492902961A00F174A2 /* CardModel.swift in Sources */,
 			);

@@ -7,67 +7,123 @@
 
 import Foundation
 
+protocol SetGameDelegate: AnyObject {
+    func updateCardsOnField(_ setGame: SetGame)
+    func setGameUpdateCards(_ setGame: SetGame)
+    
+    func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
+    
+}
+
 class SetGame {
     private var deck: [Card] = []
     private(set) var dealtCards: [Card] = []
     private(set) var points = 0
+    private(set) var selectedCardsIndices: [Int] = []
+    private(set) var cardsOnField: [Card] = []
+    
+    weak var delegate: SetGameDelegate?
     
     private var selectedCards: [Card] {
         dealtCards.filter({$0.isSelected == true})
     }
     
+    func selectCard(at index: Int) {
+        if !selectedCardsIndices.contains(index) {
+            selectedCardsIndices.append(index)
+            
+        }
+        if checkIfCardsMatch() && selectedCardsIndices.count == 3 {
+            replaceCards(at: selectedCardsIndices)
+            //replace(cards: selectedCards)
+            selectedCardsIndices.removeAll()
+        }
+    }
+    
+    func deselectCard(at index: Int) {
+        if selectedCardsIndices.count != 3 {
+            selectedCardsIndices.removeAll(where: { $0 == index })
+            // do score
+        } else {
+            if checkIfCardsMatch() {
+                replaceCards(at: selectedCardsIndices)
+                selectedCardsIndices.removeAll()
+            } else {
+                delegate?.updateCardsOnField(self)
+                selectedCardsIndices = [index]
+                //delegate?.setGame(self, didSelectCardAt: index)
+            }
+        }
+    }
+    
+
+    
+    func checkIfCardsMatch() -> Bool {
+        guard selectedCards.count == 3 else {
+            print("Less than 3 cards selected!")
+            return false
+        }
+        return getMatchState(of: getCards(from: selectedCardsIndices))
+    }
+    
+    func getCards(from indices: [Int]) -> [Card] {
+        var cards:[Card] = []
+        for index in indices {
+            cards.append(cardsOnField[index])
+        }
+        return cards
+    }
+    
     func startNewGame() {
         deck = createDeck().shuffled()
-        dealtCards.removeAll()
+        cardsOnField.removeAll()
         points = 0
         dealCards(12)
     }
     
-    func checkIfCardsMatch() {
-        
-        guard selectedCards.count == 3 else {
-            print("selected cards are not 3")
-            return
-        }
-        let state: Card.MatchState = getMatchState(of: selectedCards)
-        switch state {
-            case .Match:
-                points += 3
-                replace(cards: selectedCards)
-            case .MissMatch:
-                points -= 5
-                deSelect(cards: selectedCards)
-            default:
-                break
-        }
-    }
+//    func checkIfCardsMatch() {
+//
+//        guard selectedCards.count == 3 else {
+//            print("selected cards are not 3")
+//            return
+//        }
+//        let state: Card.MatchState = getMatchState(of: selectedCards)
+//        switch state {
+//            case .Match:
+//                points += 3
+//                replace(cards: selectedCards)
+//            case .MissMatch:
+//                points -= 5
+//                deSelect(cards: selectedCards)
+//            default:
+//                break
+//        }
+//    }
     
-    func invertMatchState(card: Card) {
-        guard let cardIndex = dealtCards.firstIndex(matching: card) else {
-            return
-        }
-        dealtCards[cardIndex].isSelected = !dealtCards[cardIndex].isSelected
-        
-        let state = getMatchState(of: selectedCards)
-        changeMatchState(of: selectedCards, to: state)
-    }
+//    func invertMatchState(card: Card) {
+//        guard let cardIndex = dealtCards.firstIndex(matching: card) else {
+//            return
+//        }
+//        dealtCards[cardIndex].isSelected = !dealtCards[cardIndex].isSelected
+//
+//        let state = getMatchState(of: selectedCards)
+//        changeMatchState(of: selectedCards, to: state)
+//    }
     
-    func dealExtraCards(_ count: Int) {
-        guard dealtCards.count < 24 else {
-            print("selected cards are not 3")
+    func dealThreeCards() {
+        guard deck.count >= 3 else {
             return
         }
-        if getMatchState(of: selectedCards) == .Match {
-            replace(cards: selectedCards)
-        } else {
-            dealCards(count)
+        for _ in 0..<3 {
+            cardsOnField.append(deck.removeFirst())
         }
+        delegate?.setGameUpdateCards(self)
     }
     
     private func dealCards(_ count: Int) {
         for _ in 0..<count {
             if let card = deck.popLast() {
-                dealtCards.append(card)
+                cardsOnField.append(card)
             } else {
                 break
             }
@@ -91,44 +147,44 @@ class SetGame {
         return cards
     }
     
-    private func getMatchState(of cards: [Card]) -> Card.MatchState {
+    private func getMatchState(of cards: [Card]) -> Bool {
         
         if cards.count != 3 {
-            return .NotSetYet
+            print("Less than 3 cards selected")
+            return false
         }
         
         let uniqueNumberOfShapes = Set(cards.map { card in card.numberOfShapes })
         if (uniqueNumberOfShapes.count == 2) {
-            return .MissMatch
+            return false
         }
         
         let uniqueShapes = Set(cards.map { card in card.shape })
         if (uniqueShapes.count == 2) {
-            return .MissMatch
+            return false
         }
         
         let uniqueColors = Set(cards.map { card in card.color })
         if uniqueColors.count == 2 {
-            return .MissMatch
+            return false
         }
         
         let uniqueShadings = Set(cards.map { card in card.shading })
         if uniqueShadings.count == 2 {
-            return .MissMatch
+            return false
         }
-        return .Match
+        return true
     }
     
-    private  func replace(cards: [Card]) {
-        for card in cards {
-            if let cardIndex = dealtCards.firstIndex(matching: card) {
-                if let replaceCard = deck.popLast() {
-                    dealtCards[cardIndex] = replaceCard
-                } else {
-                    dealtCards.remove(at: cardIndex)
-                }
+    func replaceCards(at indices: [Int]) {
+        if deck.isEmpty {
+            cardsOnField.remove(at: indices)
+        } else {
+            for index in indices {
+                cardsOnField[index] = deck.removeFirst()
             }
         }
+        //update view
     }
     
     private  func deSelect(cards: [Card]) {
