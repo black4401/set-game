@@ -9,9 +9,9 @@ import Foundation
 
 protocol SetGameDelegate: AnyObject {
     func updateCardsOnField(_ setGame: SetGame)
-    func gameUpdateCards(_ setGame: SetGame)
-    func gameUpdatePoints(_ setGame: SetGame)
-    func gameDidEnd(_ setGame: SetGame)
+    func setGameUpdateCards(_ setGame: SetGame)
+    func setGameUpdatePoints(_ setGame: SetGame)
+    func setGameDidEnd(_ setGame: SetGame)
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
     func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int])
@@ -24,7 +24,7 @@ class SetGame {
     private(set) var dealtCards: [Card] = []
     private(set) var points = 0 {
         didSet {
-            delegate?.gameUpdatePoints(self)
+            delegate?.setGameUpdatePoints(self)
         }
     }
     
@@ -60,7 +60,7 @@ class SetGame {
             moveBackIndex(&lastSelectedCardIndex)
             replaceCards(at: selectedCardsIndices)
         } else {
-            delegate?.gameUpdateCards(self)
+            delegate?.setGameUpdateCards(self)
         }
         delegate?.setGame(self, didSelectCardAt: lastSelectedCardIndex)
         selectedCardsIndices = [lastSelectedCardIndex]
@@ -117,7 +117,7 @@ class SetGame {
         for _ in 0..<3 {
             dealtCards.append(deck.removeFirst())
         }
-        delegate?.gameUpdateCards(self)
+        delegate?.setGameUpdateCards(self)
     }
     
     private func dealCards(_ count: Int) {
@@ -154,25 +154,25 @@ class SetGame {
             return false
         }
         
-        let uniqueNumberOfShapes = Set(cards.map { card in card.numberOfShapes })
-        if (uniqueNumberOfShapes.count == 2) {
-            return false
-        }
-        
-        let uniqueShapes = Set(cards.map { card in card.shape })
-        if (uniqueShapes.count == 2) {
-            return false
-        }
-        
-        let uniqueColors = Set(cards.map { card in card.color })
-        if uniqueColors.count == 2 {
-            return false
-        }
-        
-        let uniqueShadings = Set(cards.map { card in card.shading })
-        if uniqueShadings.count == 2 {
-            return false
-        }
+//        let uniqueNumberOfShapes = Set(cards.map { card in card.numberOfShapes })
+//        if (uniqueNumberOfShapes.count == 2) {
+//            return false
+//        }
+//
+//        let uniqueShapes = Set(cards.map { card in card.shape })
+//        if (uniqueShapes.count == 2) {
+//            return false
+//        }
+//
+//        let uniqueColors = Set(cards.map { card in card.color })
+//        if uniqueColors.count == 2 {
+//            return false
+//        }
+//
+//        let uniqueShadings = Set(cards.map { card in card.shading })
+//        if uniqueShadings.count == 2 {
+//            return false
+//        }
         return true
     }
     
@@ -196,7 +196,7 @@ class SetGame {
                 dealtCards[index] = deck.removeFirst()
             }
         }
-        //update view
+        delegate?.setGameUpdateCards(self)
     }
 }
 

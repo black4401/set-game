@@ -89,12 +89,12 @@ class SetGameViewController: UIViewController {
 }
 
 extension SetGameViewController: SetGameDelegate {
- 
+    
     func updateCardsOnField(_ game: SetGame) {
         cardGridView.updateCardViews(with: game.dealtCards)
     }
     
-    func gameUpdateCards(_ game: SetGame) {
+    func setGameUpdateCards(_ game: SetGame) {
         cardGridView.updateCardViews(with: game.dealtCards)
     }
     
@@ -102,11 +102,11 @@ extension SetGameViewController: SetGameDelegate {
         cardGridView.updateCardViewBorder(at: index, to: .green)
     }
     
-    func gameUpdatePoints(_ setGame: SetGame) {
+    func setGameUpdatePoints(_ setGame: SetGame) {
         pointsLabel.text = "Points: \(game.points)"
     }
     
-    func gameDidEnd(_ setGame: SetGame) {
+    func setGameDidEnd(_ setGame: SetGame) {
         // end game
     }
     
