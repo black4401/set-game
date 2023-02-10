@@ -16,17 +16,18 @@ class SetGameViewController: UIViewController {
     @IBOutlet weak var newGameButton: UIButton!
     @IBOutlet weak var deal3Button: UIButton!
     
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        game.startNewGame()
+        //game.startNewGame()
         game.delegate = self
     }
     
-    //MARK: Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         game.startNewGame()
-        cardGridView.updateCardViews(with: game.cardsOnField)
+        cardGridView.updateCardViews(with: game.dealtCards)
+        
         
         cardGridView.addGestureRecognizer(createTapGesture())
     }
@@ -90,11 +91,11 @@ class SetGameViewController: UIViewController {
 extension SetGameViewController: SetGameDelegate {
  
     func updateCardsOnField(_ game: SetGame) {
-        cardGridView.updateCardViews(with: game.cardsOnField)
+        cardGridView.updateCardViews(with: game.dealtCards)
     }
     
     func gameUpdateCards(_ game: SetGame) {
-        cardGridView.updateCardViews(with: game.cardsOnField)
+        cardGridView.updateCardViews(with: game.dealtCards)
     }
     
     func setGame(_ game: SetGame, didSelectCardAt index: Int) {
