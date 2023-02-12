@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,55 +16,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzk-aD-ROK" customClass="CardGridView" customModule="Set" customModuleProvider="target">
-                                <rect key="frame" x="16" y="47" width="343" height="666.66666666666663"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="47" width="375" height="666.66666666666663"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKu-3O-pHp">
-                                <rect key="frame" x="127.33333333333334" y="733.66666666666663" width="119.33333333333334" height="34.333333333333371"/>
+                                <rect key="frame" x="131.66666666666666" y="733.66666666666663" width="122" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Deal 3 cards"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Deal 3 Cards" cornerStyle="large"/>
                                 <connections>
                                     <action selector="tapDealButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kDm-I1-3Yi"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Points: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KF-dO-vFC">
-                                <rect key="frame" x="262.66666666666669" y="742.66666666666663" width="66.333333333333314" height="20.333333333333371"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" misplaced="YES" text="Points: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KF-dO-vFC">
+                                <rect key="frame" x="269" y="742.66666666666663" width="66.333333333333371" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-j1-E5u">
-                                <rect key="frame" x="8" y="733.66666666666663" width="103.33333333333333" height="34.333333333333371"/>
+                                <rect key="frame" x="8" y="733.66666666666663" width="107.66666666666667" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="NewGame"/>
+                                <buttonConfiguration key="configuration" style="filled" title="New Game" cornerStyle="large"/>
                                 <connections>
                                     <action selector="tapOnNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZTe-Zv-YaR"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="BjP-oO-glC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qEc-j1-E5u" secondAttribute="trailing" constant="10" id="CSU-Yx-eLv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1KF-dO-vFC" secondAttribute="bottom" constant="15" id="DKN-kI-trf"/>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="top" secondItem="aKu-3O-pHp" secondAttribute="bottom" constant="69.666666666666657" id="Gdv-lz-sFA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aKu-3O-pHp" secondAttribute="bottom" constant="10" id="HFb-Wy-fNP"/>
-                            <constraint firstItem="1KF-dO-vFC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aKu-3O-pHp" secondAttribute="trailing" constant="8" symbolic="YES" id="Hvy-gx-Aeu"/>
                             <constraint firstItem="aKu-3O-pHp" firstAttribute="top" secondItem="1KF-dO-vFC" secondAttribute="bottom" constant="85.666666666666671" id="JcA-or-9AJ"/>
                             <constraint firstItem="aKu-3O-pHp" firstAttribute="top" secondItem="Rzk-aD-ROK" secondAttribute="bottom" constant="20" id="Pam-js-0da"/>
                             <constraint firstItem="1KF-dO-vFC" firstAttribute="leading" secondItem="Rzk-aD-ROK" secondAttribute="trailing" constant="44" id="QNf-Ml-7nw"/>
                             <constraint firstItem="aKu-3O-pHp" firstAttribute="leading" secondItem="qEc-j1-E5u" secondAttribute="trailing" constant="16" id="Ryb-ZH-Ex5"/>
-                            <constraint firstItem="Rzk-aD-ROK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="S3c-c9-84A"/>
+                            <constraint firstItem="Rzk-aD-ROK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="S3c-c9-84A"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aKu-3O-pHp" secondAttribute="trailing" constant="10" id="SlO-HE-6z7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="1KF-dO-vFC" secondAttribute="trailing" constant="39.670000000000002" id="T7b-r8-YEy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rzk-aD-ROK" secondAttribute="trailing" constant="16" id="TPJ-4f-kNl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rzk-aD-ROK" secondAttribute="trailing" id="TPJ-4f-kNl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qEc-j1-E5u" secondAttribute="bottom" constant="49.666666666666686" id="VJ3-7n-PBV"/>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="leading" secondItem="Rzk-aD-ROK" secondAttribute="trailing" constant="26" id="Wd5-2b-Smk"/>
                             <constraint firstItem="aKu-3O-pHp" firstAttribute="leading" secondItem="Rzk-aD-ROK" secondAttribute="trailing" constant="20.670000000000002" id="Z3U-HF-o3j"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="e2h-sZ-t9V"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="10" id="eI4-g0-KvT"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1KF-dO-vFC" secondAttribute="trailing" constant="46" id="eu2-1P-4jT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Rzk-aD-ROK" secondAttribute="bottom" id="fyE-nS-0oP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qEc-j1-E5u" secondAttribute="bottom" constant="10" id="qhJ-IX-STW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rzk-aD-ROK" secondAttribute="trailing" constant="150" id="vTD-aK-ibH"/>
@@ -95,7 +92,6 @@
                                 <exclude reference="Pam-js-0da"/>
                                 <exclude reference="Ryb-ZH-Ex5"/>
                                 <exclude reference="Z3U-HF-o3j"/>
-                                <exclude reference="Hvy-gx-Aeu"/>
                                 <exclude reference="QNf-Ml-7nw"/>
                                 <exclude reference="zCK-2r-epU"/>
                             </mask>
@@ -129,7 +125,6 @@
                                 <include reference="BjP-oO-glC"/>
                                 <include reference="Pam-js-0da"/>
                                 <include reference="Ryb-ZH-Ex5"/>
-                                <include reference="Hvy-gx-Aeu"/>
                             </mask>
                         </variation>
                     </view>
@@ -142,12 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-101.59999999999999" y="-44.334975369458128"/>
+            <point key="canvasLocation" x="-768" y="-2"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

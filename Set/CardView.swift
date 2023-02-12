@@ -72,7 +72,7 @@ class CardView: UIView {
     }
     
     private func setupCardView() {
-        backgroundColor = .black
+        backgroundColor = .white
         layer.masksToBounds = true
         layer.cornerRadius = CardViewConstant.cornerRadius
     }
@@ -88,6 +88,7 @@ private extension CardView {
             guard var rect = grid[index] else {
                 break
             }
+            rect.displace(in: bounds, count: count)
             rects.append(rect)
         }
         return rects
@@ -134,15 +135,15 @@ private extension CardView {
         
         let pathRect = path.bounds
         
-        let scaleX: CGFloat = (rect.width - 20) / pathRect.width
-        let scaleY: CGFloat = (rect.height - 20) / pathRect.height
+        let scaleX: CGFloat = (rect.width) / pathRect.width
+        let scaleY: CGFloat = (rect.height) / pathRect.height
         let transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
         path.apply(transform)
         
         let scaledPathRect = path.bounds
         
-        let translationX: CGFloat = rect.minX + 10 - scaledPathRect.minX
-        let translationY: CGFloat = rect.minY + 10 - scaledPathRect.minY
+        let translationX: CGFloat = rect.minX - scaledPathRect.minX
+        let translationY: CGFloat = rect.minY - scaledPathRect.minY
         let translate = CGAffineTransform(translationX: translationX, y: translationY)
         path.apply(translate)
         
@@ -151,7 +152,7 @@ private extension CardView {
     
     func createStripedPath(in rect: CGRect) -> UIBezierPath {
         let path = UIBezierPath()
-        for x in stride(from: rect.minX, to: rect.maxX, by: CardViewConstant.stripeLineWidth * 3) {
+        for x in stride(from: rect.minX, to: rect.maxX, by: CardViewConstant.stripeLineWidth * 3.3) {
             path.move(to: CGPoint(x: rect.minX + x, y: rect.minY))
             path.addLine(to: CGPoint(x: rect.minX + x, y: rect.maxY))
         }
@@ -160,9 +161,12 @@ private extension CardView {
     
     func drawStripedPath(at index: Int) {
         let stripedPath = stripedPaths[index]
+        let context = UIGraphicsGetCurrentContext()
+        context?.saveGState()
         shapePaths[index].addClip()
         stripedPath.lineWidth = CardViewConstant.stripeLineWidth
         stripedPath.stroke()
+        context?.restoreGState()
     }
 }
 

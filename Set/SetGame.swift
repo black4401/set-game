@@ -12,6 +12,8 @@ protocol SetGameDelegate: AnyObject {
     func setGameUpdateCards(_ setGame: SetGame)
     func setGameUpdatePoints(_ setGame: SetGame)
     func setGameDidEnd(_ setGame: SetGame)
+    func setGameEnableDealButton(_ setGame: SetGame, isEnabled: Bool)
+    func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int])
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
     func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int])
@@ -35,7 +37,6 @@ class SetGame {
             selectedCardsIndices.append(index)
             makeASetIfPossible()
         }
-        
         replaceMatchedCardsIfPossible()
     }
     
@@ -85,7 +86,7 @@ class SetGame {
     
     
     func checkIfCardsMatch() -> Bool {
-        guard selectedCardsIndices.count == 3 else { //was selected cards
+        guard selectedCardsIndices.count == 3 else {
             return false
         }
         return getMatchState(of: getCards(from: selectedCardsIndices))
@@ -100,14 +101,14 @@ class SetGame {
     }
     
     func startNewGame() {
-        deck = createDeck().shuffled()
+        deck = createDeck()
         dealtCards.removeAll()
         selectedCardsIndices.removeAll()
         points = 0
+        deck.shuffle()
         dealCards(12)
         
         delegate?.updateCardsOnField(self)
-        
     }
     
     func dealThreeCards() {
@@ -118,6 +119,13 @@ class SetGame {
             dealtCards.append(deck.removeFirst())
         }
         delegate?.setGameUpdateCards(self)
+        delegate?.setGameEnableDealButton(self, isEnabled: !deck.isEmpty)
+    }
+    
+    func shuffleCardsOnField() {
+        selectedCardsIndices.removeAll()
+        dealtCards.shuffle()
+        delegate?.setGameDidShuffleCardsOnField(self, indices: [])
     }
     
     private func dealCards(_ count: Int) {
@@ -154,25 +162,25 @@ class SetGame {
             return false
         }
         
-//        let uniqueNumberOfShapes = Set(cards.map { card in card.numberOfShapes })
-//        if (uniqueNumberOfShapes.count == 2) {
-//            return false
-//        }
-//
-//        let uniqueShapes = Set(cards.map { card in card.shape })
-//        if (uniqueShapes.count == 2) {
-//            return false
-//        }
-//
-//        let uniqueColors = Set(cards.map { card in card.color })
-//        if uniqueColors.count == 2 {
-//            return false
-//        }
-//
-//        let uniqueShadings = Set(cards.map { card in card.shading })
-//        if uniqueShadings.count == 2 {
-//            return false
-//        }
+        let uniqueNumberOfShapes = Set(cards.map { card in card.numberOfShapes })
+        if (uniqueNumberOfShapes.count == 2) {
+            return false
+        }
+
+        let uniqueShapes = Set(cards.map { card in card.shape })
+        if (uniqueShapes.count == 2) {
+            return false
+        }
+
+        let uniqueColors = Set(cards.map { card in card.color })
+        if uniqueColors.count == 2 {
+            return false
+        }
+
+        let uniqueShadings = Set(cards.map { card in card.shading })
+        if uniqueShadings.count == 2 {
+            return false
+        }
         return true
     }
     
@@ -199,16 +207,3 @@ class SetGame {
         delegate?.setGameUpdateCards(self)
     }
 }
-
-extension Array where Element: Identifiable {
-    func firstIndex(matching: Element) -> Int? {
-        for index in 0..<self.count {
-            if self[index].id == matching.id {
-                return index
-            }
-        }
-        return nil
-    }
-}
-
-

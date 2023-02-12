@@ -19,7 +19,6 @@ class SetGameViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //game.startNewGame()
         game.delegate = self
     }
     
@@ -28,19 +27,13 @@ class SetGameViewController: UIViewController {
         game.startNewGame()
         cardGridView.updateCardViews(with: game.dealtCards)
         
-        
-        cardGridView.addGestureRecognizer(createTapGesture())
+        addTapGestures()
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             self?.cardGridView.updateCardViews(with: self!.game.dealtCards)
         }
-    }
-    
-    func createTapGesture() -> UITapGestureRecognizer {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
-        return tap
     }
     
     @objc func didTap(_ sender: UITapGestureRecognizer) {
@@ -66,26 +59,6 @@ class SetGameViewController: UIViewController {
         game.dealThreeCards()
     }
     
-    
-    func updateViewFromModel() {
-//        let cardbuttonCount = cardButtons.count
-//        let dealtCardsCount = game.dealtCards.count
-//        for index in 0..<cardbuttonCount {
-//            if index < dealtCardsCount {
-//                for index in game.dealtCards.indices {
-//                    currentCard = game.dealtCards[index]
-//                    let cardView = cardButtons[index]
-//                    cardView.setAttributedTitle(buildAttributedString(), for: UIControl.State())
-//                    cardButtons[index].isEnabled = true
-//                }
-//            } else {
-//                cardButtons[index].isEnabled = false
-//                cardButtons[index].setAttributedTitle(NSAttributedString(""), for: UIControl.State())
-//            }
-//        }
-//        pointsLabel.text = "Points: \(game.points)"
-    }
- 
 }
 
 extension SetGameViewController: SetGameDelegate {
@@ -98,7 +71,7 @@ extension SetGameViewController: SetGameDelegate {
         cardGridView.updateCardViews(with: game.dealtCards)
     }
     
-    func setGame(_ game: SetGame, didSelectCardAt index: Int) {
+    func setGame(_ setGame: SetGame, didSelectCardAt index: Int) {
         cardGridView.updateCardViewBorder(at: index, to: .green)
     }
     
@@ -116,6 +89,54 @@ extension SetGameViewController: SetGameDelegate {
             cardGridView.updateCardViewBorder(at: index, to: color)
         }
     }
+    
+    func setGameEnableDealButton(_ setGame: SetGame, isEnabled: Bool) {
+        deal3Button.isEnabled = isEnabled
+        if !isEnabled {
+            deal3Button.backgroundColor = .white
+            deal3Button.layer.cornerRadius = 8
+        }
+        
+    }
+}
+
+extension SetGameViewController {
+    
+    func addTapGestures() {
+        cardGridView.addGestureRecognizer(createTapGesture())
+        cardGridView.addGestureRecognizer(createSwipeDownGesture())
+        cardGridView.addGestureRecognizer(createRotationGesture())
+    }
+    
+    func createTapGesture() -> UITapGestureRecognizer {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        return gesture
+    }
+    
+    func createSwipeDownGesture() -> UISwipeGestureRecognizer {
+        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDown))
+        gesture.direction = .down
+        return gesture
+    }
+    
+    func createRotationGesture() -> UIRotationGestureRecognizer {
+        let gesture = UIRotationGestureRecognizer(target: self, action: #selector(didRotateWithGesture))
+        return gesture
+    }
+    
+    @objc func didSwipeDown(_ sender: UISwipeGestureRecognizer) {
+        game.dealThreeCards()
+    }
+    
+    @objc func didRotateWithGesture(_ sender: UIRotationGestureRecognizer) {
+        if sender.state == .began {
+            game.shuffleCardsOnField()
+        }
+    }
+    
+    func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int]) {
+        cardGridView.updateCardViews(with: game.dealtCards)
+    }
 }
 
 extension SetGameViewController {
@@ -125,6 +146,15 @@ extension SetGameViewController {
             self.game.startNewGame()
         })
         let alert = Alert.create(title: "Do you want to start a new game?", message: "Your game progress will be lost!", actions: [cancelAction, newGameAction])
+        
+        present(alert, animated: true)
+    }
+    
+    func showGameOverAlert() {
+        let newGameAction = Alert.createAction(.newGame() { _ in
+            self.game.startNewGame()
+        })
+        let alert = Alert.create(title: "Game ended", message: "Your Score is: \(game.points)", actions: [newGameAction])
         
         present(alert, animated: true)
     }
