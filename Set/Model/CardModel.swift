@@ -4,12 +4,12 @@
 ////
 ////  Created by Alexander Angelov on 15.10.22.
 ////
-//
-//import Foundation
-//
+
+import Foundation
+
 class Card: Identifiable {
     
-    var id: Int = 0
+    var id = UUID()
     var isSelected: Bool = false
     var isSet: Bool = false
     var isMatch: MatchState = .NotSetYet
@@ -19,8 +19,7 @@ class Card: Identifiable {
     let color: Color
     let shading: Shading
     
-    init(id: Int, numberOfShapes: NumberOfShapes, shape: Shape, color: Color, shading: Shading) {
-        self.id = id
+    init(numberOfShapes: NumberOfShapes, shape: Shape, color: Color, shading: Shading) {
         self.numberOfShapes = numberOfShapes
         self.shape = shape
         self.color = color

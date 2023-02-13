@@ -21,15 +21,18 @@ class SetGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         game.delegate = self
+        
+        deal3Button.layer.cornerRadius = 8
+        deal3Button.clipsToBounds = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         game.startNewGame()
         cardGridView.updateCardViews(with: game.dealtCards)
-        
         addTapGestures()
     }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
@@ -84,10 +87,6 @@ extension SetGameViewController: SetGameDelegate {
         deal3Button.isEnabled = true
     }
     
-    func updateCardsOnField(_ game: SetGame) {
-        cardGridView.updateCardViews(with: game.dealtCards)
-    }
-    
     func setGameUpdateCards(_ game: SetGame) {
         cardGridView.updateCardViews(with: game.dealtCards)
     }
@@ -115,9 +114,13 @@ extension SetGameViewController: SetGameDelegate {
         deal3Button.isEnabled = isEnabled
         if !isEnabled {
             deal3Button.backgroundColor = .white
-            deal3Button.layer.cornerRadius = 8
+        } else {
+            deal3Button.backgroundColor = .systemBlue
         }
-        
+    }
+    
+    func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int]) {
+        cardGridView.updateCardViews(with: game.dealtCards)
     }
 }
 
@@ -153,10 +156,6 @@ extension SetGameViewController {
         if sender.state == .began {
             game.shuffleCardsOnField()
         }
-    }
-    
-    func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int]) {
-        cardGridView.updateCardViews(with: game.dealtCards)
     }
 }
 

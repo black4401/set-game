@@ -8,6 +8,7 @@
 import UIKit
 
 class CardView: UIView {
+    
     private var color: UIColor = .clear
     private var shapePaths: [UIBezierPath] = []
     private var stripedPaths: [UIBezierPath] = []
@@ -39,35 +40,35 @@ class CardView: UIView {
             let paddingX = rect.width * CardViewConstant.rectPaddingMultiplier
             let paddingY = rect.height * CardViewConstant.rectPaddingMultiplier
             let rect = rect.insetBy(dx: paddingX, dy: paddingY)
-
+            
             let bezierPath: UIBezierPath
             switch card.shape {
-            case .square:
-                bezierPath = createDiamondPath(in: rect)
-            case .oval:
-                bezierPath = createOvalPath(in: rect)
-            case .triangle:
-                bezierPath = createSquigglePath(in: rect)
+                case .square:
+                    bezierPath = createDiamondPath(in: rect)
+                case .oval:
+                    bezierPath = createOvalPath(in: rect)
+                case .triangle:
+                    bezierPath = createSquigglePath(in: rect)
             }
             shapePaths.append(bezierPath)
         }
         
         switch card.color {
-        case .red:
-            color = .systemRed
+            case .red:
+                color = .systemRed
             case .blue:
-            color = .systemGreen
-        case .purple:
-            color = .systemPurple
+                color = .systemGreen
+            case .purple:
+                color = .systemPurple
         }
         
         switch card.shading {
-        case .filled:
-            shading = 1.0
-        case .empty:
-            shading = 0.0
-        case .striped:
-            shading = 0.0
+            case .filled:
+                shading = 1.0
+            case .empty:
+                shading = 0.0
+            case .striped:
+                shading = 0.0
         }
     }
     
@@ -110,7 +111,6 @@ private extension CardView {
     }
     
     func createSquigglePath(in rect: CGRect) -> UIBezierPath {
-        
         let path = UIBezierPath()
         
         path.move(to: CGPoint(x: 104.0, y: 15.0))
@@ -134,14 +134,12 @@ private extension CardView {
                       controlPoint2: CGPoint(x: 100.9, y: 6.9))
         
         let pathRect = path.bounds
-        
         let scaleX: CGFloat = (rect.width) / pathRect.width
         let scaleY: CGFloat = (rect.height) / pathRect.height
         let transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
         path.apply(transform)
         
         let scaledPathRect = path.bounds
-        
         let translationX: CGFloat = rect.minX - scaledPathRect.minX
         let translationY: CGFloat = rect.minY - scaledPathRect.minY
         let translate = CGAffineTransform(translationX: translationX, y: translationY)

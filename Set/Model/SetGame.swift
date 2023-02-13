@@ -8,7 +8,6 @@
 import Foundation
 
 protocol SetGameDelegate: AnyObject {
-    func updateCardsOnField(_ setGame: SetGame)
     func setGameUpdateCards(_ setGame: SetGame)
     func setGameUpdatePoints(_ setGame: SetGame)
     func setGameDidEnd(_ setGame: SetGame)
@@ -26,27 +25,27 @@ class SetGame {
     private var deck: [Card] = []
     private(set) var selectedCardsIndices: [Int] = []
     private(set) var dealtCards: [Card] = []
+    weak var delegate: SetGameDelegate?
+    
     private(set) var points = 0 {
         didSet {
             delegate?.setGameUpdatePoints(self)
         }
     }
     
-    weak var delegate: SetGameDelegate?
-    
     func selectCard(at index: Int) {
         if !selectedCardsIndices.contains(index) {
             selectedCardsIndices.append(index)
             makeASetIfPossible()
         }
-        replaceMatchedCardsIfPossible()
+        replaceMatchedCards()
         
         if isGameEnded() {
             delegate?.setGameDidEnd(self)
         }
     }
     
-    func makeASetIfPossible() {
+    private func makeASetIfPossible() {
         guard selectedCardsIndices.count == 3 else {
             return
         }
@@ -58,7 +57,7 @@ class SetGame {
         delegate?.setGame(self, didCardsMatch: checkIfCardsMatch(indices: selectedCardsIndices), at: selectedCardsIndices)
     }
     
-    func replaceMatchedCardsIfPossible() {
+    private func replaceMatchedCards() {
         guard selectedCardsIndices.count > 3 else {
             return
         }
@@ -76,34 +75,34 @@ class SetGame {
     func deselectCard(at index: Int) {
         if selectedCardsIndices.count != 3 {
             selectedCardsIndices.removeAll(where: { $0 == index })
-            // do score
+            // do score?
         } else {
             if checkIfCardsMatch(indices: selectedCardsIndices) {
                 replaceCards(at: selectedCardsIndices)
                 selectedCardsIndices.removeAll()
             } else {
-                delegate?.updateCardsOnField(self)
+                delegate?.setGameUpdateCards(self)
                 selectedCardsIndices = [index]
                 delegate?.setGame(self, didSelectCardAt: index)
             }
         }
     }
-
-    func isGameEnded() -> Bool {
+    
+    private func isGameEnded() -> Bool {
         if deck.isEmpty && findASetOnField() == nil {
             return true
         }
         return false
     }
     
-    func checkIfCardsMatch(indices: [Int]) -> Bool {
+    private func checkIfCardsMatch(indices: [Int]) -> Bool {
         guard indices.count == 3 else {
             return false
         }
         return getMatchState(of: getCards(from: indices))
     }
     
-    func getCards(from indices: [Int]) -> [Card] {
+    private func getCards(from indices: [Int]) -> [Card] {
         var cards:[Card] = []
         for index in indices {
             cards.append(dealtCards[index])
@@ -119,7 +118,7 @@ class SetGame {
         deck.shuffle()
         dealCards(12)
         
-        delegate?.updateCardsOnField(self)
+        delegate?.setGameUpdateCards(self)
         delegate?.setGamePrepareNewGame(self)
     }
     
@@ -152,13 +151,11 @@ class SetGame {
     
     private func createDeck() -> [Card] {
         var cards: [Card] = []
-        var id = 0
         for numberOfShape in Card.NumberOfShapes.allCases {
             for shape in Card.Shape.allCases {
                 for color in Card.Color.allCases {
                     for shading in Card.Shading.allCases {
-                        let card = Card(id: id, numberOfShapes: numberOfShape, shape: shape, color: color, shading: shading)
-                        id += 1
+                        let card = Card(numberOfShapes: numberOfShape, shape: shape, color: color, shading: shading)
                         cards.append(card)
                     }
                 }
@@ -178,17 +175,17 @@ class SetGame {
         if (uniqueNumberOfShapes.count == 2) {
             return false
         }
-
+        
         let uniqueShapes = Set(cards.map { card in card.shape })
         if (uniqueShapes.count == 2) {
             return false
         }
-
+        
         let uniqueColors = Set(cards.map { card in card.color })
         if uniqueColors.count == 2 {
             return false
         }
-
+        
         let uniqueShadings = Set(cards.map { card in card.shading })
         if uniqueShadings.count == 2 {
             return false
@@ -196,7 +193,7 @@ class SetGame {
         return true
     }
     
-    func findASetOnField() -> [Int]? { // work in progress
+    private func findASetOnField() -> [Int]? {
         for firstIndex in dealtCards.indices {
             for secondIndex in dealtCards.indices where secondIndex != firstIndex {
                 for thirdIndex in dealtCards.indices where thirdIndex != secondIndex {
@@ -217,7 +214,7 @@ class SetGame {
         delegate?.setGameDidFindHint(self, at: indices)
     }
     
-    func moveBackIndex(_ index: inout Int) {
+    private func moveBackIndex(_ index: inout Int) {
         guard deck.isEmpty else {
             return
         }
@@ -229,7 +226,7 @@ class SetGame {
         }
     }
     
-    func replaceCards(at indices: [Int]) {
+    private func replaceCards(at indices: [Int]) {
         if deck.isEmpty {
             dealtCards.remove(at: indices)
         } else {

@@ -55,6 +55,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB539139299A8B4D0045CB39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BB89C5482902961A00F174A2 /* CardModel.swift */,
+				BB492FDE28FACC1C00BDA277 /* SetGame.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BB53913A299A8B570045CB39 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BBDA40BB28FA315A00F9903F /* SetGameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BB53913B299A8B680045CB39 /* Exensions */ = {
+			isa = PBXGroup;
+			children = (
+				BBF0093529950BAC00B90108 /* UIView+setBorder.swift */,
+				BB5391372998F11C0045CB39 /* CGRect+Displace.swift */,
+				BBF00937299510B600B90108 /* Array+RemoveIndices.swift */,
+			);
+			path = Exensions;
+			sourceTree = "<group>";
+		};
+		BB53913C299A8B830045CB39 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB492FE028FD7CC100BDA277 /* CardView.swift */,
+				BBF0092929914EAA00B90108 /* CardGridView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		BBDA40AB28FA315A00F9903F = {
 			isa = PBXGroup;
 			children = (
@@ -74,22 +110,18 @@
 		BBDA40B628FA315A00F9903F /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				BB89C5482902961A00F174A2 /* CardModel.swift */,
 				BBDA40B728FA315A00F9903F /* AppDelegate.swift */,
 				BBDA40B928FA315A00F9903F /* SceneDelegate.swift */,
-				BBDA40BB28FA315A00F9903F /* SetGameViewController.swift */,
-				BB28048929954D2E0029DEC2 /* Alert.swift */,
-				BB492FDE28FACC1C00BDA277 /* SetGame.swift */,
 				BB18838E299114AA00AC7BDA /* Grid.swift */,
+				BB53913C299A8B830045CB39 /* Views */,
+				BB539139299A8B4D0045CB39 /* Model */,
+				BB53913A299A8B570045CB39 /* Controllers */,
+				BB28048929954D2E0029DEC2 /* Alert.swift */,
+				BB53913B299A8B680045CB39 /* Exensions */,
 				BBDA40BD28FA315A00F9903F /* Main.storyboard */,
 				BBDA40C028FA315B00F9903F /* Assets.xcassets */,
 				BBDA40C228FA315B00F9903F /* LaunchScreen.storyboard */,
 				BBDA40C528FA315B00F9903F /* Info.plist */,
-				BBF0092929914EAA00B90108 /* CardGridView.swift */,
-				BBF0093529950BAC00B90108 /* UIView+setBorder.swift */,
-				BB492FE028FD7CC100BDA277 /* CardView.swift */,
-				BB5391372998F11C0045CB39 /* CGRect+Displace.swift */,
-				BBF00937299510B600B90108 /* Array+RemoveIndices.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";

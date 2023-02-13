@@ -8,6 +8,7 @@
 import UIKit
 
 class CardGridView: UIView {
+    
     private var cardViews: [CardView] = []
     
     func updateCardViews(with cards: [Card]) {
@@ -31,11 +32,11 @@ class CardGridView: UIView {
     }
     
     func updateCardViewBorder(at index: Int, to color: UIColor) {
-        cardViews[index].setBorder(borderWidth: CardViewConstant.borderWidth, borderColor: color)
+        cardViews[index].backgroundColor = .gray
     }
     
     func removeCardViewBorder(at index: Int) {
-        cardViews[index].setBorder(borderWidth: 0, borderColor: .clear)
+        cardViews[index].backgroundColor = .white
     }
     
     func updateCardViewBackground(at index: Int, to color: UIColor) {

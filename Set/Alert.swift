@@ -16,12 +16,12 @@ struct Alert {
     
     static func createAction(_ action: Action) -> UIAlertAction {
         switch action {
-        case .cancel:
-            return UIAlertAction(title: "Cancel", style: .cancel)
-        case let .ok(style, handler):
-            return UIAlertAction(title: "OK", style: style, handler: handler)
-        case let .newGame(style, handler):
-            return UIAlertAction(title: "New game", style: style, handler: handler)
+            case .cancel:
+                return UIAlertAction(title: "Cancel", style: .cancel)
+            case let .ok(style, handler):
+                return UIAlertAction(title: "OK", style: style, handler: handler)
+            case let .newGame(style, handler):
+                return UIAlertAction(title: "New Game", style: style, handler: handler)
         }
     }
     
