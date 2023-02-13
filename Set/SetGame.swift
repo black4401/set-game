@@ -14,6 +14,8 @@ protocol SetGameDelegate: AnyObject {
     func setGameDidEnd(_ setGame: SetGame)
     func setGameEnableDealButton(_ setGame: SetGame, isEnabled: Bool)
     func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int])
+    func setGamePrepareNewGame(_ setGame: SetGame)
+    func setGameDidFindHint(_ setGame: SetGame, at indices: [Int])
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
     func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int])
@@ -38,18 +40,22 @@ class SetGame {
             makeASetIfPossible()
         }
         replaceMatchedCardsIfPossible()
+        
+        if isGameEnded() {
+            delegate?.setGameDidEnd(self)
+        }
     }
     
     func makeASetIfPossible() {
         guard selectedCardsIndices.count == 3 else {
             return
         }
-        if checkIfCardsMatch() {
+        if checkIfCardsMatch(indices: selectedCardsIndices) {
             points += 3
         } else {
             points -= 5
         }
-        delegate?.setGame(self, didCardsMatch: checkIfCardsMatch(), at: selectedCardsIndices)
+        delegate?.setGame(self, didCardsMatch: checkIfCardsMatch(indices: selectedCardsIndices), at: selectedCardsIndices)
     }
     
     func replaceMatchedCardsIfPossible() {
@@ -57,7 +63,7 @@ class SetGame {
             return
         }
         var lastSelectedCardIndex = selectedCardsIndices.removeLast()
-        if checkIfCardsMatch() {
+        if checkIfCardsMatch(indices: selectedCardsIndices) {
             moveBackIndex(&lastSelectedCardIndex)
             replaceCards(at: selectedCardsIndices)
         } else {
@@ -72,7 +78,7 @@ class SetGame {
             selectedCardsIndices.removeAll(where: { $0 == index })
             // do score
         } else {
-            if checkIfCardsMatch() {
+            if checkIfCardsMatch(indices: selectedCardsIndices) {
                 replaceCards(at: selectedCardsIndices)
                 selectedCardsIndices.removeAll()
             } else {
@@ -82,14 +88,19 @@ class SetGame {
             }
         }
     }
+
+    func isGameEnded() -> Bool {
+        if deck.isEmpty && findASetOnField() == nil {
+            return true
+        }
+        return false
+    }
     
-    
-    
-    func checkIfCardsMatch() -> Bool {
-        guard selectedCardsIndices.count == 3 else {
+    func checkIfCardsMatch(indices: [Int]) -> Bool {
+        guard indices.count == 3 else {
             return false
         }
-        return getMatchState(of: getCards(from: selectedCardsIndices))
+        return getMatchState(of: getCards(from: indices))
     }
     
     func getCards(from indices: [Int]) -> [Card] {
@@ -109,6 +120,7 @@ class SetGame {
         dealCards(12)
         
         delegate?.updateCardsOnField(self)
+        delegate?.setGamePrepareNewGame(self)
     }
     
     func dealThreeCards() {
@@ -182,6 +194,27 @@ class SetGame {
             return false
         }
         return true
+    }
+    
+    func findASetOnField() -> [Int]? { // work in progress
+        for firstIndex in dealtCards.indices {
+            for secondIndex in dealtCards.indices where secondIndex != firstIndex {
+                for thirdIndex in dealtCards.indices where thirdIndex != secondIndex {
+                    let cardIndices = [firstIndex, secondIndex, thirdIndex]
+                    if checkIfCardsMatch(indices: cardIndices) {
+                        return cardIndices
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
+    func findSetOnTheField() {
+        guard let indices = findASetOnField() else {
+            return
+        }
+        delegate?.setGameDidFindHint(self, at: indices)
     }
     
     func moveBackIndex(_ index: inout Int) {

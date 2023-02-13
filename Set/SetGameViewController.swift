@@ -15,6 +15,7 @@ class SetGameViewController: UIViewController {
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var newGameButton: UIButton!
     @IBOutlet weak var deal3Button: UIButton!
+    @IBOutlet weak var hintButton: UIButton!
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -36,6 +37,18 @@ class SetGameViewController: UIViewController {
         }
     }
     
+    @IBAction func tapHintButton(_ sender: UIButton) {
+        game.findSetOnTheField()
+    }
+    
+    @IBAction func tapOnNewGame(_ sender: UIButton) {
+        showNewGameAlert()
+    }
+    
+    @IBAction func tapDealButton(_ sender: UIButton) {
+        game.dealThreeCards()
+    }
+    
     @objc func didTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: cardGridView)
         guard let cardView = cardGridView.hitTest(location, with: nil) as? CardView,
@@ -50,18 +63,26 @@ class SetGameViewController: UIViewController {
             game.deselectCard(at: index)
         }
     }
-    
-    @IBAction func tapOnNewGame(_ sender: UIButton) {
-        showNewGameAlert()
-    }
-    
-    @IBAction func tapDealButton(_ sender: UIButton) {
-        game.dealThreeCards()
-    }
-    
 }
 
 extension SetGameViewController: SetGameDelegate {
+    
+    func setGameDidFindHint(_ setGame: SetGame, at indices: [Int]) {
+        for index in indices {
+            cardGridView.updateCardViewBackground(at: index, to: .systemYellow)
+        }
+        cardGridView.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            for index in indices {
+                self?.cardGridView.updateCardViewBackground(at: index, to: .white)
+            }
+            self?.cardGridView.isUserInteractionEnabled = true
+        }
+    }
+    
+    func setGamePrepareNewGame(_ setGame: SetGame) {
+        deal3Button.isEnabled = true
+    }
     
     func updateCardsOnField(_ game: SetGame) {
         cardGridView.updateCardViews(with: game.dealtCards)
@@ -80,7 +101,7 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGameDidEnd(_ setGame: SetGame) {
-        // end game
+        showGameEndAlert()
     }
     
     func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int]) {
@@ -150,7 +171,7 @@ extension SetGameViewController {
         present(alert, animated: true)
     }
     
-    func showGameOverAlert() {
+    func showGameEndAlert() {
         let newGameAction = Alert.createAction(.newGame() { _ in
             self.game.startNewGame()
         })

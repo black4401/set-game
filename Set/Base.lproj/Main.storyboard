@@ -17,7 +17,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzk-aD-ROK" customClass="CardGridView" customModule="Set" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="47" width="375" height="666.66666666666663"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKu-3O-pHp">
                                 <rect key="frame" x="131.66666666666666" y="733.66666666666663" width="122" height="34.333333333333371"/>
@@ -27,12 +27,6 @@
                                     <action selector="tapDealButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kDm-I1-3Yi"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" misplaced="YES" text="Points: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KF-dO-vFC">
-                                <rect key="frame" x="269" y="742.66666666666663" width="66.333333333333371" height="20.333333333333371"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-j1-E5u">
                                 <rect key="frame" x="8" y="733.66666666666663" width="107.66666666666667" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
@@ -41,13 +35,27 @@
                                     <action selector="tapOnNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZTe-Zv-YaR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9TN-t4-St5">
+                                <rect key="frame" x="269" y="714" width="44" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="lightbulb.fill" catalog="system" cornerStyle="large"/>
+                                <connections>
+                                    <action selector="tapHintButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hyn-rm-4tq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="Points: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KF-dO-vFC">
+                                <rect key="frame" x="154" y="705" width="66.333333333333371" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="BjP-oO-glC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qEc-j1-E5u" secondAttribute="trailing" constant="10" id="CSU-Yx-eLv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1KF-dO-vFC" secondAttribute="bottom" constant="15" id="DKN-kI-trf"/>
                             <constraint firstItem="qEc-j1-E5u" firstAttribute="top" secondItem="aKu-3O-pHp" secondAttribute="bottom" constant="69.666666666666657" id="Gdv-lz-sFA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aKu-3O-pHp" secondAttribute="bottom" constant="10" id="HFb-Wy-fNP"/>
                             <constraint firstItem="aKu-3O-pHp" firstAttribute="top" secondItem="1KF-dO-vFC" secondAttribute="bottom" constant="85.666666666666671" id="JcA-or-9AJ"/>
@@ -72,7 +80,6 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="CSU-Yx-eLv"/>
-                                <exclude reference="DKN-kI-trf"/>
                                 <exclude reference="HFb-Wy-fNP"/>
                                 <exclude reference="SlO-HE-6z7"/>
                                 <exclude reference="T7b-r8-YEy"/>
@@ -116,7 +123,6 @@
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="constraints">
-                                <include reference="DKN-kI-trf"/>
                                 <include reference="HFb-Wy-fNP"/>
                                 <include reference="TPJ-4f-kNl"/>
                                 <include reference="qhJ-IX-STW"/>
@@ -131,6 +137,7 @@
                     <connections>
                         <outlet property="cardGridView" destination="Rzk-aD-ROK" id="KeM-94-pAO"/>
                         <outlet property="deal3Button" destination="aKu-3O-pHp" id="8Cp-V3-6XU"/>
+                        <outlet property="hintButton" destination="9TN-t4-St5" id="bQo-iJ-wqg"/>
                         <outlet property="newGameButton" destination="qEc-j1-E5u" id="L6V-40-ex3"/>
                         <outlet property="pointsLabel" destination="1KF-dO-vFC" id="lXH-FR-DHp"/>
                     </connections>
@@ -140,4 +147,7 @@
             <point key="canvasLocation" x="-768" y="-2"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="lightbulb.fill" catalog="system" width="92" height="128"/>
+    </resources>
 </document>
