@@ -173,7 +173,7 @@ enum CardViewConstant {
     static let insetMultiplier = 0.05
     static let borderWidth: CGFloat = 3
     static let shapeLineWidth: CGFloat = 2
-    static let stripeLineWidth: CGFloat = 4
+    static let stripeLineWidth: CGFloat = 2
     static let rectPaddingMultiplier = 0.12
     static let cornerRadius: CGFloat = 5
     static let maxNumberOfShapes: CGFloat = 3
