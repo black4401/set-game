@@ -40,6 +40,7 @@ class SetGameViewController: UIViewController {
         }
     }
     
+    //MARK: IBActions
     @IBAction private func tapHintButton(_ sender: UIButton) {
         game.findSetOnTheField()
     }
@@ -68,6 +69,7 @@ class SetGameViewController: UIViewController {
     }
 }
 
+//MARK: SetGameDelegate
 extension SetGameViewController: SetGameDelegate {
     
     func setGameDidFindHint(_ setGame: SetGame, at indices: [Int]) {
@@ -124,6 +126,8 @@ extension SetGameViewController: SetGameDelegate {
     }
 }
 
+
+//MARK: Gestures
 extension SetGameViewController {
     
     private func addTapGestures() {
@@ -159,6 +163,7 @@ extension SetGameViewController {
     }
 }
 
+//MARK: Alerts
 extension SetGameViewController {
     private func showNewGameAlert() {
         let cancelAction = Alert.createAction(.cancel)
