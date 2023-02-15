@@ -13,6 +13,7 @@ class CardView: UIView {
     private var shapePaths: [UIBezierPath] = []
     private var stripedPaths: [UIBezierPath] = []
     private var shading: CGFloat = .zero
+    private var cardBack = UIImageView()
     
     override func draw(_ rect: CGRect) {
         color.setStroke()
@@ -71,16 +72,25 @@ class CardView: UIView {
                 shading = 0.0
         }
     }
-}
-
-private extension CardView {
     
-    func setupCardView() {
+    func showBackSide() {
+        setupCardView()
+        cardBack.image = UIImage(named: "cardBack")
+        addSubview(cardBack)
+    }
+    
+    func removeBackSide() {
+        cardBack.removeFromSuperview()
+    }
+    
+    private func setupCardView() {
         backgroundColor = .white
         layer.masksToBounds = true
         layer.cornerRadius = CardViewConstant.cornerRadius
     }
-    
+}
+
+private extension CardView {
     func createRectsForShapes(count: Int) -> [CGRect] {
         let size = CGSize(width: bounds.size.width,
                           height: bounds.size.height / CardViewConstant.maxNumberOfShapes)
@@ -172,9 +182,9 @@ private extension CardView {
 enum CardViewConstant {
     static let aspectRatio: CGFloat = 5 / 7
     static let insetMultiplier = 0.05
-    static let borderWidth: CGFloat = 5
+    static let borderWidth: CGFloat = 3
     static let shapeLineWidth: CGFloat = 2
-    static let stripeLineWidth: CGFloat = 2
+    static let stripeLineWidth: CGFloat = 4
     static let rectPaddingMultiplier = 0.12
     static let cornerRadius: CGFloat = 5
     static let maxNumberOfShapes: CGFloat = 3
