@@ -13,13 +13,6 @@ class CardView: UIView {
     private var shapePaths: [UIBezierPath] = []
     private var stripedPaths: [UIBezierPath] = []
     private var shading: CGFloat = .zero
-    private var cardBack = UIImageView()
-    
-    override var frame: CGRect {
-        didSet {
-            cardBack.frame = bounds
-        }
-    }
     
     override func draw(_ rect: CGRect) {
         color.setStroke()
@@ -58,16 +51,6 @@ class CardView: UIView {
                     bezierPath = createSquigglePath(in: rect)
             }
             shapePaths.append(bezierPath)
-        }
-        
-        func showBackSide() {
-            setupCardView()
-            cardBack.image = UIImage(named: "cardBack")
-            addSubview(cardBack)
-        }
-        
-        func removeBackSide() {
-            cardBack.removeFromSuperview()
         }
         
         switch card.color {
