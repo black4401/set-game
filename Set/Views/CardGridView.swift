@@ -19,6 +19,7 @@ class CardGridView: UIView {
         cardViews = []
         var grid = Grid(layout: .aspectRatio(CardViewConstant.aspectRatio), frame: bounds)
         grid.cellCount = cards.count
+        
         for (index, card) in cards.enumerated() {
             guard let cardFrame = grid[index] else {
                 return
