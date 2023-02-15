@@ -45,6 +45,10 @@ class SetGame {
         }
     }
     
+    func isSelected(at index: Int) -> Bool {
+        return selectedCardsIndices.contains(index)
+    }
+    
     private func makeASetIfPossible() {
         guard selectedCardsIndices.count == 3 else {
             return
