@@ -103,9 +103,8 @@ class SetGame {
     }
     
     private func getCards(from indices: [Int]) -> [Card] {
-        var cards:[Card] = []
-        for index in indices {
-            cards.append(dealtCards[index])
+        let cards:[Card] = indices.map { index in
+           dealtCards[index]
         }
         return cards
     }
