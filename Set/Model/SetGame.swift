@@ -129,7 +129,8 @@ class SetGame {
             return
         }
         for _ in 0..<3 {
-            dealtCards.append(deck.removeFirst())
+            let card = deck.removeFirst()
+            dealtCards.append(card)
         }
         delegate?.setGameDidUpdateCards(self)
         delegate?.setGameDidEnableDealButton(self, isEnabled: !deck.isEmpty)
