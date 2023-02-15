@@ -83,11 +83,11 @@ extension SetGameViewController: SetGameDelegate {
         }
     }
     
-    func setGamePrepareNewGame(_ setGame: SetGame) {
+    func setGameDidPrepareNewGame(_ setGame: SetGame) {
         deal3Button.isEnabled = true
     }
     
-    func setGameUpdateCards(_ game: SetGame) {
+    func setGameDidUpdateCards(_ game: SetGame) {
         cardGridView.updateCardViews(with: game.dealtCards)
     }
     
@@ -95,7 +95,7 @@ extension SetGameViewController: SetGameDelegate {
         cardGridView.updateCardViewBorder(at: index, to: .green)
     }
     
-    func setGameUpdatePoints(_ setGame: SetGame) {
+    func setGameDidUpdatePoints(_ setGame: SetGame) {
         pointsLabel.text = "Points: \(game.points)"
     }
     
@@ -110,7 +110,7 @@ extension SetGameViewController: SetGameDelegate {
         }
     }
     
-    func setGameEnableDealButton(_ setGame: SetGame, isEnabled: Bool) {
+    func setGameDidEnableDealButton(_ setGame: SetGame, isEnabled: Bool) {
         deal3Button.isEnabled = isEnabled
         if !isEnabled {
             deal3Button.backgroundColor = .white

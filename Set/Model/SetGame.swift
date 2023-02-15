@@ -8,12 +8,12 @@
 import Foundation
 
 protocol SetGameDelegate: AnyObject {
-    func setGameUpdateCards(_ setGame: SetGame)
-    func setGameUpdatePoints(_ setGame: SetGame)
+    func setGameDidUpdateCards(_ setGame: SetGame)
+    func setGameDidUpdatePoints(_ setGame: SetGame)
     func setGameDidEnd(_ setGame: SetGame)
-    func setGameEnableDealButton(_ setGame: SetGame, isEnabled: Bool)
+    func setGameDidEnableDealButton(_ setGame: SetGame, isEnabled: Bool)
     func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int])
-    func setGamePrepareNewGame(_ setGame: SetGame)
+    func setGameDidPrepareNewGame(_ setGame: SetGame)
     func setGameDidFindHint(_ setGame: SetGame, at indices: [Int])
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
@@ -29,7 +29,7 @@ class SetGame {
     
     private(set) var points = 0 {
         didSet {
-            delegate?.setGameUpdatePoints(self)
+            delegate?.setGameDidUpdatePoints(self)
         }
     }
     
@@ -70,7 +70,7 @@ class SetGame {
             moveBackIndex(&lastSelectedCardIndex)
             replaceCards(at: selectedCardsIndices)
         } else {
-            delegate?.setGameUpdateCards(self)
+            delegate?.setGameDidUpdateCards(self)
         }
         delegate?.setGame(self, didSelectCardAt: lastSelectedCardIndex)
         selectedCardsIndices = [lastSelectedCardIndex]
@@ -85,7 +85,7 @@ class SetGame {
                 replaceCards(at: selectedCardsIndices)
                 selectedCardsIndices.removeAll()
             } else {
-                delegate?.setGameUpdateCards(self)
+                delegate?.setGameDidUpdateCards(self)
                 selectedCardsIndices = [index]
                 delegate?.setGame(self, didSelectCardAt: index)
             }
@@ -121,8 +121,8 @@ class SetGame {
         deck.shuffle()
         dealCards(12)
         
-        delegate?.setGameUpdateCards(self)
-        delegate?.setGamePrepareNewGame(self)
+        delegate?.setGameDidUpdateCards(self)
+        delegate?.setGameDidPrepareNewGame(self)
     }
     
     func dealThreeCards() {
@@ -132,8 +132,8 @@ class SetGame {
         for _ in 0..<3 {
             dealtCards.append(deck.removeFirst())
         }
-        delegate?.setGameUpdateCards(self)
-        delegate?.setGameEnableDealButton(self, isEnabled: !deck.isEmpty)
+        delegate?.setGameDidUpdateCards(self)
+        delegate?.setGameDidEnableDealButton(self, isEnabled: !deck.isEmpty)
     }
     
     func shuffleCardsOnField() {
@@ -237,6 +237,6 @@ class SetGame {
                 dealtCards[index] = deck.removeFirst()
             }
         }
-        delegate?.setGameUpdateCards(self)
+        delegate?.setGameDidUpdateCards(self)
     }
 }
