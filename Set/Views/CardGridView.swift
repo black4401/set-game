@@ -12,19 +12,44 @@ class CardGridView: UIView {
     private var cardViews: [CardView] = []
     
     func updateCardViews(with cards: [Card]) {
-        for cardView in subviews {
+        let difference = cards.count - cardViews.count
+        var oldFrames: [CGRect] = []
+        for cardView in cardViews {
             cardView.removeFromSuperview()
+            oldFrames.append(cardView.frame)
         }
         cardViews = []
         var grid = Grid(layout: .aspectRatio(CardViewConstant.aspectRatio), frame: bounds)
         grid.cellCount = cards.count
+        var iterations = 1.0
         for (index, card) in cards.enumerated() {
             guard let cardFrame = grid[index] else {
                 return
             }
             let inset = cardFrame.width * CardViewConstant.insetMultiplier
             let frame = cardFrame.insetBy(dx: inset, dy: inset)
-            let cardView = CardView(frame: frame)
+            var cardView = CardView(frame: frame)
+            
+            if index < cards.count - difference {
+                cardView.frame = oldFrames[index]
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: {
+                    cardView.frame = frame
+                })
+            } else {
+                cardView.frame = frame
+                //cardView
+                cardView.alpha = 0
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: iterations/5.0, animations: {
+                    cardView.frame = frame
+                    cardView.alpha = 1
+                }) { _ in
+                    UIView.transition(with: cardView, duration: 0.2, options: .transitionFlipFromLeft, animations: {
+                        //cardView.removeBackSide()
+                    })
+                }
+                iterations += 1
+            }
+            
             cardView.configure(with: card)
             addSubview(cardView)
             cardViews.append(cardView)
