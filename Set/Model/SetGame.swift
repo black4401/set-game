@@ -79,7 +79,6 @@ class SetGame {
     func deselectCard(at index: Int) {
         if selectedCardsIndices.count != 3 {
             selectedCardsIndices.removeAll(where: { $0 == index })
-            // do score?
         } else {
             if checkIfCardsMatch(indices: selectedCardsIndices) {
                 replaceCards(at: selectedCardsIndices)
@@ -93,7 +92,7 @@ class SetGame {
     }
     
     private func isGameEnded() -> Bool {
-        if deck.isEmpty && findASetOnField() == nil {
+        if deck.isEmpty && lookForASet() == nil {
             return true
         }
         return false
@@ -144,8 +143,8 @@ class SetGame {
     
     private func dealCards(_ count: Int) {
         for _ in 0..<count {
-            if let card = deck.popLast() {
-                dealtCards.append(card)
+            if !deck.isEmpty {
+                dealtCards.append(deck.removeFirst())
             } else {
                 break
             }
@@ -196,7 +195,7 @@ class SetGame {
         return true
     }
     
-    private func findASetOnField() -> [Int]? {
+    private func lookForASet() -> [Int]? {
         for firstIndex in dealtCards.indices {
             for secondIndex in dealtCards.indices where secondIndex != firstIndex {
                 for thirdIndex in dealtCards.indices where thirdIndex != secondIndex {
@@ -211,7 +210,7 @@ class SetGame {
     }
     
     func findSetOnTheField() {
-        guard let indices = findASetOnField() else {
+        guard let indices = lookForASet() else {
             return
         }
         delegate?.setGameDidFindHint(self, at: indices)

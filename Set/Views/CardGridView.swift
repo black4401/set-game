@@ -12,9 +12,10 @@ class CardGridView: UIView {
     private var cardViews: [CardView] = []
     
     func updateCardViews(with cards: [Card]) {
-        for cardView in subviews {
+        for cardView in cardViews {
             cardView.removeFromSuperview()
         }
+        
         cardViews = []
         var grid = Grid(layout: .aspectRatio(CardViewConstant.aspectRatio), frame: bounds)
         grid.cellCount = cards.count
@@ -32,11 +33,11 @@ class CardGridView: UIView {
     }
     
     func updateCardViewBorder(at index: Int, to color: UIColor) {
-        cardViews[index].backgroundColor = .gray
+        cardViews[index].setBorder(borderWidth: CardViewConstant.borderWidth, borderColor: color)
     }
     
     func removeCardViewBorder(at index: Int) {
-        cardViews[index].backgroundColor = .white
+        cardViews[index].setBorder(borderWidth: CardViewConstant.borderWidth, borderColor: .white)
     }
     
     func updateCardViewBackground(at index: Int, to color: UIColor) {

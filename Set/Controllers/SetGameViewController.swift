@@ -35,7 +35,7 @@ class SetGameViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.cardGridView.updateCardViews(with: self!.game.dealtCards)
         }
     }

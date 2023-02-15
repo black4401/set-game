@@ -12,7 +12,7 @@ class Card: Identifiable {
     var id = UUID()
     var isSelected: Bool = false
     var isSet: Bool = false
-    var isMatch: MatchState = .NotSetYet
+    var isMatch: MatchState = .notSet
     
     let numberOfShapes: NumberOfShapes
     let shape: Shape
@@ -27,9 +27,9 @@ class Card: Identifiable {
     }
     
     enum MatchState {
-        case Match
-        case MissMatch
-        case NotSetYet
+        case match
+        case notMatch
+        case notSet
     }
     
     enum NumberOfShapes: Int, CaseIterable {
