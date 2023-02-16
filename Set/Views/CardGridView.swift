@@ -109,9 +109,9 @@ private extension CardGridView {
         deckView.setBorder(borderWidth: 5.0, borderColor: .black)
         addSubview(deckView)
         NSLayoutConstraint.activate([
-            deckView.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -10),
+            deckView.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -5),
             deckView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            deckView.heightAnchor.constraint(equalToConstant: 128),
+            deckView.heightAnchor.constraint(equalToConstant: 100),
             deckView.widthAnchor.constraint(equalTo: deckView.heightAnchor, multiplier: 5/7)
         ])
         let tap = createTapGesture()
@@ -124,9 +124,9 @@ private extension CardGridView {
         discardPile.setBorder(borderWidth: 5.0, borderColor: .black)
         addSubview(discardPile)
         NSLayoutConstraint.activate([
-            discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 10),
+            discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 5),
             discardPile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            discardPile.heightAnchor.constraint(equalToConstant: 128),
+            discardPile.heightAnchor.constraint(equalToConstant: 100),
             discardPile.widthAnchor.constraint(equalTo: discardPile.heightAnchor, multiplier: 5/7)
         ])
     }

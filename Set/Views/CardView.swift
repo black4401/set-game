@@ -15,6 +15,12 @@ class CardView: UIView {
     private var shading: CGFloat = .zero
     private var cardBack = UIImageView()
     
+    override var frame: CGRect {
+        didSet {
+            cardBack.frame = bounds
+        }
+    }
+    
     override func draw(_ rect: CGRect) {
         color.setStroke()
         color.withAlphaComponent(shading).setFill()
@@ -75,7 +81,7 @@ class CardView: UIView {
     
     func showBackSide() {
         setupCardView()
-        cardBack.image = UIImage(named: "cardBack2")
+        cardBack.image = UIImage(named: "cardBack")
         addSubview(cardBack)
     }
     
