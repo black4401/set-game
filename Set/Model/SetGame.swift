@@ -202,7 +202,7 @@ private extension SetGame {
         return nil
     }
     
-    private func relocateCardIndex(_ index: inout Int) {
+    private func updateCardIndexIfNeeded(_ index: inout Int) {
         guard deck.isEmpty else {
             return
         }
@@ -231,7 +231,7 @@ private extension SetGame {
         }
         var lastSelectedCardIndex = selectedCardsIndices.removeLast()
         if checkIfCardsMatch(indices: selectedCardsIndices) {
-            relocateCardIndex(&lastSelectedCardIndex)
+            updateCardIndexIfNeeded(&lastSelectedCardIndex)
             replaceCards(at: selectedCardsIndices)
         } else {
             delegate?.setGameDidUpdateCards(self)
