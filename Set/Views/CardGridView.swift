@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CardGridViewDelegate: AnyObject {
+    func cardGridViewDidTapDeck(_ cardGridView: CardGridView)
+}
+
 class CardGridView: UIView {
     
     private var cardViews: [CardView] = []
@@ -18,6 +22,8 @@ class CardGridView: UIView {
         let grid = Grid(layout: .aspectRatio(CardViewConstant.aspectRatio), frame: frame)
         return grid
     }
+    
+    weak var delegate: CardGridViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -84,7 +90,17 @@ class CardGridView: UIView {
     func getIndex(of cardView: CardView) -> Int? {
         return cardViews.firstIndex(where: { $0 == cardView })
     }
+    
+    func createTapGesture() -> UITapGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        return tap
+    }
+    
+    @objc func didTap (_ sender: UITapGestureRecognizer) {
+        delegate?.cardGridViewDidTapDeck(self)
+    }
 }
+
 //MARK: Private methods
 private extension CardGridView {
     
@@ -98,7 +114,9 @@ private extension CardGridView {
             deckView.heightAnchor.constraint(equalToConstant: 128),
             deckView.widthAnchor.constraint(equalTo: deckView.heightAnchor, multiplier: 5/7)
         ])
-// add tap gesture to deal 3
+        let tap = createTapGesture()
+        deckView.addGestureRecognizer(tap)
+        
     }
     
     func setupDiscardPile() {

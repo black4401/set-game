@@ -21,7 +21,7 @@ class SetGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         game.delegate = self
-        
+        cardGridView.delegate = self
         //deal3Button.layer.cornerRadius = 8
         //deal3Button.clipsToBounds = true
     }
@@ -31,6 +31,7 @@ class SetGameViewController: UIViewController {
         game.startNewGame()
         cardGridView.updateCardViews(with: game.dealtCards)
         addTapGestures()
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -179,3 +180,12 @@ extension SetGameViewController {
         present(alert, animated: true)
     }
 }
+
+
+extension SetGameViewController: CardGridViewDelegate {
+    
+    func cardGridViewDidTapDeck(_ cardGridView: CardGridView) {
+        game.dealThreeCards()
+    }
+}
+
