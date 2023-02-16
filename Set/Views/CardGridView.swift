@@ -145,7 +145,7 @@ private extension CardGridView {
         deckView.image = UIImage(named: "cardBack")
         addSubview(deckView)
         NSLayoutConstraint.activate([
-            deckView.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -5),
+            deckView.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -100),
             deckView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             deckView.heightAnchor.constraint(equalToConstant: 100),
             deckView.widthAnchor.constraint(equalTo: deckView.heightAnchor, multiplier: 5/7)
@@ -160,7 +160,7 @@ private extension CardGridView {
         discardPile.setBorder(borderWidth: 1.0, borderColor: .black)
         addSubview(discardPile)
         NSLayoutConstraint.activate([
-            discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 5),
+            discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 105),
             discardPile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             discardPile.heightAnchor.constraint(equalToConstant: 100),
             discardPile.widthAnchor.constraint(equalTo: discardPile.heightAnchor, multiplier: 5/7)

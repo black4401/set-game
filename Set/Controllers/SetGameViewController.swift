@@ -101,7 +101,7 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGameUpdatePoints(_ setGame: SetGame) {
-        //pointsLabel.text = "Points: \(game.points)"
+        pointsLabel.text = "Points: \(game.points)"
     }
     
     func setGameDidEnd(_ setGame: SetGame) {
