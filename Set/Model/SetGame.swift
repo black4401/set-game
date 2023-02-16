@@ -108,7 +108,7 @@ class SetGame {
 //MARK: Private Methods
 private extension SetGame {
     
-    private func getMatchState(of cards: [Card]) -> Bool {
+    func getMatchState(of cards: [Card]) -> Bool {
         
         if cards.count != 3 {
             print("Less than 3 cards selected")
@@ -137,14 +137,14 @@ private extension SetGame {
         return true
     }
     
-    private func checkIfCardsMatch(indices: [Int]) -> Bool {
+    func checkIfCardsMatch(indices: [Int]) -> Bool {
         guard indices.count == 3 else {
             return false
         }
         return getMatchState(of: getCards(from: indices))
     }
     
-    private func dealCards(_ count: Int) {
+    func dealCards(_ count: Int) {
         for _ in 0..<count {
             if !deck.isEmpty {
                 dealtCards.append(deck.removeFirst())
@@ -154,7 +154,7 @@ private extension SetGame {
         }
     }
     
-    private func createDeck() -> [Card] {
+    func createDeck() -> [Card] {
         var cards: [Card] = []
         for numberOfShape in Card.NumberOfShapes.allCases {
             for shape in Card.Shape.allCases {
@@ -169,7 +169,7 @@ private extension SetGame {
         return cards
     }
     
-    private func makeASetIfPossible() {
+    func makeASetIfPossible() {
         guard selectedCardsIndices.count == 3 else {
             return
         }
@@ -181,14 +181,14 @@ private extension SetGame {
         delegate?.setGame(self, didCardsMatch: checkIfCardsMatch(indices: selectedCardsIndices), at: selectedCardsIndices)
     }
     
-    private func getCards(from indices: [Int]) -> [Card] {
+    func getCards(from indices: [Int]) -> [Card] {
         let cards:[Card] = indices.map { index in
             dealtCards[index]
         }
         return cards
     }
     
-    private func lookForASet() -> [Int]? {
+    func lookForASet() -> [Int]? {
         for firstIndex in dealtCards.indices {
             for secondIndex in dealtCards.indices where secondIndex != firstIndex {
                 for thirdIndex in dealtCards.indices where thirdIndex != secondIndex {
@@ -202,7 +202,7 @@ private extension SetGame {
         return nil
     }
     
-    private func updateCardIndexIfNeeded(_ index: inout Int) {
+    func updateCardIndexIfNeeded(_ index: inout Int) {
         guard deck.isEmpty else {
             return
         }
@@ -214,7 +214,7 @@ private extension SetGame {
         }
     }
     
-    private func replaceCards(at indices: [Int]) {
+    func replaceCards(at indices: [Int]) {
         if deck.isEmpty {
             dealtCards.remove(at: indices)
         } else {
@@ -225,7 +225,7 @@ private extension SetGame {
         delegate?.setGameDidUpdateCards(self)
     }
     
-    private func replaceMatchedCards() {
+    func replaceMatchedCards() {
         guard selectedCardsIndices.count > 3 else {
             return
         }
@@ -240,7 +240,7 @@ private extension SetGame {
         selectedCardsIndices = [lastSelectedCardIndex]
     }
     
-    private func isGameEnded() -> Bool {
+    func isGameEnded() -> Bool {
         if deck.isEmpty && lookForASet() == nil {
             return true
         }
