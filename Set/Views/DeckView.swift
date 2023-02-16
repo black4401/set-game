@@ -41,6 +41,9 @@ class DeckView: UIImageView {
     }
     
     func configureDiscardPile() {
+        layer.cornerRadius = CardViewConstant.cornerRadius
+        translatesAutoresizingMaskIntoConstraints = false
+        isUserInteractionEnabled = false
         label = UILabel()
         label?.textColor = .red
         label?.textAlignment = .center
