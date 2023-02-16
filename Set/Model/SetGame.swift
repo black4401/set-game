@@ -16,7 +16,6 @@ protocol SetGameDelegate: AnyObject {
     func setGamePrepareNewGame(_ setGame: SetGame)
     func setGameDidFindHint(_ setGame: SetGame, at indices: [Int])
     func setGameDidReplaceCards(_ game: SetGame)
-    func setGameDidRemoveCards(_ game: SetGame)
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
     func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int])
@@ -231,15 +230,12 @@ class SetGame {
     private func replaceCards(at indices: [Int]) {
         if deck.isEmpty {
             dealtCards.remove(at: indices)
-            delegate?.setGameDidRemoveCards(self)
         } else {
             for index in indices {
                 dealtCards[index] = deck.removeFirst()
             }
-            delegate?.setGameDidReplaceCards(self)
         }
         //delegate?.setGameUpdateCards(self)
-        
+        delegate?.setGameDidReplaceCards(self)
     }
 }
-

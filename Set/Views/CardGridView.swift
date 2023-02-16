@@ -151,6 +151,36 @@ class CardGridView: UIView {
         }
     }
     
+    func replaceCardViews(at indices: [Int], with cards: [Card]) {
+        var iteration = 0.0
+        var grid = grid
+        grid.cellCount = cards.count
+        
+        for index in indices {
+            let oldCardView = cardViews[index]
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
+                oldCardView.frame = self.discardPile.frame
+                oldCardView.alpha = 0
+            }) { _ in
+                oldCardView.removeFromSuperview()
+            }
+            iteration += 1
+            let cardFrame = grid[index]!
+            let inset = cardFrame.width * CardViewConstant.insetMultiplier
+            let frame = cardFrame.insetBy(dx: inset, dy: inset)
+            let cardView = CardView()
+            cardView.frame = deckView.frame
+            cardView.alpha = 0
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iteration/5.0, animations: {
+                cardView.frame = frame
+                cardView.alpha = 1
+            })
+            cardView.configure(with: cards[index])
+            addSubview(cardView)
+            cardViews[index] = cardView
+        }
+    }
+    
     func updateCardViewBorder(at index: Int, to color: UIColor) {
         cardViews[index].setBorder(borderWidth: CardViewConstant.borderWidth, borderColor: color)
     }

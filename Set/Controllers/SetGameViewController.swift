@@ -93,11 +93,7 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGameDidReplaceCards(_ game: SetGame) {
-        cardGridView.replaceCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
-    }
-    
-    func setGameDidRemoveCards(_ game: SetGame) {
-        cardGridView.removeCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
+        cardGridView.replaceCardViews(at: game.selectedCardsIndices, with: game.dealtCards)
     }
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int) {
@@ -105,7 +101,7 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGameUpdatePoints(_ setGame: SetGame) {
-        pointsLabel.text = "Points: \(game.points)"
+        //pointsLabel.text = "Points: \(game.points)"
     }
     
     func setGameDidEnd(_ setGame: SetGame) {
@@ -189,11 +185,9 @@ extension SetGameViewController {
     }
 }
 
-
 extension SetGameViewController: CardGridViewDelegate {
     
     func cardGridViewDidTapDeck(_ cardGridView: CardGridView) {
         game.dealThreeCards()
     }
 }
-
