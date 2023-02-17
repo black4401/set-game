@@ -31,6 +31,43 @@ class CardGridView: UIView {
         setupDiscardPile()
     }
     
+    func dealIntialCardsAnimated(cards: [Card]) {
+        var oldFrames: [CGRect] = []
+        for cardView in cardViews {
+            cardView.removeFromSuperview()
+            oldFrames.append(cardView.frame)
+        }
+        cardViews = []
+        var grid = grid
+        grid.cellCount = cards.count
+        var iterations = 1.0
+        for (index, card) in cards.enumerated() {
+            guard let cardFrame = grid[index] else {
+                return
+            }
+            let inset = cardFrame.width * CardViewConstant.insetMultiplier
+            let frame = cardFrame.insetBy(dx: inset, dy: inset)
+            let cardView = CardView(frame: frame)
+            
+            cardView.frame = deckView.frame
+            cardView.showBackSide()
+            cardView.alpha = 0
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iterations/5.0, animations: {
+                cardView.frame = frame
+                cardView.alpha = 1
+            }) { _ in
+                UIView.transition(with: cardView, duration: 0.4, options: .transitionFlipFromRight, animations: {
+                    cardView.removeBackSide()
+                })
+            }
+            
+            iterations += 1
+            cardView.configure(with: card)
+            addSubview(cardView)
+            cardViews.append(cardView)
+        }
+    }
+    
     func updateCardViews(with cards: [Card]) {
         let difference = cards.count - cardViews.count
         var oldFrames: [CGRect] = []
@@ -49,6 +86,7 @@ class CardGridView: UIView {
             let inset = cardFrame.width * CardViewConstant.insetMultiplier
             let frame = cardFrame.insetBy(dx: inset, dy: inset)
             let cardView = CardView(frame: frame)
+            
             if index < cards.count - difference {
                 cardView.frame = oldFrames[index]
                 UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
@@ -131,14 +169,13 @@ class CardGridView: UIView {
             self?.cardViews = []
             var grid = self!.grid
             grid.cellCount = cards.count
-            var shiftBackBy = 0
             for (index, card) in cards.enumerated() {
                 
                 let cardFrame = grid[index]!
                 let inset = cardFrame.width * CardViewConstant.insetMultiplier
                 let frame = cardFrame.insetBy(dx: inset, dy: inset)
                 let cardView = CardView()
-                cardView.frame = oldFrames[index+shiftBackBy]
+                cardView.frame = oldFrames[index]
                 
                 UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
                     cardView.frame = frame

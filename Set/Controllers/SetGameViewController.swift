@@ -29,7 +29,7 @@ class SetGameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         game.startNewGame()
-        cardGridView.updateCardViews(with: game.dealtCards)
+        cardGridView.dealIntialCardsAnimated(cards: game.dealtCards)
         addTapGestures()
         
     }
