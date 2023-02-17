@@ -18,7 +18,8 @@ protocol SetGameDelegate: AnyObject {
     func setGameDidReplaceCards(_ game: SetGame)
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
-    func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int])
+    func setGame(_ setGame: SetGame, didFindMatch isMatched: Bool, at indices: [Int])
+    func setGame(_ setGame: SetGame, didFindMissmatchAt indices: [Int])
 }
 
 class SetGame {
@@ -52,10 +53,13 @@ class SetGame {
         }
         if checkIfCardsMatch(indices: selectedCardsIndices) {
             points += 3
+            replaceCards(at: selectedCardsIndices)
         } else {
             points -= 5
+            delegate?.setGame(self, didFindMissmatchAt: selectedCardsIndices)
+  
         }
-        delegate?.setGame(self, didCardsMatch: checkIfCardsMatch(indices: selectedCardsIndices), at: selectedCardsIndices)
+        //delegate?.setGame(self, didFindMatch: checkIfCardsMatch(indices: selectedCardsIndices), at: selectedCardsIndices)
     }
     
     private func replaceMatchedCards() {

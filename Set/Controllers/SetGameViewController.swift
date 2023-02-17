@@ -93,7 +93,7 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGameDidReplaceCards(_ game: SetGame) {
-        cardGridView.replaceCardViews(at: game.selectedCardsIndices, with: game.dealtCards)
+        cardGridView.replaceCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
     }
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int) {
@@ -108,10 +108,19 @@ extension SetGameViewController: SetGameDelegate {
         showGameEndAlert()
     }
     
-    func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int]) {
+    func setGame(_ setGame: SetGame, didFindMatch isMatched: Bool, at indices: [Int]) {
         for index in indices {
             let color: UIColor = isMatched ? .green : .red
             cardGridView.updateCardViewBorder(at: index, to: color)
+        }
+    }
+    
+    func setGame(_ setGame: SetGame, didFindMissmatchAt indices: [Int]) {
+        cardGridView.shakeCardViews(at: indices)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
+            for index in indices {
+                self?.cardGridView.removeCardViewBorder(at: index)
+            }
         }
     }
     
