@@ -93,7 +93,11 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGameDidReplaceCards(_ game: SetGame) {
-        cardGridView.replaceCardViews(at: game.selectedCardsIndices, with: game.dealtCards)
+        cardGridView.replaceCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
+    }
+    
+    func setGameDidRemoveCards(_ game: SetGame) {
+        cardGridView.removeCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
     }
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int) {
