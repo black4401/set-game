@@ -71,15 +71,16 @@ class CardView: UIView {
                 shading = 0.0
         }
     }
+}
+
+private extension CardView {
     
-    private func setupCardView() {
+    func setupCardView() {
         backgroundColor = .white
         layer.masksToBounds = true
         layer.cornerRadius = CardViewConstant.cornerRadius
     }
-}
-
-private extension CardView {
+    
     func createRectsForShapes(count: Int) -> [CGRect] {
         let size = CGSize(width: bounds.size.width,
                           height: bounds.size.height / CardViewConstant.maxNumberOfShapes)

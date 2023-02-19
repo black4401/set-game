@@ -39,21 +39,24 @@ class SetGameViewController: UIViewController {
             self?.cardGridView.updateCardViews(with: self!.game.dealtCards)
         }
     }
+}
+
+//MARK: IBActions
+private extension SetGameViewController {
     
-    //MARK: IBActions
-    @IBAction private func tapHintButton(_ sender: UIButton) {
+    @IBAction func tapHintButton(_ sender: UIButton) {
         game.findSetOnTheField()
     }
     
-    @IBAction private func tapOnNewGame(_ sender: UIButton) {
+    @IBAction func tapOnNewGame(_ sender: UIButton) {
         showNewGameAlert()
     }
     
-    @IBAction private func tapDealButton(_ sender: UIButton) {
+    @IBAction func tapDealButton(_ sender: UIButton) {
         game.dealThreeCards()
     }
     
-    @objc private func didTap(_ sender: UITapGestureRecognizer) {
+    @objc func didTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: cardGridView)
         guard let cardView = cardGridView.hitTest(location, with: nil) as? CardView,
               let index = cardGridView.getIndex(of: cardView) else {
@@ -68,7 +71,6 @@ class SetGameViewController: UIViewController {
         }
     }
 }
-
 //MARK: SetGameDelegate
 extension SetGameViewController: SetGameDelegate {
     
@@ -128,35 +130,35 @@ extension SetGameViewController: SetGameDelegate {
 
 
 //MARK: Gestures
-extension SetGameViewController {
+private extension SetGameViewController {
     
-    private func addTapGestures() {
+    func addTapGestures() {
         cardGridView.addGestureRecognizer(createTapGesture())
         cardGridView.addGestureRecognizer(createSwipeDownGesture())
         cardGridView.addGestureRecognizer(createRotationGesture())
     }
     
-    private func createTapGesture() -> UITapGestureRecognizer {
+    func createTapGesture() -> UITapGestureRecognizer {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         return gesture
     }
     
-    private func createSwipeDownGesture() -> UISwipeGestureRecognizer {
+    func createSwipeDownGesture() -> UISwipeGestureRecognizer {
         let gesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDown))
         gesture.direction = .down
         return gesture
     }
     
-    private func createRotationGesture() -> UIRotationGestureRecognizer {
+    func createRotationGesture() -> UIRotationGestureRecognizer {
         let gesture = UIRotationGestureRecognizer(target: self, action: #selector(didRotateWithGesture))
         return gesture
     }
     
-    @objc private func didSwipeDown(_ sender: UISwipeGestureRecognizer) {
+    @objc func didSwipeDown(_ sender: UISwipeGestureRecognizer) {
         game.dealThreeCards()
     }
     
-    @objc private func didRotateWithGesture(_ sender: UIRotationGestureRecognizer) {
+    @objc func didRotateWithGesture(_ sender: UIRotationGestureRecognizer) {
         if sender.state == .began {
             game.shuffleCardsOnField()
         }
@@ -164,8 +166,8 @@ extension SetGameViewController {
 }
 
 //MARK: Alerts
-extension SetGameViewController {
-    private func showNewGameAlert() {
+private extension SetGameViewController {
+    func showNewGameAlert() {
         let cancelAction = Alert.createAction(.cancel)
         let newGameAction = Alert.createAction(.newGame() { _ in
             self.game.startNewGame()
@@ -175,7 +177,7 @@ extension SetGameViewController {
         present(alert, animated: true)
     }
     
-    private func showGameEndAlert() {
+    func showGameEndAlert() {
         let newGameAction = Alert.createAction(.newGame() { _ in
             self.game.startNewGame()
         })
