@@ -29,6 +29,9 @@
                                 <rect key="frame" x="165.66666666666666" y="719" width="43.666666666666657" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="lightbulb.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="tapHintButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="erq-WK-UAf"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -76,7 +79,7 @@
                     </view>
                     <connections>
                         <outlet property="cardGridView" destination="Rzk-aD-ROK" id="KeM-94-pAO"/>
-                        <outlet property="hintButton" destination="69p-eq-SIX" id="5n7-k4-9DV"/>
+                        <outlet property="hintButton" destination="69p-eq-SIX" id="m4a-9w-SEs"/>
                         <outlet property="pointsLabel" destination="UY0-23-y4b" id="e3K-WT-Lt6"/>
                     </connections>
                 </viewController>

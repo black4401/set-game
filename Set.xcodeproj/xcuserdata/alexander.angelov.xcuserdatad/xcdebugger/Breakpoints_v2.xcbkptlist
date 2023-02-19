@@ -246,6 +246,54 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D0DC0951-7833-4866-97A3-44A9937BDEBF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Set/Views/CardGridView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "updateCardViews(with:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D0DC0951-7833-4866-97A3-44A9937BDEBF - 2b2f41007dd84052"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Set.CardGridView.updateCardViews(with: Swift.Array&lt;Set.Card&gt;) -&gt; ()"
+                  moduleName = "Set"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexander.angelov/Developer/Set/Set/Views/CardGridView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "1256">
+               </Location>
+               <Location
+                  uuid = "D0DC0951-7833-4866-97A3-44A9937BDEBF - e7d7d5635db08325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Set.CardGridView.updateCardViews(with: Swift.Array&lt;Set.Card&gt;) -&gt; ()"
+                  moduleName = "Set"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexander.angelov/Developer/Set/Set/Views/CardGridView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 >>>>>>> cf5ce44 (Work on the initial dealing of cards animation)
 </Bucket>
