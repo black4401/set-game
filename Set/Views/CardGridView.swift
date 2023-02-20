@@ -117,12 +117,7 @@ class CardGridView: UIView {
             let oldCardView = cardViews[index]
             zoomIn(cardView: oldCardView)
             animateReplace(of: oldCardView)
-            //            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
-            //                oldCardView.frame = self.discardPile.frame
-            //                oldCardView.alpha = 0
-            //            }) { _ in
-            //                oldCardView.removeFromSuperview()
-            //            }
+            
             iteration += 1
             let cardFrame = grid[index]!
             let inset = cardFrame.width * CardViewConstant.insetMultiplier
@@ -243,26 +238,12 @@ class CardGridView: UIView {
         return tap
     }
     
-    func resetDeckAndDiscardPileState() {
-        deckView.isEmpty = false
-        deckView.image = UIImage(named: "cardBack")
-        discardPile.isEmpty = true
-        discardPile.image = nil
-    }
-    
     func removeDeckViewImage() {
-        if deckView.image != nil {
-            deckView.image = nil
-        }
+        deckView.image = nil
     }
     
     func addCardBackToDiscardPile() {
-        guard discardPile.image != nil else {
-            let image = UIImage(named: "cardBack")
-            discardPile.image = image
-            discardPile.alpha = 0.5
-            return
-        }
+        discardPile.image = deckView.image
     }
     
     @objc func didTap (_ sender: UITapGestureRecognizer) {
@@ -296,13 +277,10 @@ private extension CardGridView {
         discardPile.setBorder(borderWidth: 1.0, borderColor: .black)
         addSubview(discardPile)
         NSLayoutConstraint.activate([
-            discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 100),
+            discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 105),
             discardPile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             discardPile.heightAnchor.constraint(equalToConstant: 100),
             discardPile.widthAnchor.constraint(equalTo: discardPile.heightAnchor, multiplier: 5/7)
         ])
     }
 }
-
-
-
