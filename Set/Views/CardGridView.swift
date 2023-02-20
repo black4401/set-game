@@ -120,12 +120,10 @@ class CardGridView: UIView {
         for index in indices {
             
             let oldCardView = cardViews[index]
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
-                oldCardView.frame = self.discardPile.frame
-                oldCardView.alpha = 0
-            }) { _ in
-                oldCardView.removeFromSuperview()
-            }
+            zoomIn(cardView: oldCardView)
+            
+            animateReplace(of: oldCardView)
+            
             iteration += 1
             let cardFrame = grid[index]!
             let inset = cardFrame.width * CardViewConstant.insetMultiplier
@@ -185,6 +183,26 @@ class CardGridView: UIView {
                 self?.cardViews.append(cardView)
             }
         }
+    }
+    
+    private func animateReplace(of cardView: CardView) {
+        let viewCenter = cardView.superview!.center
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
+            cardView.center = viewCenter
+        }) { _ in
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
+                cardView.frame = self.discardPile.frame
+                cardView.alpha = 0
+            }) { _ in
+                cardView.removeFromSuperview()
+            }
+        }
+    }
+    
+    func zoomIn(cardView: CardView) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.2, delay: 0, animations: {
+            cardView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        })
     }
     
     func shakeCardViews(at indices: [Int]) {
