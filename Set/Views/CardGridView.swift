@@ -52,7 +52,7 @@ class CardGridView: UIView {
             cardView.frame = deckView.frame
             cardView.showBackSide()
             cardView.alpha = 0
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iterations/5.0, animations: {
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iterations/5.0, options: .curveEaseInOut, animations: {
                 cardView.frame = frame
                 cardView.alpha = 1
             }) { _ in
@@ -89,7 +89,7 @@ class CardGridView: UIView {
             
             if index < cards.count - difference {
                 cardView.frame = oldFrames[index]
-                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
                     cardView.frame = frame
                 })
             } else {
