@@ -160,8 +160,13 @@
             filePath = "Set/Views/CardGridView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "272"
             endingLineNumber = "272"
+=======
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+>>>>>>> 4e415a2 (Work on replace cardView animation)
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -240,8 +245,13 @@
             filePath = "Set/Views/CardGridView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "151"
             endingLineNumber = "151"
+=======
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+>>>>>>> 4e415a2 (Work on replace cardView animation)
             landmarkName = "removeCardViews(at:cards:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -304,8 +314,13 @@
             filePath = "Set/Views/CardGridView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "161"
             endingLineNumber = "161"
+=======
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+>>>>>>> 4e415a2 (Work on replace cardView animation)
             landmarkName = "removeCardViews(at:cards:)"
             landmarkType = "7">
          </BreakpointContent>

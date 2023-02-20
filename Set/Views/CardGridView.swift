@@ -121,9 +121,15 @@ class CardGridView: UIView {
             
             let oldCardView = cardViews[index]
             zoomIn(cardView: oldCardView)
+            //let viewCenter = self.center
             
             animateReplace(of: oldCardView)
-            
+            //            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
+            //                oldCardView.frame = self.discardPile.frame
+            //                oldCardView.alpha = 0
+            //            }) { _ in
+            //                oldCardView.removeFromSuperview()
+            //            }
             iteration += 1
             let cardFrame = grid[index]!
             let inset = cardFrame.width * CardViewConstant.insetMultiplier
@@ -269,5 +275,6 @@ private extension CardGridView {
         ])
     }
 }
+
 
 
