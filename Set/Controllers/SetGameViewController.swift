@@ -85,7 +85,7 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGamePrepareNewGame(_ setGame: SetGame) {
-        //deal3Button.isEnabled = true
+        cardGridView.resetDeckAndDiscardPileState()
     }
     
     func setGameUpdateCards(_ game: SetGame) {
