@@ -14,7 +14,6 @@ class SetGameViewController: UIViewController {
     @IBOutlet private weak var cardGridView: CardGridView!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var newGameButton: UIButton!
-    @IBOutlet weak var deal3Button: UIButton!
     @IBOutlet weak var hintButton: UIButton!
     
     //MARK: Lifecycle
@@ -22,8 +21,6 @@ class SetGameViewController: UIViewController {
         super.viewDidLoad()
         game.delegate = self
         cardGridView.delegate = self
-        //deal3Button.layer.cornerRadius = 8
-        //deal3Button.clipsToBounds = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,7 +28,6 @@ class SetGameViewController: UIViewController {
         game.startNewGame()
         cardGridView.dealIntialCardsAnimated(cards: game.dealtCards)
         addTapGestures()
-        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -47,10 +43,6 @@ class SetGameViewController: UIViewController {
     
     @IBAction func tapOnNewGame(_ sender: UIButton) {
         showNewGameAlert()
-    }
-    
-    @IBAction func tapDealButton(_ sender: UIButton) {
-        game.dealThreeCards()
     }
     
     @objc func didTap(_ sender: UITapGestureRecognizer) {
@@ -115,10 +107,10 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGame(_ setGame: SetGame, didFindMatch isMatched: Bool, at indices: [Int]) {
-//        for index in indices {
-//            let color: UIColor = isMatched ? .green : .red
-//            cardGridView.updateCardViewBorder(at: index, to: color)
-//        }
+        //        for index in indices {
+        //            let color: UIColor = isMatched ? .green : .red
+        //            cardGridView.updateCardViewBorder(at: index, to: color)
+        //        }
     }
     
     func setGame(_ setGame: SetGame, didFindMissmatchAt indices: [Int]) {
