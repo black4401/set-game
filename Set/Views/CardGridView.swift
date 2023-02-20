@@ -96,14 +96,9 @@ class CardGridView: UIView {
                 cardView.frame = deckView.frame
                 cardView.showBackSide()
                 cardView.alpha = 0
-                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iterations/5.0, animations: {
-                    cardView.frame = frame
-                    cardView.alpha = 1
-                }) { _ in
-                    UIView.transition(with: cardView, duration: 0.4, options: .transitionFlipFromRight, animations: {
-                        cardView.removeBackSide()
-                    })
-                }
+                
+                animateDealing(of: cardView, iteration: iterations, frame: frame)
+                
                 iterations += 1
             }
             cardView.configure(with: card)
@@ -121,8 +116,6 @@ class CardGridView: UIView {
             
             let oldCardView = cardViews[index]
             zoomIn(cardView: oldCardView)
-            //let viewCenter = self.center
-            
             animateReplace(of: oldCardView)
             //            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
             //                oldCardView.frame = self.discardPile.frame
@@ -139,14 +132,8 @@ class CardGridView: UIView {
             cardView.showBackSide()
             cardView.alpha = 0
             
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iteration/5.0, animations: {
-                cardView.frame = frame
-                cardView.alpha = 1
-            }) { _ in
-                UIView.transition(with: cardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
-                    cardView.removeBackSide()
-                })
-            }
+            animateDealing(of: cardView, iteration: iteration, frame: frame)
+            
             cardView.configure(with: cards[index])
             addSubview(cardView)
             cardViews[index] = cardView
@@ -160,12 +147,11 @@ class CardGridView: UIView {
         }
         for index in indices {
             let cardView = cardViews[index]
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: { [weak self] in
-                cardView.frame = (self?.discardPile.frame)!
-                cardView.alpha = 0
-            })
+            
+            zoomIn(cardView: cardView)
+            animateReplace(of: cardView)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.4) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.4) { [weak self] in
             for cardView in self!.cardViews {
                 cardView.removeFromSuperview()
             }
@@ -182,6 +168,7 @@ class CardGridView: UIView {
                 
                 UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
                     cardView.frame = frame
+                    cardView.transform = .identity
                 })
                 
                 cardView.configure(with: card)
@@ -191,23 +178,40 @@ class CardGridView: UIView {
         }
     }
     
+    private func animateRemove(of cardView: CardView, after delay: Double) {
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, animations: {
+            cardView.frame = self.discardPile.frame
+            cardView.alpha = 0
+        }) { _ in
+            cardView.removeFromSuperview()
+        }
+    }
+    
     private func animateReplace(of cardView: CardView) {
+        
         let viewCenter = cardView.superview!.center
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
-            cardView.center = viewCenter
+            cardView.center = CGPoint(x: viewCenter.x, y: viewCenter.y + 250)
         }) { _ in
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
-                cardView.frame = self.discardPile.frame
-                cardView.alpha = 0
-            }) { _ in
-                cardView.removeFromSuperview()
-            }
+            self.animateRemove(of: cardView, after: 0)
+        }
+    }
+    
+    private func animateDealing(of cardView: CardView, iteration: Double, frame: CGRect) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iteration/5.0, animations: {
+            cardView.frame = frame
+            cardView.alpha = 1
+        }) { _ in
+            UIView.transition(with: cardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
+                cardView.removeBackSide()
+            })
         }
     }
     
     func zoomIn(cardView: CardView) {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.2, delay: 0, animations: {
-            cardView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
+            cardView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         })
     }
     
