@@ -94,6 +94,12 @@ extension SetGameViewController: SetGameDelegate {
     
     func setGameDidReplaceCards(_ game: SetGame) {
         cardGridView.replaceCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
+        cardGridView.addCardBackToDiscardPile()
+    }
+    
+    func setGameDidRemoveCards(_ game: SetGame) {
+        cardGridView.removeCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
+        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int) {
@@ -101,7 +107,7 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGameUpdatePoints(_ setGame: SetGame) {
-        //pointsLabel.text = "Points: \(game.points)"
+        pointsLabel.text = "Points: \(game.points)"
     }
     
     func setGameDidEnd(_ setGame: SetGame) {
@@ -109,10 +115,10 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGame(_ setGame: SetGame, didFindMatch isMatched: Bool, at indices: [Int]) {
-        for index in indices {
-            let color: UIColor = isMatched ? .green : .red
-            cardGridView.updateCardViewBorder(at: index, to: color)
-        }
+//        for index in indices {
+//            let color: UIColor = isMatched ? .green : .red
+//            cardGridView.updateCardViewBorder(at: index, to: color)
+//        }
     }
     
     func setGame(_ setGame: SetGame, didFindMissmatchAt indices: [Int]) {
@@ -125,12 +131,13 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGameEnableDealButton(_ setGame: SetGame, isEnabled: Bool) {
-//        deal3Button.isEnabled = isEnabled
-//        if !isEnabled {
-//            deal3Button.backgroundColor = .white
-//        } else {
-//            deal3Button.backgroundColor = .systemBlue
-//        }
+        if !isEnabled {
+            cardGridView.removeDeckViewImage()
+        }
+    }
+    
+    func setGameDidFindFirstSet(_ setGame: SetGame) {
+        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int]) {

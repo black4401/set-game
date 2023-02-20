@@ -243,6 +243,21 @@ class CardGridView: UIView {
         return tap
     }
     
+    func removeDeckViewImage() {
+        if deckView.image != nil {
+            deckView.image = nil
+        }
+    }
+    
+    func addCardBackToDiscardPile() {
+        guard discardPile.image != nil else {
+            let image = UIImage(named: "cardBack")
+            discardPile.image = image
+            discardPile.alpha = 0.5
+            return
+        }
+    }
+    
     @objc func didTap (_ sender: UITapGestureRecognizer) {
         delegate?.cardGridViewDidTapDeck(self)
     }
@@ -252,6 +267,7 @@ class CardGridView: UIView {
 private extension CardGridView {
     
     func setupDeckView() {
+        deckView.isEmpty = false
         deckView.configureDeck()
         deckView.setBorder(borderWidth: 1.0, borderColor: .black)
         deckView.image = UIImage(named: "cardBack")
@@ -268,11 +284,12 @@ private extension CardGridView {
     }
     
     func setupDiscardPile() {
+        discardPile.isEmpty = true
         discardPile.configureDiscardPile()
         discardPile.setBorder(borderWidth: 1.0, borderColor: .black)
         addSubview(discardPile)
         NSLayoutConstraint.activate([
-            discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 105),
+            discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 100),
             discardPile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             discardPile.heightAnchor.constraint(equalToConstant: 100),
             discardPile.widthAnchor.constraint(equalTo: discardPile.heightAnchor, multiplier: 5/7)
