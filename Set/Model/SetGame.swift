@@ -16,6 +16,7 @@ protocol SetGameDelegate: AnyObject {
     func setGamePrepareNewGame(_ setGame: SetGame)
     func setGameDidFindHint(_ setGame: SetGame, at indices: [Int])
     func setGameDidReplaceCards(_ game: SetGame)
+    func setGameDidRemoveCards(_ game: SetGame)
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
     func setGame(_ setGame: SetGame, didFindMatch isMatched: Bool, at indices: [Int])
@@ -41,7 +42,6 @@ class SetGame {
             selectedCardsIndices.append(index)
             makeASetIfPossible()
         }
-        replaceMatchedCards()
         
         if isGameEnded() {
             delegate?.setGameDidEnd(self)
@@ -58,30 +58,12 @@ class SetGame {
         } else {
             points -= 5
             delegate?.setGame(self, didFindMissmatchAt: selectedCardsIndices)
-  
         }
-        //delegate?.setGame(self, didFindMatch: checkIfCardsMatch(indices: selectedCardsIndices), at: selectedCardsIndices)
-    }
-    
-    private func replaceMatchedCards() {
-        guard selectedCardsIndices.count > 3 else {
-            return
-        }
-        var lastSelectedCardIndex = selectedCardsIndices.removeLast()
-        if checkIfCardsMatch(indices: selectedCardsIndices) {
-            moveBackIndex(&lastSelectedCardIndex)
-            replaceCards(at: selectedCardsIndices)
-        } else {
-            delegate?.setGameUpdateCards(self)
-        }
-        delegate?.setGame(self, didSelectCardAt: lastSelectedCardIndex)
-        selectedCardsIndices = [lastSelectedCardIndex]
     }
     
     func deselectCard(at index: Int) {
         if selectedCardsIndices.count != 3 {
             selectedCardsIndices.removeAll(where: { $0 == index })
-            // do score?
         } else {
             if checkIfCardsMatch(indices: selectedCardsIndices) {
                 replaceCards(at: selectedCardsIndices)
@@ -220,27 +202,17 @@ class SetGame {
         delegate?.setGameDidFindHint(self, at: indices)
     }
     
-    private func moveBackIndex(_ index: inout Int) {
-        guard deck.isEmpty else {
-            return
-        }
-        let originalIndex = index
-        for selectedCardIndex in selectedCardsIndices {
-            if originalIndex > selectedCardIndex {
-                index -= 1
-            }
-        }
-    }
-    
     private func replaceCards(at indices: [Int]) {
         if deck.isEmpty {
             dealtCards.remove(at: indices)
+            delegate?.setGameDidRemoveCards(self)
         } else {
             for index in indices {
                 dealtCards[index] = deck.removeFirst()
             }
+            delegate?.setGameDidReplaceCards(self)
         }
-        //delegate?.setGameUpdateCards(self)
-        delegate?.setGameDidReplaceCards(self)
+        selectedCardsIndices.removeAll()
     }
 }
+
