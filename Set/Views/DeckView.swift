@@ -10,26 +10,10 @@ import UIKit
 class DeckView: UIImageView {
     
     var label: UILabel?
-    
-    enum State {
-        case notEmpty
-        case empty
-        
-        var text: String {
-            switch self {
-                case .notEmpty:
-                    return "Deal 3"
-                case .empty:
-                    return ""
-            }
-        }
-        
-        var image: UIImage? {
-            switch self {
-                case .notEmpty:
-                    return UIImage(named: "cardBack")
-                case .empty:
-                    return nil
+    var isEmpty: Bool? {
+        didSet {
+            if !isEmpty! {
+                image = UIImage(named: "cardBack")
             }
         }
     }
@@ -45,7 +29,8 @@ class DeckView: UIImageView {
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = false
         label = UILabel()
-        label?.textColor = .red
+        label?.text = "Discard"
+        label?.textColor = .black
         label?.textAlignment = .center
         label?.font = .systemFont(ofSize: 25, weight: .bold)
         addSubview(label!)
