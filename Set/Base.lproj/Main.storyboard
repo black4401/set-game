@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,82 +12,112 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SetGameViewController" customModule="Set" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzk-aD-ROK" customClass="CardGridView" customModule="Set" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="47" width="375" height="731"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoR-bK-h4w">
-                                        <rect key="frame" x="133.66666666666666" y="678" width="107.66666666666666" height="35"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="New Game"/>
-                                        <connections>
-                                            <action selector="tapOnNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cnf-4A-Lhc"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                                <rect key="frame" x="10" y="10" width="802" height="331"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="XoR-bK-h4w" firstAttribute="centerX" secondItem="Rzk-aD-ROK" secondAttribute="centerX" id="FAj-2B-wMb"/>
-                                    <constraint firstItem="XoR-bK-h4w" firstAttribute="centerY" secondItem="Rzk-aD-ROK" secondAttribute="centerY" constant="330" id="GDU-0a-HRU"/>
-                                </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UY0-23-y4b">
-                                <rect key="frame" x="166.66666666666666" y="770.66666666666663" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoR-bK-h4w">
+                                <rect key="frame" x="352.33333333333331" y="300" width="107.66666666666669" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="New Game"/>
+                                <connections>
+                                    <action selector="tapOnNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cnf-4A-Lhc"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69p-eq-SIX">
-                                <rect key="frame" x="165.66666666666666" y="689" width="43.666666666666657" height="34.333333333333371"/>
+                                <rect key="frame" x="384.33333333333331" y="260.33333333333331" width="43.666666666666686" height="34.333333333333314"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="lightbulb.fill" catalog="system"/>
                                 <connections>
                                     <action selector="tapHintButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="erq-WK-UAf"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UY0-23-y4b">
+                                <rect key="frame" x="385" y="337" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="69p-eq-SIX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="90" id="AmJ-yi-Een"/>
                             <constraint firstItem="UY0-23-y4b" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="375" id="KDg-zV-j3r"/>
                             <constraint firstItem="69p-eq-SIX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OXC-rq-KGH"/>
+                            <constraint firstItem="UY0-23-y4b" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="160" id="PaD-me-ibE"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="S3c-c9-84A"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rzk-aD-ROK" secondAttribute="trailing" id="TPJ-4f-kNl"/>
+                            <constraint firstItem="XoR-bK-h4w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WIt-kw-6to"/>
+                            <constraint firstItem="XoR-bK-h4w" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="130" id="Z5V-S9-cna"/>
+                            <constraint firstItem="XoR-bK-h4w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cfh-EX-ePy"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="e2h-sZ-t9V"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="10" id="eI4-g0-KvT"/>
+                            <constraint firstItem="69p-eq-SIX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="flK-ee-CuX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Rzk-aD-ROK" secondAttribute="bottom" id="fyE-nS-0oP"/>
+                            <constraint firstItem="XoR-bK-h4w" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="338" id="peC-AE-3UD"/>
                             <constraint firstItem="UY0-23-y4b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vHK-Nx-dwD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rzk-aD-ROK" secondAttribute="trailing" constant="128" id="vTD-aK-ibH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rzk-aD-ROK" secondAttribute="trailing" id="vTD-aK-ibH"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vaO-Z1-4dy"/>
+                            <constraint firstItem="UY0-23-y4b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="veQ-K6-2Zn"/>
                             <constraint firstItem="69p-eq-SIX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="300" id="xO9-cy-Z9y"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="zpU-0r-iM2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="TPJ-4f-kNl"/>
-                                <exclude reference="fyE-nS-0oP"/>
-                                <exclude reference="vTD-aK-ibH"/>
                                 <exclude reference="S3c-c9-84A"/>
                                 <exclude reference="e2h-sZ-t9V"/>
                                 <exclude reference="eI4-g0-KvT"/>
                                 <exclude reference="vaO-Z1-4dy"/>
+                                <exclude reference="TPJ-4f-kNl"/>
+                                <exclude reference="fyE-nS-0oP"/>
+                                <exclude reference="vTD-aK-ibH"/>
+                                <exclude reference="WIt-kw-6to"/>
+                                <exclude reference="Z5V-S9-cna"/>
+                                <exclude reference="cfh-EX-ePy"/>
+                                <exclude reference="peC-AE-3UD"/>
+                                <exclude reference="AmJ-yi-Een"/>
+                                <exclude reference="OXC-rq-KGH"/>
+                                <exclude reference="flK-ee-CuX"/>
+                                <exclude reference="xO9-cy-Z9y"/>
+                                <exclude reference="KDg-zV-j3r"/>
+                                <exclude reference="PaD-me-ibE"/>
+                                <exclude reference="vHK-Nx-dwD"/>
+                                <exclude reference="veQ-K6-2Zn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
-                                <include reference="fyE-nS-0oP"/>
-                                <include reference="vTD-aK-ibH"/>
                                 <include reference="e2h-sZ-t9V"/>
                                 <include reference="eI4-g0-KvT"/>
+                                <include reference="fyE-nS-0oP"/>
+                                <include reference="vTD-aK-ibH"/>
+                                <include reference="Z5V-S9-cna"/>
+                                <include reference="cfh-EX-ePy"/>
+                                <include reference="AmJ-yi-Een"/>
+                                <include reference="flK-ee-CuX"/>
+                                <include reference="PaD-me-ibE"/>
+                                <include reference="veQ-K6-2Zn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="constraints">
-                                <include reference="TPJ-4f-kNl"/>
                                 <include reference="S3c-c9-84A"/>
                                 <include reference="vaO-Z1-4dy"/>
+                                <include reference="TPJ-4f-kNl"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="WIt-kw-6to"/>
+                                <include reference="peC-AE-3UD"/>
+                                <include reference="OXC-rq-KGH"/>
+                                <include reference="xO9-cy-Z9y"/>
+                                <include reference="KDg-zV-j3r"/>
+                                <include reference="vHK-Nx-dwD"/>
                             </mask>
                         </variation>
                     </view>
