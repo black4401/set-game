@@ -257,7 +257,7 @@ private extension CardGridView {
     func setupDeckView() {
         deckView.isEmpty = false
         deckView.configureDeck()
-        deckView.setBorder(borderWidth: 1.0, borderColor: .black)
+        deckView.setBorder(borderWidth: 1.0, borderColor: .white)
         deckView.image = UIImage(named: "cardBack")
         addSubview(deckView)
         NSLayoutConstraint.activate([
@@ -274,7 +274,7 @@ private extension CardGridView {
     func setupDiscardPile() {
         discardPile.isEmpty = true
         discardPile.configureDiscardPile()
-        discardPile.setBorder(borderWidth: 1.0, borderColor: .black)
+        discardPile.setBorder(borderWidth: 1.0, borderColor: .white)
         addSubview(discardPile)
         NSLayoutConstraint.activate([
             discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 105),

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_9" orientation="landscape" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,15 +12,15 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SetGameViewController" customModule="Set" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzk-aD-ROK" customClass="CardGridView" customModule="Set" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="802" height="331"/>
+                                <rect key="frame" x="0.0" y="47" width="375" height="731"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoR-bK-h4w">
-                                <rect key="frame" x="352.33333333333331" y="300" width="107.66666666666669" height="35"/>
+                                <rect key="frame" x="133.66666666666666" y="726.66666666666663" width="107.66666666666666" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="New Game"/>
                                 <connections>
@@ -28,7 +28,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69p-eq-SIX">
-                                <rect key="frame" x="384.33333333333331" y="260.33333333333331" width="43.666666666666686" height="34.333333333333314"/>
+                                <rect key="frame" x="165.66666666666666" y="689" width="43.666666666666657" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="lightbulb.fill" catalog="system"/>
                                 <connections>
@@ -36,14 +36,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UY0-23-y4b">
-                                <rect key="frame" x="385" y="337" width="42" height="21"/>
+                                <rect key="frame" x="166.66666666666666" y="770.66666666666663" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="69p-eq-SIX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="90" id="AmJ-yi-Een"/>
                             <constraint firstItem="UY0-23-y4b" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="375" id="KDg-zV-j3r"/>
@@ -68,13 +68,13 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="TPJ-4f-kNl"/>
+                                <exclude reference="fyE-nS-0oP"/>
+                                <exclude reference="vTD-aK-ibH"/>
                                 <exclude reference="S3c-c9-84A"/>
                                 <exclude reference="e2h-sZ-t9V"/>
                                 <exclude reference="eI4-g0-KvT"/>
                                 <exclude reference="vaO-Z1-4dy"/>
-                                <exclude reference="TPJ-4f-kNl"/>
-                                <exclude reference="fyE-nS-0oP"/>
-                                <exclude reference="vTD-aK-ibH"/>
                                 <exclude reference="WIt-kw-6to"/>
                                 <exclude reference="Z5V-S9-cna"/>
                                 <exclude reference="cfh-EX-ePy"/>
@@ -91,10 +91,10 @@
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
-                                <include reference="e2h-sZ-t9V"/>
-                                <include reference="eI4-g0-KvT"/>
                                 <include reference="fyE-nS-0oP"/>
                                 <include reference="vTD-aK-ibH"/>
+                                <include reference="e2h-sZ-t9V"/>
+                                <include reference="eI4-g0-KvT"/>
                                 <include reference="Z5V-S9-cna"/>
                                 <include reference="cfh-EX-ePy"/>
                                 <include reference="AmJ-yi-Een"/>
@@ -105,9 +105,9 @@
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="constraints">
+                                <include reference="TPJ-4f-kNl"/>
                                 <include reference="S3c-c9-84A"/>
                                 <include reference="vaO-Z1-4dy"/>
-                                <include reference="TPJ-4f-kNl"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
