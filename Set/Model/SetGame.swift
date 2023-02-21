@@ -59,6 +59,7 @@ class SetGame {
             points -= 5
             delegate?.setGame(self, didFindMissmatchAt: selectedCardsIndices)
         }
+        selectedCardsIndices.removeAll()
     }
     
     func deselectCard(at index: Int) {
@@ -70,6 +71,7 @@ class SetGame {
                 selectedCardsIndices.removeAll()
             } else {
                 delegate?.setGameUpdateCards(self)
+                selectedCardsIndices.removeAll()
                 selectedCardsIndices = [index]
                 delegate?.setGame(self, didSelectCardAt: index)
             }
@@ -212,7 +214,6 @@ class SetGame {
             }
             delegate?.setGameDidReplaceCards(self)
         }
-        selectedCardsIndices.removeAll()
     }
 }
 
