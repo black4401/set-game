@@ -19,9 +19,11 @@
                                 <rect key="frame" x="0.0" y="47" width="375" height="731"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoR-bK-h4w">
-                                <rect key="frame" x="133.66666666666666" y="726.66666666666663" width="107.66666666666666" height="35"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoR-bK-h4w">
+                                <rect key="frame" x="133.66666666666666" y="727" width="107.66666666666666" height="34.333333333333371"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="New Game"/>
                                 <buttonConfiguration key="configuration" style="filled" title="New Game"/>
                                 <connections>
                                     <action selector="tapOnNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cnf-4A-Lhc"/>
@@ -75,14 +77,14 @@
                                 <exclude reference="e2h-sZ-t9V"/>
                                 <exclude reference="eI4-g0-KvT"/>
                                 <exclude reference="vaO-Z1-4dy"/>
-                                <exclude reference="WIt-kw-6to"/>
-                                <exclude reference="Z5V-S9-cna"/>
-                                <exclude reference="cfh-EX-ePy"/>
-                                <exclude reference="peC-AE-3UD"/>
                                 <exclude reference="AmJ-yi-Een"/>
                                 <exclude reference="OXC-rq-KGH"/>
                                 <exclude reference="flK-ee-CuX"/>
                                 <exclude reference="xO9-cy-Z9y"/>
+                                <exclude reference="WIt-kw-6to"/>
+                                <exclude reference="Z5V-S9-cna"/>
+                                <exclude reference="cfh-EX-ePy"/>
+                                <exclude reference="peC-AE-3UD"/>
                                 <exclude reference="KDg-zV-j3r"/>
                                 <exclude reference="PaD-me-ibE"/>
                                 <exclude reference="vHK-Nx-dwD"/>
@@ -95,10 +97,10 @@
                                 <include reference="vTD-aK-ibH"/>
                                 <include reference="e2h-sZ-t9V"/>
                                 <include reference="eI4-g0-KvT"/>
-                                <include reference="Z5V-S9-cna"/>
-                                <include reference="cfh-EX-ePy"/>
                                 <include reference="AmJ-yi-Een"/>
                                 <include reference="flK-ee-CuX"/>
+                                <include reference="Z5V-S9-cna"/>
+                                <include reference="cfh-EX-ePy"/>
                                 <include reference="PaD-me-ibE"/>
                                 <include reference="veQ-K6-2Zn"/>
                             </mask>
@@ -112,10 +114,10 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="WIt-kw-6to"/>
-                                <include reference="peC-AE-3UD"/>
                                 <include reference="OXC-rq-KGH"/>
                                 <include reference="xO9-cy-Z9y"/>
+                                <include reference="WIt-kw-6to"/>
+                                <include reference="peC-AE-3UD"/>
                                 <include reference="KDg-zV-j3r"/>
                                 <include reference="vHK-Nx-dwD"/>
                             </mask>
@@ -134,6 +136,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="lightbulb.fill" catalog="system" width="32" height="32"/>
+        <image name="lightbulb.fill" catalog="system" width="92" height="128"/>
     </resources>
 </document>
