@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB18838F299114AA00AC7BDA /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB18838E299114AA00AC7BDA /* Grid.swift */; };
+		BB28048A29954D2E0029DEC2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB28048929954D2E0029DEC2 /* Alert.swift */; };
 		BB492FDF28FACC1C00BDA277 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB492FDE28FACC1C00BDA277 /* SetGame.swift */; };
 		BB492FE128FD7CC100BDA277 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB492FE028FD7CC100BDA277 /* CardView.swift */; };
+		BB5391382998F11C0045CB39 /* CGRect+Displace.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5391372998F11C0045CB39 /* CGRect+Displace.swift */; };
 		BB89C5492902961A00F174A2 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB89C5482902961A00F174A2 /* CardModel.swift */; };
 		BBDA40B828FA315A00F9903F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDA40B728FA315A00F9903F /* AppDelegate.swift */; };
 		BBDA40BA28FA315A00F9903F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDA40B928FA315A00F9903F /* SceneDelegate.swift */; };
@@ -16,11 +19,17 @@
 		BBDA40BF28FA315A00F9903F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40BD28FA315A00F9903F /* Main.storyboard */; };
 		BBDA40C128FA315B00F9903F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40C028FA315B00F9903F /* Assets.xcassets */; };
 		BBDA40C428FA315B00F9903F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40C228FA315B00F9903F /* LaunchScreen.storyboard */; };
+		BBF0092A29914EAA00B90108 /* CardGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0092929914EAA00B90108 /* CardGridView.swift */; };
+		BBF0093629950BAC00B90108 /* UIView+setBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0093529950BAC00B90108 /* UIView+setBorder.swift */; };
+		BBF00938299510B600B90108 /* Array+RemoveIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF00937299510B600B90108 /* Array+RemoveIndices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB18838E299114AA00AC7BDA /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		BB28048929954D2E0029DEC2 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		BB492FDE28FACC1C00BDA277 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		BB492FE028FD7CC100BDA277 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		BB5391372998F11C0045CB39 /* CGRect+Displace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Displace.swift"; sourceTree = "<group>"; };
 		BB89C5482902961A00F174A2 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		BBDA40B428FA315A00F9903F /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDA40B728FA315A00F9903F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +39,9 @@
 		BBDA40C028FA315B00F9903F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBDA40C328FA315B00F9903F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBDA40C528FA315B00F9903F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBF0092929914EAA00B90108 /* CardGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGridView.swift; sourceTree = "<group>"; };
+		BBF0093529950BAC00B90108 /* UIView+setBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+setBorder.swift"; sourceTree = "<group>"; };
+		BBF00937299510B600B90108 /* Array+RemoveIndices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RemoveIndices.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +55,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB539139299A8B4D0045CB39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BB89C5482902961A00F174A2 /* CardModel.swift */,
+				BB492FDE28FACC1C00BDA277 /* SetGame.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BB53913A299A8B570045CB39 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BBDA40BB28FA315A00F9903F /* SetGameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BB53913B299A8B680045CB39 /* Exensions */ = {
+			isa = PBXGroup;
+			children = (
+				BBF0093529950BAC00B90108 /* UIView+setBorder.swift */,
+				BB5391372998F11C0045CB39 /* CGRect+Displace.swift */,
+				BBF00937299510B600B90108 /* Array+RemoveIndices.swift */,
+			);
+			path = Exensions;
+			sourceTree = "<group>";
+		};
+		BB53913C299A8B830045CB39 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB492FE028FD7CC100BDA277 /* CardView.swift */,
+				BBF0092929914EAA00B90108 /* CardGridView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		BBDA40AB28FA315A00F9903F = {
 			isa = PBXGroup;
 			children = (
@@ -62,12 +110,14 @@
 		BBDA40B628FA315A00F9903F /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				BB89C5482902961A00F174A2 /* CardModel.swift */,
-				BB492FE028FD7CC100BDA277 /* CardView.swift */,
 				BBDA40B728FA315A00F9903F /* AppDelegate.swift */,
 				BBDA40B928FA315A00F9903F /* SceneDelegate.swift */,
-				BBDA40BB28FA315A00F9903F /* SetGameViewController.swift */,
-				BB492FDE28FACC1C00BDA277 /* SetGame.swift */,
+				BB18838E299114AA00AC7BDA /* Grid.swift */,
+				BB53913C299A8B830045CB39 /* Views */,
+				BB539139299A8B4D0045CB39 /* Model */,
+				BB53913A299A8B570045CB39 /* Controllers */,
+				BB28048929954D2E0029DEC2 /* Alert.swift */,
+				BB53913B299A8B680045CB39 /* Exensions */,
 				BBDA40BD28FA315A00F9903F /* Main.storyboard */,
 				BBDA40C028FA315B00F9903F /* Assets.xcassets */,
 				BBDA40C228FA315B00F9903F /* LaunchScreen.storyboard */,
@@ -147,11 +197,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF0092A29914EAA00B90108 /* CardGridView.swift in Sources */,
+				BBF00938299510B600B90108 /* Array+RemoveIndices.swift in Sources */,
 				BBDA40BC28FA315A00F9903F /* SetGameViewController.swift in Sources */,
 				BB492FDF28FACC1C00BDA277 /* SetGame.swift in Sources */,
 				BBDA40B828FA315A00F9903F /* AppDelegate.swift in Sources */,
 				BBDA40BA28FA315A00F9903F /* SceneDelegate.swift in Sources */,
 				BB492FE128FD7CC100BDA277 /* CardView.swift in Sources */,
+				BBF0093629950BAC00B90108 /* UIView+setBorder.swift in Sources */,
+				BB5391382998F11C0045CB39 /* CGRect+Displace.swift in Sources */,
+				BB28048A29954D2E0029DEC2 /* Alert.swift in Sources */,
+				BB18838F299114AA00AC7BDA /* Grid.swift in Sources */,
 				BB89C5492902961A00F174A2 /* CardModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +361,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -333,6 +390,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
