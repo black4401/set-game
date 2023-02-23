@@ -116,7 +116,7 @@ class CardGridView: UIView {
             
             let oldCardView = cardViews[index]
             zoomIn(cardView: oldCardView)
-            animateReplace(of: oldCardView)
+            animateMatchMovement(of: oldCardView)
             
             iteration += 1
             let cardFrame = grid[index]!
@@ -144,9 +144,9 @@ class CardGridView: UIView {
             let cardView = cardViews[index]
             
             zoomIn(cardView: cardView)
-            animateReplace(of: cardView)
+            animateMatchMovement(of: cardView)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.4) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.2) { [weak self] in
             for cardView in self!.cardViews {
                 cardView.removeFromSuperview()
             }
@@ -173,8 +173,8 @@ class CardGridView: UIView {
         }
     }
     
-    private func animateRemove(of cardView: CardView, after delay: Double) {
-        
+    private func animateMovementToDiscard(of cardView: CardView, after delay: Double) {
+        cardView.layer.zPosition = 10
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, animations: {
             cardView.frame = self.discardPile.frame
             cardView.alpha = 0
@@ -183,13 +183,13 @@ class CardGridView: UIView {
         }
     }
     
-    private func animateReplace(of cardView: CardView) {
-        
+    private func animateMatchMovement(of cardView: CardView) {
+        cardView.layer.zPosition = 10
         let viewCenter = cardView.superview!.center
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
-            cardView.center = CGPoint(x: viewCenter.x, y: viewCenter.y + 250)
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+            cardView.center = CGPoint(x: viewCenter.x, y: viewCenter.y)
         }) { _ in
-            self.animateRemove(of: cardView, after: 0)
+            self.animateMovementToDiscard(of: cardView, after: 0)
         }
     }
     
@@ -198,7 +198,7 @@ class CardGridView: UIView {
             cardView.frame = frame
             cardView.alpha = 1
         }) { _ in
-            UIView.transition(with: cardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
+            UIView.transition(with: cardView, duration: 0.4, options: .transitionFlipFromRight, animations: {
                 cardView.removeBackSide()
             })
         }
