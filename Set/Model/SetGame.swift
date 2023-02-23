@@ -108,7 +108,6 @@ class SetGame {
         deck.shuffle()
         dealCards(12)
         
-        delegate?.setGameUpdateCards(self)
         delegate?.setGamePrepareNewGame(self)
     }
     

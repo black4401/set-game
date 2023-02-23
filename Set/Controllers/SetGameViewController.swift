@@ -79,6 +79,7 @@ extension SetGameViewController: SetGameDelegate {
     
     func setGamePrepareNewGame(_ setGame: SetGame) {
         cardGridView.resetDeckAndDiscardPileState()
+        cardGridView.dealIntialCardsAnimated(cards: game.dealtCards)
     }
     
     func setGameUpdateCards(_ game: SetGame) {
