@@ -32,9 +32,10 @@ class SetGameViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
-            self?.cardGridView.updateCardViews(with: self!.game.dealtCards)
-        }
+        
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self!.cardGridView.updateCardViews(with: self!.game.dealtCards)
+        })
     }
     
     @IBAction func tapHintButton(_ sender: UIButton) {
