@@ -40,7 +40,7 @@ class CardGridView: UIView {
         cardViews = []
         var grid = grid
         grid.cellCount = cards.count
-        var iterations = 1.0
+        
         for (index, card) in cards.enumerated() {
             guard let cardFrame = grid[index] else {
                 return
@@ -52,16 +52,8 @@ class CardGridView: UIView {
             cardView.frame = deckView.frame
             cardView.showBackSide()
             cardView.alpha = 0
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iterations/5.0, options: .curveEaseInOut, animations: {
-                cardView.frame = frame
-                cardView.alpha = 1
-            }) { _ in
-                UIView.transition(with: cardView, duration: 0.4, options: .transitionFlipFromRight, animations: {
-                    cardView.removeBackSide()
-                })
-            }
+            animateDealing(of: cardView, delay: Double(index)/7.0, frame: frame)
             
-            iterations += 1
             cardView.configure(with: card)
             addSubview(cardView)
             cardViews.append(cardView)
@@ -97,7 +89,7 @@ class CardGridView: UIView {
                 cardView.showBackSide()
                 cardView.alpha = 0
                 
-                animateDealing(of: cardView, iteration: iterations, frame: frame)
+                animateDealing(of: cardView, delay: iterations/5.0, frame: frame)
                 
                 iterations += 1
             }
@@ -116,7 +108,7 @@ class CardGridView: UIView {
             
             let oldCardView = cardViews[index]
             zoomIn(cardView: oldCardView)
-            animateMatchMovement(of: oldCardView)
+            animateMatchMovement(of: oldCardView, delay: iteration/10.0)
             
             iteration += 1
             let cardFrame = grid[index]!
@@ -127,7 +119,7 @@ class CardGridView: UIView {
             cardView.showBackSide()
             cardView.alpha = 0
             
-            animateDealing(of: cardView, iteration: iteration, frame: frame)
+            animateDealing(of: cardView, delay: iteration/5.0, frame: frame)
             
             cardView.configure(with: cards[index])
             addSubview(cardView)
@@ -137,6 +129,7 @@ class CardGridView: UIView {
     
     func removeCardViews(at indices: [Int], cards: [Card]) {
         var oldFrames: [CGRect] = []
+        var iteration = 0.0
         for cardView in cardViews {
             oldFrames.append(cardView.frame)
         }
@@ -144,8 +137,13 @@ class CardGridView: UIView {
             let cardView = cardViews[index]
             
             zoomIn(cardView: cardView)
-            animateMatchMovement(of: cardView)
+            animateMatchMovement(of: cardView, delay: iteration/10.0)
+            iteration += 1
         }
+        relayoutCardViews(at: indices, cards: cards, oldFrames: oldFrames)
+    }
+    
+    func relayoutCardViews(at indices: [Int], cards: [Card], oldFrames: [CGRect]) {
         DispatchQueue.main.asyncAfter(deadline: .now()+1.2) { [weak self] in
             for cardView in self!.cardViews {
                 cardView.removeFromSuperview()
@@ -187,18 +185,18 @@ class CardGridView: UIView {
         }
     }
     
-    private func animateMatchMovement(of cardView: CardView) {
+    private func animateMatchMovement(of cardView: CardView, delay: Double) {
         cardView.layer.zPosition = 10
         let viewCenter = cardView.superview!.center
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, options: .curveEaseInOut, animations: {
             cardView.center = CGPoint(x: viewCenter.x, y: viewCenter.y)
         }) { _ in
-            self.animateMovementToDiscard(of: cardView, after: 0)
+            self.animateMovementToDiscard(of: cardView, after: delay)
         }
     }
     
-    private func animateDealing(of cardView: CardView, iteration: Double, frame: CGRect) {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: iteration/5.0, animations: {
+    private func animateDealing(of cardView: CardView, delay: Double, frame: CGRect) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, animations: {
             cardView.frame = frame
             cardView.alpha = 1
         }) { _ in
