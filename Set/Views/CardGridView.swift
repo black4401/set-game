@@ -220,7 +220,7 @@ class CardGridView: UIView {
     }
     
     func updateCardViewBorder(at index: Int, to color: UIColor) {
-        cardViews[index].backgroundColor = .gray
+        cardViews[index].backgroundColor = .lightGray
     }
     
     func removeCardViewBorder(at index: Int) {
