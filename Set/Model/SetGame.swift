@@ -19,7 +19,6 @@ protocol SetGameDelegate: AnyObject {
     func setGameDidRemoveCards(_ game: SetGame)
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
-    func setGame(_ setGame: SetGame, didFindMatch isMatched: Bool, at indices: [Int])
     func setGame(_ setGame: SetGame, didFindMissmatchAt indices: [Int])
     func setGameDidFindFirstSet(_ setGame: SetGame)
 }

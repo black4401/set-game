@@ -108,13 +108,6 @@ extension SetGameViewController: SetGameDelegate {
         showGameEndAlert()
     }
     
-    func setGame(_ setGame: SetGame, didFindMatch isMatched: Bool, at indices: [Int]) {
-        //        for index in indices {
-        //            let color: UIColor = isMatched ? .green : .red
-        //            cardGridView.updateCardViewBorder(at: index, to: color)
-        //        }
-    }
-    
     func setGame(_ setGame: SetGame, didFindMissmatchAt indices: [Int]) {
         cardGridView.shakeCardViews(at: indices)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
