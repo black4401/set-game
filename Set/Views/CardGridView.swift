@@ -175,36 +175,7 @@ class CardGridView: UIView {
         }
     }
     
-    private func animateMovementToDiscard(of cardView: CardView, after delay: Double) {
-        cardView.layer.zPosition = 10
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, animations: {
-            cardView.frame = self.discardPile.frame
-            cardView.alpha = 0
-        }) { _ in
-            cardView.removeFromSuperview()
-        }
-    }
-    
-    private func animateMatchMovement(of cardView: CardView, delay: Double) {
-        cardView.layer.zPosition = 10
-        let viewCenter = cardView.superview!.center
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, options: .curveEaseInOut, animations: {
-            cardView.center = CGPoint(x: viewCenter.x, y: viewCenter.y)
-        }) { _ in
-            self.animateMovementToDiscard(of: cardView, after: delay)
-        }
-    }
-    
-    private func animateDealing(of cardView: CardView, delay: Double, frame: CGRect) {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, animations: {
-            cardView.frame = frame
-            cardView.alpha = 1
-        }) { _ in
-            UIView.transition(with: cardView, duration: 0.4, options: .transitionFlipFromRight, animations: {
-                cardView.removeBackSide()
-            })
-        }
-    }
+
     
     func zoomIn(cardView: CardView) {
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
@@ -235,11 +206,6 @@ class CardGridView: UIView {
         return cardViews.firstIndex(where: { $0 == cardView })
     }
     
-    func createTapGesture() -> UITapGestureRecognizer {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
-        return tap
-    }
-    
     func resetDeckAndDiscardPileState() {
         deckView.isEmpty = false
         deckView.image = UIImage(named: "cardBack")
@@ -262,6 +228,42 @@ class CardGridView: UIView {
 
 //MARK: Private methods
 private extension CardGridView {
+    
+    func animateMovementToDiscard(of cardView: CardView, after delay: Double) {
+        cardView.layer.zPosition = 10
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, animations: {
+            cardView.frame = self.discardPile.frame
+            cardView.alpha = 0
+        }) { _ in
+            cardView.removeFromSuperview()
+        }
+    }
+    
+    func animateMatchMovement(of cardView: CardView, delay: Double) {
+        cardView.layer.zPosition = 10
+        let viewCenter = cardView.superview!.center
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, options: .curveEaseInOut, animations: {
+            cardView.center = CGPoint(x: viewCenter.x, y: viewCenter.y)
+        }) { _ in
+            self.animateMovementToDiscard(of: cardView, after: delay)
+        }
+    }
+    
+    func animateDealing(of cardView: CardView, delay: Double, frame: CGRect) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, animations: {
+            cardView.frame = frame
+            cardView.alpha = 1
+        }) { _ in
+            UIView.transition(with: cardView, duration: 0.4, options: .transitionFlipFromRight, animations: {
+                cardView.removeBackSide()
+            })
+        }
+    }
+    
+    func createTapGesture() -> UITapGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        return tap
+    }
     
     func setupDeckView() {
         deckView.isEmpty = false
