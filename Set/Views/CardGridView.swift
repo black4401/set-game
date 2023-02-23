@@ -153,19 +153,23 @@ class CardGridView: UIView {
             self?.cardViews = []
             var grid = self!.grid
             grid.cellCount = cards.count
+            var indexIncrement = 0
             for (index, card) in cards.enumerated() {
-                
+
                 let cardFrame = grid[index]!
                 let inset = cardFrame.width * CardViewConstant.insetMultiplier
                 let frame = cardFrame.insetBy(dx: inset, dy: inset)
                 let cardView = CardView()
-                cardView.frame = oldFrames[index]
-                
+                if indices.contains(where: { $0 == index}) {
+                    indexIncrement += 1
+                }
+                cardView.frame = oldFrames[index + indexIncrement]
+
                 UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
                     cardView.frame = frame
                     cardView.transform = .identity
                 })
-                
+
                 cardView.configure(with: card)
                 self?.addSubview(cardView)
                 self?.cardViews.append(cardView)
