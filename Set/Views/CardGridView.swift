@@ -240,6 +240,13 @@ class CardGridView: UIView {
         return tap
     }
     
+    func resetDeckAndDiscardPileState() {
+        deckView.isEmpty = false
+        deckView.image = UIImage(named: "cardBack")
+        discardPile.isEmpty = true
+        discardPile.image = nil
+    }
+    
     func removeDeckViewImage() {
         deckView.image = nil
     }
