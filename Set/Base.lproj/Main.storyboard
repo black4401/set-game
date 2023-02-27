@@ -19,53 +19,49 @@
                                 <rect key="frame" x="0.0" y="47" width="375" height="731"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoR-bK-h4w">
-                                <rect key="frame" x="133.66666666666666" y="727" width="107.66666666666666" height="34.333333333333371"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="New Game"/>
-                                <buttonConfiguration key="configuration" style="filled" title="New Game"/>
-                                <connections>
-                                    <action selector="tapOnNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cnf-4A-Lhc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69p-eq-SIX">
-                                <rect key="frame" x="165.66666666666666" y="689" width="43.666666666666657" height="34.333333333333371"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="lightbulb.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="tapHintButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="erq-WK-UAf"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UY0-23-y4b">
-                                <rect key="frame" x="166.66666666666666" y="770.66666666666663" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="50T-nr-Rrd">
+                                <rect key="frame" x="133.66666666666666" y="677" width="107.66666666666666" height="101"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69p-eq-SIX">
+                                        <rect key="frame" x="31.999999999999996" y="0.0" width="43.666666666666657" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" image="lightbulb.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="tapHintButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="erq-WK-UAf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoR-bK-h4w">
+                                        <rect key="frame" x="0.0" y="40.333333333333371" width="107.66666666666667" height="34.333333333333343"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="New Game"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="New Game"/>
+                                        <connections>
+                                            <action selector="tapOnNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cnf-4A-Lhc"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UY0-23-y4b">
+                                        <rect key="frame" x="33.333333333333343" y="80.666666666666629" width="41.333333333333343" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.83921568627450982" green="0.49937867752880827" blue="0.37249423321829706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="69p-eq-SIX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="90" id="AmJ-yi-Een"/>
-                            <constraint firstItem="UY0-23-y4b" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="375" id="KDg-zV-j3r"/>
-                            <constraint firstItem="69p-eq-SIX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OXC-rq-KGH"/>
-                            <constraint firstItem="UY0-23-y4b" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="160" id="PaD-me-ibE"/>
+                            <constraint firstItem="50T-nr-Rrd" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="LZ0-vK-CPi"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="S3c-c9-84A"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="50T-nr-Rrd" secondAttribute="trailing" constant="133.66666666666666" id="TLs-lt-U25"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rzk-aD-ROK" secondAttribute="trailing" id="TPJ-4f-kNl"/>
-                            <constraint firstItem="XoR-bK-h4w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WIt-kw-6to"/>
-                            <constraint firstItem="XoR-bK-h4w" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="130" id="Z5V-S9-cna"/>
-                            <constraint firstItem="XoR-bK-h4w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cfh-EX-ePy"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="e2h-sZ-t9V"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="10" id="eI4-g0-KvT"/>
-                            <constraint firstItem="69p-eq-SIX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="flK-ee-CuX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Rzk-aD-ROK" secondAttribute="bottom" id="fyE-nS-0oP"/>
-                            <constraint firstItem="XoR-bK-h4w" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="338" id="peC-AE-3UD"/>
-                            <constraint firstItem="UY0-23-y4b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vHK-Nx-dwD"/>
+                            <constraint firstItem="50T-nr-Rrd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="133.66666666666669" id="pWb-Rs-kWo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rzk-aD-ROK" secondAttribute="trailing" id="vTD-aK-ibH"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vaO-Z1-4dy"/>
-                            <constraint firstItem="UY0-23-y4b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="veQ-K6-2Zn"/>
-                            <constraint firstItem="69p-eq-SIX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="300" id="xO9-cy-Z9y"/>
                             <constraint firstItem="Rzk-aD-ROK" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="zpU-0r-iM2"/>
                         </constraints>
                         <variation key="default">
@@ -77,18 +73,6 @@
                                 <exclude reference="e2h-sZ-t9V"/>
                                 <exclude reference="eI4-g0-KvT"/>
                                 <exclude reference="vaO-Z1-4dy"/>
-                                <exclude reference="AmJ-yi-Een"/>
-                                <exclude reference="OXC-rq-KGH"/>
-                                <exclude reference="flK-ee-CuX"/>
-                                <exclude reference="xO9-cy-Z9y"/>
-                                <exclude reference="WIt-kw-6to"/>
-                                <exclude reference="Z5V-S9-cna"/>
-                                <exclude reference="cfh-EX-ePy"/>
-                                <exclude reference="peC-AE-3UD"/>
-                                <exclude reference="KDg-zV-j3r"/>
-                                <exclude reference="PaD-me-ibE"/>
-                                <exclude reference="vHK-Nx-dwD"/>
-                                <exclude reference="veQ-K6-2Zn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -97,12 +81,6 @@
                                 <include reference="vTD-aK-ibH"/>
                                 <include reference="e2h-sZ-t9V"/>
                                 <include reference="eI4-g0-KvT"/>
-                                <include reference="AmJ-yi-Een"/>
-                                <include reference="flK-ee-CuX"/>
-                                <include reference="Z5V-S9-cna"/>
-                                <include reference="cfh-EX-ePy"/>
-                                <include reference="PaD-me-ibE"/>
-                                <include reference="veQ-K6-2Zn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -110,16 +88,6 @@
                                 <include reference="TPJ-4f-kNl"/>
                                 <include reference="S3c-c9-84A"/>
                                 <include reference="vaO-Z1-4dy"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="OXC-rq-KGH"/>
-                                <include reference="xO9-cy-Z9y"/>
-                                <include reference="WIt-kw-6to"/>
-                                <include reference="peC-AE-3UD"/>
-                                <include reference="KDg-zV-j3r"/>
-                                <include reference="vHK-Nx-dwD"/>
                             </mask>
                         </variation>
                     </view>
