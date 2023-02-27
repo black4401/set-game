@@ -31,7 +31,7 @@ class CardGridView: UIView {
         setupDiscardPile()
     }
     
-    func dealIntialCardsAnimated(cards: [Card]) {
+    func dealIntialCards(cards: [Card]) {
         var oldFrames: [CGRect] = []
         for cardView in cardViews {
             cardView.removeFromSuperview()
@@ -62,6 +62,7 @@ class CardGridView: UIView {
     
     func updateCardViews(with cards: [Card]) {
         let difference = cards.count - cardViews.count
+        let cardIndexOffset = cards.count - difference
         var oldFrames: [CGRect] = []
         for cardView in cardViews {
             cardView.removeFromSuperview()
@@ -79,7 +80,7 @@ class CardGridView: UIView {
             let frame = cardFrame.insetBy(dx: inset, dy: inset)
             let cardView = CardView(frame: frame)
             
-            if index < cards.count - difference {
+            if index < cardIndexOffset {
                 cardView.frame = oldFrames[index]
                 UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
                     cardView.frame = frame
@@ -145,15 +146,23 @@ class CardGridView: UIView {
     
     func relayoutCardViews(at indices: [Int], cards: [Card], oldFrames: [CGRect]) {
         DispatchQueue.main.asyncAfter(deadline: .now()+1.2) { [weak self] in
-            for cardView in self!.cardViews {
+            
+            guard let cardViews = self?.cardViews else {
+                return
+            }
+            
+            for cardView in cardViews {
                 cardView.removeFromSuperview()
             }
-            self?.cardViews = []
-            var grid = self!.grid
+            self?.cardViews.removeAll()
+            guard var grid = self?.grid else {
+                return
+            }
+            
             grid.cellCount = cards.count
             var indexIncrement = 0
             for (index, card) in cards.enumerated() {
-
+                
                 let cardFrame = grid[index]!
                 let inset = cardFrame.width * CardViewConstant.insetMultiplier
                 let frame = cardFrame.insetBy(dx: inset, dy: inset)
@@ -162,20 +171,18 @@ class CardGridView: UIView {
                     indexIncrement += 1
                 }
                 cardView.frame = oldFrames[index + indexIncrement]
-
+                
                 UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
                     cardView.frame = frame
                     cardView.transform = .identity
                 })
-
+                
                 cardView.configure(with: card)
                 self?.addSubview(cardView)
                 self?.cardViews.append(cardView)
             }
         }
     }
-    
-
     
     func zoomIn(cardView: CardView) {
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, animations: {
@@ -244,8 +251,8 @@ private extension CardGridView {
         let viewCenter = cardView.superview!.center
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: delay, options: .curveEaseInOut, animations: {
             cardView.center = CGPoint(x: viewCenter.x, y: viewCenter.y)
-        }) { _ in
-            self.animateMovementToDiscard(of: cardView, after: delay)
+        }) { [weak self] _ in
+            self?.animateMovementToDiscard(of: cardView, after: delay)
         }
     }
     
@@ -267,7 +274,7 @@ private extension CardGridView {
     
     func setupDeckView() {
         deckView.isEmpty = false
-        deckView.configureDeck()
+        deckView.configure()
         deckView.setBorder(borderWidth: 1.0, borderColor: .white)
         deckView.image = UIImage(named: "cardBack")
         addSubview(deckView)
@@ -284,7 +291,7 @@ private extension CardGridView {
     
     func setupDiscardPile() {
         discardPile.isEmpty = true
-        discardPile.configureDiscardPile()
+        discardPile.configure()
         discardPile.setBorder(borderWidth: 1.0, borderColor: .white)
         addSubview(discardPile)
         NSLayoutConstraint.activate([

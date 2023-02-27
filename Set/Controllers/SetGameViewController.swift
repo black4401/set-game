@@ -26,7 +26,7 @@ class SetGameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         game.startNewGame()
-        cardGridView.dealIntialCardsAnimated(cards: game.dealtCards)
+        cardGridView.dealIntialCards(cards: game.dealtCards)
         addTapGestures()
     }
     
@@ -79,7 +79,7 @@ extension SetGameViewController: SetGameDelegate {
     
     func setGamePrepareNewGame(_ setGame: SetGame) {
         cardGridView.resetDeckAndDiscardPileState()
-        cardGridView.dealIntialCardsAnimated(cards: game.dealtCards)
+        cardGridView.dealIntialCards(cards: game.dealtCards)
     }
     
     func setGameUpdateCards(_ game: SetGame) {

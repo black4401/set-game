@@ -18,16 +18,13 @@ class DeckView: UIImageView {
         }
     }
     
-    func configureDeck() {
+    func configure() {
         layer.cornerRadius = CardViewConstant.cornerRadius
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = true
     }
     
-    func configureDiscardPile() {
-        layer.cornerRadius = CardViewConstant.cornerRadius
-        translatesAutoresizingMaskIntoConstraints = false
-        isUserInteractionEnabled = false
+    func configureDiscardPileLabel() {
         label = UILabel()
         label?.text = "Discard"
         label?.textColor = .black
