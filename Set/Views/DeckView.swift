@@ -10,10 +10,12 @@ import UIKit
 class DeckView: UIImageView {
     
     var label: UILabel?
-    var isEmpty: Bool? {
+    var isEmpty: Bool = false {
         didSet {
-            if !isEmpty! {
+            if !isEmpty {
                 image = UIImage(named: "cardBack")
+            } else {
+                image = nil
             }
         }
     }

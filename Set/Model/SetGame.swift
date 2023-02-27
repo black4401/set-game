@@ -36,6 +36,10 @@ class SetGame {
         }
     }
     
+    func isSelected(at index: Int) -> Bool {
+        return selectedCardsIndices.contains(index)
+    }
+    
     func selectCard(at index: Int) {
         if !selectedCardsIndices.contains(index) {
             selectedCardsIndices.append(index)

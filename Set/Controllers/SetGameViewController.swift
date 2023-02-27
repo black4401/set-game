@@ -52,7 +52,7 @@ class SetGameViewController: UIViewController {
               let index = cardGridView.getIndex(of: cardView) else {
             return
         }
-        if !game.selectedCardsIndices.contains(index) {
+        if !game.isSelected(at: index) {
             cardGridView.updateCardViewBorder(at: index, to: .green)
             game.selectCard(at: index)
         } else {
@@ -78,7 +78,8 @@ extension SetGameViewController: SetGameDelegate {
     }
     
     func setGamePrepareNewGame(_ setGame: SetGame) {
-        cardGridView.resetDeckAndDiscardPileState()
+        cardGridView.resetDeck()
+        cardGridView.resetDiscardPile()
         cardGridView.dealIntialCards(cards: game.dealtCards)
     }
     
