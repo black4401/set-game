@@ -34,6 +34,10 @@ class CardGridView: UIView {
         setupDiscardPile()
     }
     
+    func resizeGrid() {
+        grid.frame = gridFrame
+    }
+    
     func dealIntialCards(cards: [Card]) {
         var oldFrames: [CGRect] = []
         for cardView in cardViews {
@@ -42,7 +46,6 @@ class CardGridView: UIView {
         }
         cardViews = []
         
-        grid.frame = gridFrame
         grid.cellCount = cards.count
         
         for (index, card) in cards.enumerated() {
@@ -55,7 +58,7 @@ class CardGridView: UIView {
             cardView.frame = deckView.frame
             cardView.showBackSide()
             cardView.alpha = 0
-            let delay = Double(index)/AnimationConstants.initialDealDelayModifier
+            let delay = Double(index)/AnimationConstants.initialDealingDelayModifier
             
             animateDealing(of: cardView, delay: delay, frame: frame)
             
@@ -76,7 +79,6 @@ class CardGridView: UIView {
         }
         
         cardViews = []
-        grid.frame = gridFrame
         grid.cellCount = cards.count
         var iterations = 1.0
         
@@ -111,15 +113,14 @@ class CardGridView: UIView {
     
     func replaceCardViews(at indices: [Int], cards: [Card]) {
         var iteration = 0.0
-        grid.frame = gridFrame
         grid.cellCount = cards.count
         
         for index in indices {
             
             let oldCardView = cardViews[index]
-            let removeDelay = iteration/AnimationConstants.removeDelayModifier
+            let removalDelay = iteration/AnimationConstants.removalDelayModifier
             zoomIn(cardView: oldCardView)
-            animateMatchMovement(of: oldCardView, delay: removeDelay)
+            animateMatchMovement(of: oldCardView, delay: removalDelay)
             
             iteration += 1
             let cardFrame = grid[index]!
@@ -130,9 +131,9 @@ class CardGridView: UIView {
             cardView.frame = deckView.frame
             cardView.showBackSide()
             cardView.alpha = 0
-            let dealDelay = iteration/AnimationConstants.standardDelayModifier
+            let dealingDelay = iteration/AnimationConstants.standardDelayModifier
             
-            animateDealing(of: cardView, delay: dealDelay, frame: frame)
+            animateDealing(of: cardView, delay: dealingDelay, frame: frame)
             
             cardView.configure(with: cards[index])
             addSubview(cardView)
@@ -148,7 +149,7 @@ class CardGridView: UIView {
         }
         for index in indices {
             let cardView = cardViews[index]
-            let delay = iteration/AnimationConstants.removeDelayModifier
+            let delay = iteration/AnimationConstants.removalDelayModifier
             
             zoomIn(cardView: cardView)
             animateMatchMovement(of: cardView, delay: delay)
@@ -327,8 +328,8 @@ private extension CardGridView {
 }
 
 enum AnimationConstants {
-    static let initialDealDelayModifier: Double = 7.0
-    static let removeDelayModifier: Double = 7.0
+    static let initialDealingDelayModifier: Double = 7.0
+    static let removalDelayModifier: Double = 7.0
     static let standardDelayModifier: Double = 5.0
     
     static let standardDuration: Double = 0.4

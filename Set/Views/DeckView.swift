@@ -25,13 +25,4 @@ class DeckView: UIImageView {
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = true
     }
-    
-    func configureDiscardPileLabel() {
-        label = UILabel()
-        label?.text = "Discard"
-        label?.textColor = .black
-        label?.textAlignment = .center
-        label?.font = .systemFont(ofSize: 25, weight: .bold)
-        addSubview(label!)
-    }
 }

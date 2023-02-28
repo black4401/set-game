@@ -34,6 +34,7 @@ class SetGameViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         coordinator.animate(alongsideTransition: { [weak self] _ in
+            self!.cardGridView.resizeGrid()
             self!.cardGridView.updateCardViews(with: self!.game.dealtCards)
         })
     }
