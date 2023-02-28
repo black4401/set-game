@@ -16,11 +16,14 @@ class CardGridView: UIView {
     private var cardViews: [CardView] = []
     private var deckView = DeckView()
     private var discardPile = DeckView()
-    private var grid: Grid {
-        let height = bounds.height - deckView.bounds.height - 20
-        let frame = CGRect(x: 0, y: 0, width: bounds.width, height: height)
-        let grid = Grid(layout: .aspectRatio(CardViewConstant.aspectRatio), frame: frame)
+    private lazy var grid: Grid = {
+        let grid = Grid(layout: .aspectRatio(CardViewConstant.aspectRatio), frame: gridFrame)
         return grid
+    } ()
+    
+    private var gridFrame: CGRect {
+        let height = bounds.height - deckView.bounds.height - 20
+        return CGRect(x: 0, y: 0, width: bounds.width, height: height)
     }
     
     weak var delegate: CardGridViewDelegate?
@@ -39,7 +42,7 @@ class CardGridView: UIView {
         }
         cardViews = []
         
-        var grid = grid
+        grid.frame = gridFrame
         grid.cellCount = cards.count
         
         for (index, card) in cards.enumerated() {
@@ -73,7 +76,7 @@ class CardGridView: UIView {
         }
         
         cardViews = []
-        var grid = grid
+        grid.frame = gridFrame
         grid.cellCount = cards.count
         var iterations = 1.0
         
@@ -108,7 +111,7 @@ class CardGridView: UIView {
     
     func replaceCardViews(at indices: [Int], cards: [Card]) {
         var iteration = 0.0
-        var grid = grid
+        grid.frame = gridFrame
         grid.cellCount = cards.count
         
         for index in indices {
