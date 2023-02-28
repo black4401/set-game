@@ -9,7 +9,6 @@ import UIKit
 
 class DeckView: UIImageView {
     
-    var label: UILabel?
     var isEmpty: Bool = false {
         didSet {
             if !isEmpty {
