@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ConcentrationModel{
+class ConcentrationModel {
     
     private(set) var cards: [ConcentrationCard] = []
     private(set) var points = 0
@@ -24,7 +24,7 @@ struct ConcentrationModel{
         }
     }
     
-    mutating func newGame() {
+    func newGame() {
         for index in cards.indices {
             cards[index].isFaceUp = false
             cards[index].isMatched = false
@@ -37,7 +37,7 @@ struct ConcentrationModel{
         }
     }
     
-    mutating func chooseCard(at index: Int){
+    func chooseCard(at index: Int){
         if !cards[index].isMatched {
             flips += 1
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
@@ -71,7 +71,7 @@ struct ConcentrationModel{
         }
         shuffleCards()
     }
-    mutating func shuffleCards(){
+    func shuffleCards(){
         cards.shuffle()
     }
 }

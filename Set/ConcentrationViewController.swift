@@ -32,8 +32,6 @@ class ConcentrationViewController: UIViewController {
         if let cardNumber = cardButtons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModal()
-        } else{
-            print("not in range")
         }
     }
     
@@ -74,7 +72,6 @@ private extension ConcentrationViewController {
     func emoji(for card: ConcentrationCard) -> String {
         if emoji[card] == nil,
            currentEmoji.count > 0 {
-            
             emoji[card] = currentEmoji.remove(at: currentEmoji.count.arc4random)
         }
         return emoji[card] ?? "?"

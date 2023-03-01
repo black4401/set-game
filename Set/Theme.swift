@@ -74,12 +74,10 @@ enum Theme : CaseIterable {
     }
     
     static func getRandomTheme() -> Theme {
-        
-        return .allCases.randomElement()!
+        .allCases.randomElement()!
     }
     
     static func getAllThemes() -> [Theme] {
-
-        return Theme.allCases
+        Theme.allCases
     }
 }
