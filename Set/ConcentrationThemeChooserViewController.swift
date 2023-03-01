@@ -13,9 +13,6 @@ class ConcentrationThemeChooserViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for theme in themes {
-            print( theme)
-        }
         // Do any additional setup after loading the view.
     }
     
@@ -33,11 +30,32 @@ class ConcentrationThemeChooserViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        var theme = themes[indexPath.row]
-        cell.nameLabel.text = theme.name
-        
+        var configutaion = cell.defaultContentConfiguration()
+        configutaion.text = themes[indexPath.row].name
+        configutaion.textProperties.font = .systemFont(ofSize: 30)
+        configutaion.textProperties.alignment = .center
+        cell.contentConfiguration = configutaion
         
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "Concentration", sender: themes[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "Concentration" else {
+            return }
+        
+        guard let themeVC = segue.destination as? ConcentrationViewController else {
+            return
+        }
+        guard let selectedTheme = sender as? Theme else {
+            return
+        }
+        themeVC.theme = selectedTheme
+        print(selectedTheme)
+    }
+    
+    
 }

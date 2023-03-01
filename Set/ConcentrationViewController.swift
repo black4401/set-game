@@ -11,8 +11,9 @@ class ConcentrationViewController: UIViewController {
     
     private lazy var game = ConcentrationModel(numberOfPairsOfCards: numberOfPairsOFCards)
     
-    private var theme: Theme = Theme.getRandomTheme()
+    
     private lazy var currentEmoji = theme.emojiChoices
+    var theme: Theme = Theme.halloween 
     
     override func viewDidLoad() {
         super.viewDidLoad()

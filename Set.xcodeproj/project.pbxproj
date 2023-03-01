@@ -113,10 +113,10 @@
 			isa = PBXGroup;
 			children = (
 				BB574B8F29AC8D3F00FE6093 /* ConcentrationThemeChooserViewController.swift */,
+				BB574B8829A8E56F00FE6093 /* ConcentrationViewController.swift */,
 				BB152FB229AC93A000AFC592 /* ThemeChooserTableViewCell.swift */,
 				BB574B8929A8E56F00FE6093 /* Card.swift */,
 				BB574B8729A8E56F00FE6093 /* ConcentrationModel.swift */,
-				BB574B8829A8E56F00FE6093 /* ConcentrationViewController.swift */,
 				BB574B8A29A8E56F00FE6093 /* Theme.swift */,
 			);
 			name = Concentration;
