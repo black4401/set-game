@@ -10,23 +10,13 @@ import UIKit
 class ConcentrationViewController: UIViewController {
     
     private lazy var game = ConcentrationModel(numberOfPairsOfCards: numberOfPairsOFCards)
-    
-    
     private lazy var currentEmoji = theme.emojiChoices
-    var theme: Theme = Theme.halloween 
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.view.backgroundColor = theme.backgroundColour
-        for index in cardButtons.indices {
-            cardButtons[index].backgroundColor = theme.cardColour
-        }
-    }
-    
+    private var emoji = [ConcentrationCard:String]()
     private var numberOfPairsOFCards: Int {
         return (cardButtons.count + 1) / 2
     }
+    
+    var theme: Theme = Theme.halloween
     
     @IBOutlet weak var pointsCountLabel: UILabel!
     
@@ -47,8 +37,18 @@ class ConcentrationViewController: UIViewController {
         }
     }
     
-    private func updateViewFromModal(){
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        self.view.backgroundColor = theme.backgroundColour
+        for index in cardButtons.indices {
+            cardButtons[index].backgroundColor = theme.cardColour
+        }
+    }
+}
+
+private extension ConcentrationViewController {
+    func updateViewFromModal(){
         flipCountLabel.text = "Flips: \(game.flips)"
         pointsCountLabel.text = "Points: \(game.points)"
         
@@ -71,9 +71,7 @@ class ConcentrationViewController: UIViewController {
         }
     }
     
-    private var emoji = [ConcentrationCard:String]()
-    
-    private func emoji(for card: ConcentrationCard) -> String {
+    func emoji(for card: ConcentrationCard) -> String {
         if emoji[card] == nil,
            currentEmoji.count > 0 {
             
@@ -81,12 +79,12 @@ class ConcentrationViewController: UIViewController {
         }
         return emoji[card] ?? "?"
     }
-    private func startNewGame(){
+    func startNewGame(){
         game.newGame()
         updateViewFromModal()
     }
-    
 }
+
 extension Int {
     var arc4random: Int {
         if self == 0 {
