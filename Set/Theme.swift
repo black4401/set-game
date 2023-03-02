@@ -49,11 +49,11 @@ enum Theme : CaseIterable {
             case .halloween:
                 return .black
             case .numbers:
-                return .black
+                return .lightGray
             case .animals:
                 return .systemGreen
             case .weather:
-                return .blue
+                return .systemPurple
             case .astrology:
                 return .cyan
         }
