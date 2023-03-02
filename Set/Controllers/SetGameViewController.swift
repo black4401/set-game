@@ -45,6 +45,8 @@ class SetGameViewController: UIViewController {
     
     @IBAction func tapOnNewGame(_ sender: UIButton) {
         showNewGameAlert()
+        hintButton.tintAdjustmentMode = .normal
+        newGameButton.tintAdjustmentMode = .normal
     }
     
     @objc func didTap(_ sender: UITapGestureRecognizer) {
