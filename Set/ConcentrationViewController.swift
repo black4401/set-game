@@ -1,95 +1,121 @@
 //
-//  ViewController.swift
-//  ConcentrationGame
+//  ConcentrationViewController.swift
+//  Set
 //
-//  Created by Alexander Angelov on 19.09.22.
+//  Created by Alexander Angelov on 2.03.23.
 //
 
 import UIKit
 
+private var cellIdentifier = "ConcentrationCell"
+
 class ConcentrationViewController: UIViewController {
     
-    private lazy var game = ConcentrationModel(numberOfPairsOfCards: numberOfPairsOFCards)
-    private lazy var currentEmoji = theme.emojiChoices
-    private var emoji = [ConcentrationCard:String]()
-    private var numberOfPairsOFCards: Int {
-        return (cardButtons.count + 1) / 2
-    }
+    //MARK: - Properties
+    private lazy var game = ConcentrationModel(numberOfPairsOfCards: 8)
+    private var emoji: [ConcentrationCard: String] = [:]
+    private lazy var emojiChoices = theme.emojiChoices
     
-    var theme: Theme = Theme.halloween
-    
-    @IBOutlet weak var pointsCountLabel: UILabel!
-    
-    @IBAction func newGameButton(_ sender: UIButton) {
-        startNewGame()
-    }
-    
-    @IBOutlet private weak var flipCountLabel: UILabel!
-    
-    @IBOutlet private var cardButtons: [UIButton]!
-    
-    @IBAction private func touchCard(_ sender: UIButton) {
-        if let cardNumber = cardButtons.firstIndex(of: sender) {
-            game.chooseCard(at: cardNumber)
-            updateViewFromModal()
+    var theme: Theme = Theme.halloween {
+        didSet {
+            updateTheme()
+            updateViewFromModel()
         }
     }
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = theme.backgroundColour
-        for index in cardButtons.indices {
-            cardButtons[index].backgroundColor = theme.cardColour
+    }
+    
+    //MARK: - IBOutlets
+    
+    @IBOutlet weak var flipsLabel: UILabel!
+    
+    @IBOutlet weak var pointsLabel: UILabel!
+    
+    @IBOutlet weak var newGameButton: UIButton!
+    
+    @IBOutlet weak var concentrationCollectionView: UICollectionView! {
+        didSet {
+            concentrationCollectionView?.dataSource = self
+            concentrationCollectionView?.delegate = self
         }
+    }
+    
+    //MARK: - IBActions
+    
+    @IBAction func tapNewGame(_ sender: UIButton) {
+        resetCurrentGame()
+        updateTheme()
+        updateViewFromModel()
     }
 }
 
 private extension ConcentrationViewController {
-    func updateViewFromModal(){
-        flipCountLabel.text = "Flips: \(game.flips)"
-        pointsCountLabel.text = "Points: \(game.points)"
-        
-        for index in cardButtons.indices {
-            let button = cardButtons[index]
-            let card = game.cards[index]
-            if card.isFaceUp{
-                button.setTitle(emoji(for: card), for: UIControl.State.normal)
-                button.backgroundColor = UIColor.white
-                button.isEnabled = false
-            } else{
-                button.setTitle("", for: UIControl.State.normal)
-                button.backgroundColor = card.isMatched ? UIColor.clear : theme.cardColour
-                if card.isMatched {
-                    button.isEnabled = false
-                } else {
-                    button.isEnabled = true
-                }
-            }
-        }
-    }
     
-    func emoji(for card: ConcentrationCard) -> String {
-        if emoji[card] == nil,
-           currentEmoji.count > 0 {
-            emoji[card] = currentEmoji.remove(at: currentEmoji.count.arc4random)
+    func getEmoji(for card: ConcentrationCard) -> String {
+        if emoji[card] == nil, emojiChoices.count > 0 {
+            guard let randomStringIndex = emojiChoices.indices.randomElement() else {
+                return "?"
+            }
+            emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
         }
         return emoji[card] ?? "?"
     }
-    func startNewGame(){
+    
+    func updateViewFromModel() {
+        concentrationCollectionView.reloadData()
+        updateLabel(label: pointsLabel, to: "Points: \(game.points)")
+        updateLabel(label: flipsLabel, to: "Flips: \(game.flips)")
+    }
+    
+    func updateLabel(label: UILabel, to string: String) {
+        let attributes: [NSAttributedString.Key:Any] = [
+            .strokeColor: theme.cardColour]
+        let attrributedString = NSAttributedString(string: string, attributes: attributes)
+        label.attributedText = attrributedString
+    }
+
+    func updateTheme() {
+        emoji.removeAll()
+        emojiChoices = theme.emojiChoices
+        view.backgroundColor = theme.backgroundColour
+    }
+    func resetCurrentGame() {
         game.newGame()
-        updateViewFromModal()
+        emoji.removeAll()
     }
 }
 
-extension Int {
-    var arc4random: Int {
-        if self == 0 {
-            return 0
-        } else if self < 0{
-            return -Int(arc4random_uniform(UInt32(self)))
-        }
-        return Int(arc4random_uniform(UInt32(self)))
+//MARK: - UICollectionViewDataSource
+extension ConcentrationViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return game.cards.count + 1 / 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ConcentrationCollectionViewCell
+        let card = game.cards[indexPath.item]
+        card.isFaceUp ? cardCell.configure(text: getEmoji(for: card), backgroundColor: theme.backgroundColour) : cardCell.configure(text: "", backgroundColor: card.isMatched ? UIColor.clear : theme.cardColour)
+        return cardCell
+    }
+
+}
+
+//MARK: - UICollectionViewDelegate
+extension ConcentrationViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        game.chooseCard(at: indexPath.row)
+        updateViewFromModel()
+    }
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+extension ConcentrationViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.bounds.size.width - 30) / 4
+        return CGSize(width: width, height: width)
     }
 }
 
