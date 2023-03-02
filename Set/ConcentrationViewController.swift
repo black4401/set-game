@@ -46,9 +46,7 @@ class ConcentrationViewController: UIViewController {
     //MARK: - IBActions
     
     @IBAction func tapNewGame(_ sender: UIButton) {
-        resetCurrentGame()
-        updateTheme()
-        updateViewFromModel()
+        showNewGameAlert()
     }
 }
 
@@ -82,9 +80,11 @@ private extension ConcentrationViewController {
         emojiChoices = theme.emojiChoices
         view.backgroundColor = theme.backgroundColour
     }
-    func resetCurrentGame() {
+    
+    func startNewGame() {
         game.newGame()
         emoji.removeAll()
+        updateViewFromModel()
     }
 }
 
@@ -97,7 +97,11 @@ extension ConcentrationViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ConcentrationCollectionViewCell
         let card = game.cards[indexPath.item]
-        card.isFaceUp ? cardCell.configure(text: getEmoji(for: card), backgroundColor: theme.backgroundColour) : cardCell.configure(text: "", backgroundColor: card.isMatched ? UIColor.clear : theme.cardColour)
+        if card.isFaceUp {
+            cardCell.configure(text: getEmoji(for: card), backgroundColor: theme.backgroundColour)
+        } else {
+            cardCell.configure(text: "", backgroundColor: card.isMatched ? UIColor.clear : theme.cardColour)
+        }
         return cardCell
     }
 
@@ -116,6 +120,18 @@ extension ConcentrationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.size.width - 30) / 4
         return CGSize(width: width, height: width)
+    }
+}
+
+extension ConcentrationViewController {
+    func showNewGameAlert() {
+        let cancelAction = Alert.createAction(.cancel)
+        let newGameAction = Alert.createAction(.newGame() { _ in
+            self.startNewGame()
+        })
+        let alert = Alert.create(title: "Do you want to start a new game?", message: "Your game progress will be lost!", actions: [cancelAction, newGameAction])
+        
+        present(alert, animated: true)
     }
 }
 
