@@ -46,13 +46,13 @@ class ConcentrationThemeChooserViewController: UITableViewController {
         guard segue.identifier == "Concentration" else {
             return }
         
-        guard let themeVC = segue.destination as? ConcentrationViewController else {
+        guard let vc = segue.destination as? ConcentrationViewController else {
             return
         }
         guard let selectedTheme = sender as? Theme else {
             return
         }
-        themeVC.theme = selectedTheme
+        vc.theme = selectedTheme
         print(selectedTheme)
     }
 }
