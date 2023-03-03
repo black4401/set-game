@@ -14,35 +14,30 @@ class SetGameViewController: UIViewController {
     @IBOutlet private weak var cardGridView: CardGridView!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var newGameButton: UIButton!
-    @IBOutlet weak var deal3Button: UIButton!
     @IBOutlet weak var hintButton: UIButton!
     
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         game.delegate = self
-        
-        deal3Button.layer.cornerRadius = 8
-        deal3Button.clipsToBounds = true
+        cardGridView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         game.startNewGame()
-        cardGridView.updateCardViews(with: game.dealtCards)
+        cardGridView.dealIntialCards(cards: game.dealtCards)
         addTapGestures()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        DispatchQueue.main.async { [weak self] in
-            self?.cardGridView.updateCardViews(with: self!.game.dealtCards)
-        }
+        
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self!.cardGridView.resizeGrid()
+            self!.cardGridView.updateCardViews(with: self!.game.dealtCards)
+        })
     }
-}
-
-//MARK: IBActions
-private extension SetGameViewController {
     
     @IBAction func tapHintButton(_ sender: UIButton) {
         game.findSetOnTheField()
@@ -50,10 +45,6 @@ private extension SetGameViewController {
     
     @IBAction func tapOnNewGame(_ sender: UIButton) {
         showNewGameAlert()
-    }
-    
-    @IBAction func tapDealButton(_ sender: UIButton) {
-        game.dealThreeCards()
     }
     
     @objc func didTap(_ sender: UITapGestureRecognizer) {
@@ -71,7 +62,7 @@ private extension SetGameViewController {
         }
     }
 }
-//MARK: SetGameDelegate
+
 extension SetGameViewController: SetGameDelegate {
     
     func setGameDidFindHint(_ setGame: SetGame, at indices: [Int]) {
@@ -87,19 +78,31 @@ extension SetGameViewController: SetGameDelegate {
         }
     }
     
-    func setGameDidPrepareNewGame(_ setGame: SetGame) {
-        deal3Button.isEnabled = true
+    func setGamePrepareNewGame(_ setGame: SetGame) {
+        cardGridView.resetDeck()
+        cardGridView.resetDiscardPile()
+        cardGridView.dealIntialCards(cards: game.dealtCards)
     }
     
-    func setGameDidUpdateCards(_ game: SetGame) {
+    func setGameUpdateCards(_ game: SetGame) {
         cardGridView.updateCardViews(with: game.dealtCards)
+    }
+    
+    func setGameDidReplaceCards(_ game: SetGame) {
+        cardGridView.replaceCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
+        cardGridView.addCardBackToDiscardPile()
+    }
+    
+    func setGameDidRemoveCards(_ game: SetGame) {
+        cardGridView.removeCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
+        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int) {
         cardGridView.updateCardViewBorder(at: index, to: .green)
     }
     
-    func setGameDidUpdatePoints(_ setGame: SetGame) {
+    func setGameUpdatePoints(_ setGame: SetGame) {
         pointsLabel.text = "Points: \(game.points)"
     }
     
@@ -107,20 +110,23 @@ extension SetGameViewController: SetGameDelegate {
         showGameEndAlert()
     }
     
-    func setGame(_ setGame: SetGame, didCardsMatch isMatched: Bool, at indices: [Int]) {
-        for index in indices {
-            let color: UIColor = isMatched ? .green : .red
-            cardGridView.updateCardViewBorder(at: index, to: color)
+    func setGame(_ setGame: SetGame, didFindMissmatchAt indices: [Int]) {
+        cardGridView.shakeCardViews(at: indices)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
+            for index in indices {
+                self?.cardGridView.removeCardViewBorder(at: index)
+            }
         }
     }
     
-    func setGameDidEnableDealButton(_ setGame: SetGame, isEnabled: Bool) {
-        deal3Button.isEnabled = isEnabled
+    func setGameEnableDealButton(_ setGame: SetGame, isEnabled: Bool) {
         if !isEnabled {
-            deal3Button.backgroundColor = .white
-        } else {
-            deal3Button.backgroundColor = .systemBlue
+            cardGridView.removeDeckViewImage()
         }
+    }
+    
+    func setGameDidFindFirstSet(_ setGame: SetGame) {
+        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int]) {
@@ -128,9 +134,7 @@ extension SetGameViewController: SetGameDelegate {
     }
 }
 
-
-//MARK: Gestures
-private extension SetGameViewController {
+extension SetGameViewController {
     
     func addTapGestures() {
         cardGridView.addGestureRecognizer(createTapGesture())
@@ -165,8 +169,7 @@ private extension SetGameViewController {
     }
 }
 
-//MARK: Alerts
-private extension SetGameViewController {
+extension SetGameViewController {
     func showNewGameAlert() {
         let cancelAction = Alert.createAction(.cancel)
         let newGameAction = Alert.createAction(.newGame() { _ in
@@ -187,3 +190,9 @@ private extension SetGameViewController {
     }
 }
 
+extension SetGameViewController: CardGridViewDelegate {
+    
+    func cardGridViewDidTapDeck(_ cardGridView: CardGridView) {
+        game.dealThreeCards()
+    }
+}
