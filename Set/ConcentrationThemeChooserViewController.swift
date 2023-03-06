@@ -15,6 +15,10 @@ class ConcentrationThemeChooserViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func awakeFromNib() {
+        splitViewController?.delegate = self
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -39,20 +43,35 @@ class ConcentrationThemeChooserViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "Concentration", sender: themes[indexPath.row])
+        let selectedTheme = Theme.allCases[indexPath.row]
+        if let cvc = splitViewController?.viewController(for: .secondary) as? ConcentrationViewController {
+            cvc.theme = selectedTheme
+            cvc.title = selectedTheme.name
+            splitViewController?.show(.secondary)
+        } else {
+            performSegue(withIdentifier: "Concentration", sender: selectedTheme)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "Concentration" else {
-            return }
         
+        guard segue.identifier == "Concentration" else {
+            return
+        }
         guard let vc = segue.destination as? ConcentrationViewController else {
             return
         }
         guard let selectedTheme = sender as? Theme else {
             return
         }
+        
         vc.theme = selectedTheme
         print(selectedTheme)
+    }
+}
+
+extension ConcentrationThemeChooserViewController: UISplitViewControllerDelegate {
+    func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
+        .primary
     }
 }

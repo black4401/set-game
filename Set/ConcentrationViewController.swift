@@ -28,6 +28,11 @@ class ConcentrationViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateTheme()
+    }
+    
     //MARK: - IBOutlets
     
     @IBOutlet weak var flipsLabel: UILabel!
