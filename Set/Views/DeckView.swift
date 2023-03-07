@@ -13,6 +13,7 @@ class DeckView: UIImageView {
         didSet {
             if !isEmpty {
                 image = UIImage(named: "cardBack")
+                configure()
             } else {
                 image = nil
             }
@@ -21,6 +22,7 @@ class DeckView: UIImageView {
     
     func configure() {
         layer.cornerRadius = CardViewConstant.cornerRadius
+        layer.masksToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = true
     }
