@@ -123,8 +123,8 @@ extension ConcentrationViewController: UICollectionViewDelegate {
 //MARK: - UICollectionViewDelegateFlowLayout
 extension ConcentrationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.size.width - 30) / 4
-        let height = (collectionView.bounds.size.height - 30) / 4
+        let width = (collectionView.bounds.size.width - 80) / 4
+        let height = (collectionView.bounds.size.height - 80) / 4
         return CGSize(width: width, height: height)
     }
 }
