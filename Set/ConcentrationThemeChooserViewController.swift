@@ -7,16 +7,16 @@
 
 import UIKit
 
+private var concentrationSegue = "Concentration"
+private var themeCellIdentifier = "Theme Cell"
+
 class ConcentrationThemeChooserViewController: UITableViewController {
     
     private let themes = Theme.getAllThemes()
+    private var concentrationVC: ConcentrationViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func awakeFromNib() {
-        splitViewController?.delegate = self
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -29,7 +29,7 @@ class ConcentrationThemeChooserViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Theme Cell", for: indexPath) as? ThemeChooserTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: themeCellIdentifier, for: indexPath) as? ThemeChooserTableViewCell else {
             return UITableViewCell()
         }
         
@@ -43,35 +43,28 @@ class ConcentrationThemeChooserViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedTheme = Theme.allCases[indexPath.row]
-        if let cvc = splitViewController?.viewController(for: .secondary) as? ConcentrationViewController {
+        
+        let selectedTheme = themes[indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        if let cvc = splitViewController?.viewControllers.last as? ConcentrationViewController {
             cvc.theme = selectedTheme
-            cvc.title = selectedTheme.name
-            splitViewController?.show(.secondary)
+        } else if let cvc = concentrationVC {
+            cvc.theme = selectedTheme
+            navigationController?.pushViewController(cvc, animated: true)
         } else {
-            performSegue(withIdentifier: "Concentration", sender: selectedTheme)
+            performSegue(withIdentifier: concentrationSegue, sender: cell)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard segue.identifier == "Concentration" else {
-            return
+        if segue.identifier == concentrationSegue,
+           let vc = segue.destination as? ConcentrationViewController,
+           let selectedCell = sender as? UITableViewCell {
+            let theme = themes[tableView.indexPath(for: selectedCell)?.row ?? 0]
+            vc.theme = theme
+            concentrationVC = vc
         }
-        guard let vc = segue.destination as? ConcentrationViewController else {
-            return
-        }
-        guard let selectedTheme = sender as? Theme else {
-            return
-        }
-        
-        vc.theme = selectedTheme
-        print(selectedTheme)
-    }
-}
-
-extension ConcentrationThemeChooserViewController: UISplitViewControllerDelegate {
-    func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
-        .primary
     }
 }
