@@ -24,10 +24,6 @@ class ConcentrationViewController: UIViewController {
     }
     
     //MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateTheme()
@@ -109,7 +105,6 @@ extension ConcentrationViewController: UICollectionViewDataSource {
         }
         return cardCell
     }
-
 }
 
 //MARK: - UICollectionViewDelegate
@@ -123,8 +118,8 @@ extension ConcentrationViewController: UICollectionViewDelegate {
 //MARK: - UICollectionViewDelegateFlowLayout
 extension ConcentrationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.size.width - 80) / 4
-        let height = (collectionView.bounds.size.height - 80) / 4
+        let width = (collectionView.bounds.size.width - ConcentrationConstants.cellSizeModifier) / ConcentrationConstants.itemsInRow
+        let height = (collectionView.bounds.size.height - ConcentrationConstants.cellSizeModifier) / ConcentrationConstants.itemsInRow
         return CGSize(width: width, height: height)
     }
 }
@@ -139,5 +134,10 @@ extension ConcentrationViewController {
         
         present(alert, animated: true)
     }
+}
+
+struct ConcentrationConstants {
+    static let cellSizeModifier = 80.0
+    static let itemsInRow = 4.0
 }
 
