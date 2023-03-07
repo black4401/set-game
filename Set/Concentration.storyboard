@@ -9,10 +9,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Split View Controller-->
+        <!--Concentration-->
         <scene sceneID="Tm4-Hr-73Q">
             <objects>
                 <splitViewController preferredDisplayMode="beside" id="CfM-6s-7hA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Concentration" image="brain" catalog="system" id="3n1-ob-c9m">
+                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="kAd-bp-YMg" kind="relationship" relationship="masterViewController" id="OFT-ZJ-Bri"/>
@@ -155,6 +158,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nQK-Om-31n"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="concentrationCollectionView" destination="JOd-cL-7SA" id="Lvj-BX-Zp7"/>
@@ -191,6 +195,7 @@
         <segue reference="Gfk-P4-pYF"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="brain" catalog="system" width="128" height="107"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
