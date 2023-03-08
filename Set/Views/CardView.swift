@@ -81,7 +81,7 @@ class CardView: UIView {
     
     func showBackSide() {
         setupCardView()
-        cardBack.image = UIImage(named: "cardBack")
+        cardBack.image = UIImage(named: "cardBackCurvedEdges")
         addSubview(cardBack)
     }
     

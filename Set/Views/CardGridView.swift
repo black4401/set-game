@@ -258,10 +258,8 @@ private extension CardGridView {
         cardView.layer.zPosition = 10
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationConstants.standardDuration, delay: delay, animations: {
             cardView.frame = self.discardPile.frame
-            cardView.alpha = 0
-        }) { _ in
-            cardView.removeFromSuperview()
-        }
+            self.animateShowBackSide(of: cardView, delay: delay, frame: self.discardPile.frame)
+        })
     }
     
     func animateMatchMovement(of cardView: CardView, delay: Double) {
@@ -281,6 +279,17 @@ private extension CardGridView {
         }) { _ in
             UIView.transition(with: cardView, duration: AnimationConstants.standardDuration, options: .transitionFlipFromRight, animations: {
                 cardView.removeBackSide()
+            })
+        }
+    }
+    
+    func animateShowBackSide(of cardView: CardView, delay: Double, frame: CGRect) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationConstants.standardDuration, delay: delay, animations: {
+            cardView.frame = frame
+            cardView.alpha = 1
+        }) { _ in
+            UIView.transition(with: cardView, duration: AnimationConstants.standardDuration, options: .transitionFlipFromLeft, animations: {
+                cardView.showBackSide()
             })
         }
     }
