@@ -7,14 +7,13 @@
 
 import UIKit
 
-private var cellIdentifier = "ConcentrationCell"
+private var cellIdentifier = "ConcentrationCellIdentifier"
 
 class ConcentrationViewController: UIViewController {
     
     //MARK: - Properties
     private lazy var game = ConcentrationModel(numberOfPairsOfCards: ConcentrationConstants.numberOfPairsOfCards)
-    private var emoji: [ConcentrationCard: String] = [:]
-    private lazy var emojiChoices = theme.emojiChoices
+    private lazy var emojiModel = EmojiModel()
     
     var theme: Theme = Theme.halloween {
         didSet {
@@ -53,16 +52,6 @@ class ConcentrationViewController: UIViewController {
 
 private extension ConcentrationViewController {
     
-    func getEmoji(for card: ConcentrationCard) -> String {
-        if emoji[card] == nil, emojiChoices.count > 0 {
-            guard let randomStringIndex = emojiChoices.indices.randomElement() else {
-                return "?"
-            }
-            emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
-        }
-        return emoji[card] ?? "?"
-    }
-    
     func updateViewFromModel() {
         concentrationCollectionView.reloadData()
         updateLabel(label: pointsLabel, to: "Points: \(game.points)")
@@ -75,16 +64,16 @@ private extension ConcentrationViewController {
         let attrributedString = NSAttributedString(string: string, attributes: attributes)
         label.attributedText = attrributedString
     }
-
+    
     func updateTheme() {
-        emoji.removeAll()
-        emojiChoices = theme.emojiChoices
+        emojiModel.removeAllEmoji()
+        emojiModel.changeEmoji(to: theme.emojiChoices)
         view.backgroundColor = theme.backgroundColour
     }
     
     func startNewGame() {
         game.newGame()
-        emoji.removeAll()
+        emojiModel.removeAllEmoji()
         updateViewFromModel()
     }
 }
@@ -99,7 +88,7 @@ extension ConcentrationViewController: UICollectionViewDataSource {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ConcentrationCollectionViewCell
         let card = game.cards[indexPath.item]
         if card.isFaceUp {
-            cardCell.configure(text: getEmoji(for: card), backgroundColor: theme.backgroundColour)
+            cardCell.configure(text: emojiModel.getEmoji(for: card), backgroundColor: theme.backgroundColour)
         } else {
             cardCell.configure(text: "", backgroundColor: card.isMatched ? UIColor.clear : theme.cardColour)
         }

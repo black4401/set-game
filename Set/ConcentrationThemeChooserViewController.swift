@@ -7,8 +7,8 @@
 
 import UIKit
 
-private var concentrationSegue = "Concentration"
-private var themeCellIdentifier = "Theme Cell"
+private var concentrationSegue = "ConcentrationSegue"
+private var themeCellIdentifier = "ThemeCellIdentifier"
 
 class ConcentrationThemeChooserViewController: UITableViewController {
     

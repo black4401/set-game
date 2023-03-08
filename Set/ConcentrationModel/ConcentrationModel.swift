@@ -37,47 +37,43 @@ class ConcentrationModel {
         }
     }
     
-    func chooseCard(at index: Int){
-        if !cards[index].isMatched {
-            flips += 1
-            if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
-                if cards[matchIndex] == cards[index] {
-                    cards[matchIndex].isMatched = true
-                    cards[index].isMatched = true
-                    points += 2
-                } else {
-                    if cards[index].wasFlipped {
-                        points -= 1
-                    }
-                    
-                    if cards[matchIndex].wasFlipped {
-                        points -= 1
-                    }
+    func chooseCard(at index: Int) {
+        guard !cards[index].isMatched else {
+            return
+        }
+        
+        flips += 1
+        if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
+            if cards[matchIndex] == cards[index] {
+                cards[matchIndex].isMatched = true
+                cards[index].isMatched = true
+                points += 2
+            } else {
+                if cards[index].wasFlipped {
+                    points -= 1
                 }
                 
-                cards[index].isFaceUp = true
-                cards[index].wasFlipped = true
-                cards[matchIndex].wasFlipped = true
-            } else{
-                indexOfOneAndOnlyFaceUpCard = index
+                if cards[matchIndex].wasFlipped {
+                    points -= 1
+                }
             }
+            
+            cards[index].isFaceUp = true
+            cards[index].wasFlipped = true
+            cards[matchIndex].wasFlipped = true
+        } else{
+            indexOfOneAndOnlyFaceUpCard = index
         }
     }
     
-    init(numberOfPairsOfCards: Int){
+    init(numberOfPairsOfCards: Int) {
         for _ in 1...numberOfPairsOfCards {
             let card = ConcentrationCard()
             cards += [card, card]
         }
         shuffleCards()
     }
-    func shuffleCards(){
+    func shuffleCards() {
         cards.shuffle()
-    }
-}
-
-extension Collection {
-    var oneAndOnly: Element? {
-        return count == 1 ? first : nil
     }
 }

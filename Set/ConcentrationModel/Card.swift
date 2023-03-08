@@ -8,20 +8,21 @@
 import Foundation
 
 
-struct ConcentrationCard: Hashable
-{
-    private var identifier: Int
+struct ConcentrationCard: Hashable {
+    
     private static var identifierFactory = 0
-    private static func getIdentifier() -> Int{
+    private static func getIdentifier() -> Int {
         identifierFactory += 1
         return identifierFactory
     }
+    
+    private var identifier: Int
     
     var wasFlipped = false
     var isFaceUp = false
     var isMatched = false
     
-    init(){
+    init() {
         self.identifier = ConcentrationCard.getIdentifier()
     }
     

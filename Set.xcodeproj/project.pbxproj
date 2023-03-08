@@ -28,6 +28,8 @@
 		BBDA40BF28FA315A00F9903F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40BD28FA315A00F9903F /* Main.storyboard */; };
 		BBDA40C128FA315B00F9903F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40C028FA315B00F9903F /* Assets.xcassets */; };
 		BBDA40C428FA315B00F9903F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDA40C228FA315B00F9903F /* LaunchScreen.storyboard */; };
+		BBDC485929B8C2CE001A41C1 /* Collection+oneAndOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC485829B8C2CE001A41C1 /* Collection+oneAndOnly.swift */; };
+		BBDC485B29B8C9B4001A41C1 /* EmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC485A29B8C9B4001A41C1 /* EmojiModel.swift */; };
 		BBF0092A29914EAA00B90108 /* CardGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0092929914EAA00B90108 /* CardGridView.swift */; };
 		BBF0093629950BAC00B90108 /* UIView+setBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0093529950BAC00B90108 /* UIView+setBorder.swift */; };
 		BBF00938299510B600B90108 /* Array+RemoveIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF00937299510B600B90108 /* Array+RemoveIndices.swift */; };
@@ -57,6 +59,8 @@
 		BBDA40C028FA315B00F9903F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBDA40C328FA315B00F9903F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBDA40C528FA315B00F9903F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBDC485829B8C2CE001A41C1 /* Collection+oneAndOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+oneAndOnly.swift"; sourceTree = "<group>"; };
+		BBDC485A29B8C9B4001A41C1 /* EmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiModel.swift; sourceTree = "<group>"; };
 		BBF0092929914EAA00B90108 /* CardGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGridView.swift; sourceTree = "<group>"; };
 		BBF0093529950BAC00B90108 /* UIView+setBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+setBorder.swift"; sourceTree = "<group>"; };
 		BBF00937299510B600B90108 /* Array+RemoveIndices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RemoveIndices.swift"; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 		BB53913B299A8B680045CB39 /* Exensions */ = {
 			isa = PBXGroup;
 			children = (
+				BBDC485829B8C2CE001A41C1 /* Collection+oneAndOnly.swift */,
 				BB382C7E299F9ABE00FF1977 /* UIView+ShakeAnimation.swift */,
 				BBF0093529950BAC00B90108 /* UIView+setBorder.swift */,
 				BB5391372998F11C0045CB39 /* CGRect+Displace.swift */,
@@ -179,6 +184,7 @@
 		BBDC485729B87F90001A41C1 /* ConcentrationModel */ = {
 			isa = PBXGroup;
 			children = (
+				BBDC485A29B8C9B4001A41C1 /* EmojiModel.swift */,
 				BB574B8929A8E56F00FE6093 /* Card.swift */,
 				BB574B8729A8E56F00FE6093 /* ConcentrationModel.swift */,
 			);
@@ -265,6 +271,7 @@
 				BBDA40BC28FA315A00F9903F /* SetGameViewController.swift in Sources */,
 				BB8E324929B0B93D00CE2880 /* ConcentrationViewController.swift in Sources */,
 				BB492FDF28FACC1C00BDA277 /* SetGame.swift in Sources */,
+				BBDC485929B8C2CE001A41C1 /* Collection+oneAndOnly.swift in Sources */,
 				BB152FBB29B0AE3D00AFC592 /* ConcentrationCollectionViewCell.swift in Sources */,
 				BB574B8D29A8E56F00FE6093 /* Card.swift in Sources */,
 				BBDA40B828FA315A00F9903F /* AppDelegate.swift in Sources */,
@@ -274,6 +281,7 @@
 				BBF0093629950BAC00B90108 /* UIView+setBorder.swift in Sources */,
 				BB5391382998F11C0045CB39 /* CGRect+Displace.swift in Sources */,
 				BB28048A29954D2E0029DEC2 /* Alert.swift in Sources */,
+				BBDC485B29B8C9B4001A41C1 /* EmojiModel.swift in Sources */,
 				BB18838F299114AA00AC7BDA /* Grid.swift in Sources */,
 				BB89C5492902961A00F174A2 /* CardModel.swift in Sources */,
 				BB6350DF299D701B004DC381 /* DeckView.swift in Sources */,
