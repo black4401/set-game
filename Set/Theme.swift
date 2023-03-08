@@ -73,10 +73,6 @@ enum Theme : CaseIterable {
         }
     }
     
-    static func getRandomTheme() -> Theme {
-        .allCases.randomElement()!
-    }
-    
     static func getAllThemes() -> [Theme] {
         Theme.allCases
     }

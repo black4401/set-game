@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB152FB329AC93A000AFC592 /* ThemeChooserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB152FB229AC93A000AFC592 /* ThemeChooserTableViewCell.swift */; };
 		BB152FBB29B0AE3D00AFC592 /* ConcentrationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB152FBA29B0AE3D00AFC592 /* ConcentrationCollectionViewCell.swift */; };
 		BB18838F299114AA00AC7BDA /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB18838E299114AA00AC7BDA /* Grid.swift */; };
 		BB28048A29954D2E0029DEC2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB28048929954D2E0029DEC2 /* Alert.swift */; };
@@ -35,7 +34,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BB152FB229AC93A000AFC592 /* ThemeChooserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChooserTableViewCell.swift; sourceTree = "<group>"; };
 		BB152FBA29B0AE3D00AFC592 /* ConcentrationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationCollectionViewCell.swift; sourceTree = "<group>"; };
 		BB18838E299114AA00AC7BDA /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		BB28048929954D2E0029DEC2 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				BB152FBA29B0AE3D00AFC592 /* ConcentrationCollectionViewCell.swift */,
-				BB152FB229AC93A000AFC592 /* ThemeChooserTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -136,9 +133,8 @@
 			children = (
 				BB2A738A29B71B03006B0978 /* Controllers */,
 				BB2A738B29B7204D006B0978 /* Cells */,
-				BB574B8929A8E56F00FE6093 /* Card.swift */,
+				BBDC485729B87F90001A41C1 /* ConcentrationModel */,
 				BB2A738829B7192D006B0978 /* Concentration.storyboard */,
-				BB574B8729A8E56F00FE6093 /* ConcentrationModel.swift */,
 				BB574B8A29A8E56F00FE6093 /* Theme.swift */,
 			);
 			name = Concentration;
@@ -178,6 +174,15 @@
 				BB53913B299A8B680045CB39 /* Exensions */,
 			);
 			path = Set;
+			sourceTree = "<group>";
+		};
+		BBDC485729B87F90001A41C1 /* ConcentrationModel */ = {
+			isa = PBXGroup;
+			children = (
+				BB574B8929A8E56F00FE6093 /* Card.swift */,
+				BB574B8729A8E56F00FE6093 /* ConcentrationModel.swift */,
+			);
+			path = ConcentrationModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +266,6 @@
 				BB8E324929B0B93D00CE2880 /* ConcentrationViewController.swift in Sources */,
 				BB492FDF28FACC1C00BDA277 /* SetGame.swift in Sources */,
 				BB152FBB29B0AE3D00AFC592 /* ConcentrationCollectionViewCell.swift in Sources */,
-				BB152FB329AC93A000AFC592 /* ThemeChooserTableViewCell.swift in Sources */,
 				BB574B8D29A8E56F00FE6093 /* Card.swift in Sources */,
 				BBDA40B828FA315A00F9903F /* AppDelegate.swift in Sources */,
 				BB574B8E29A8E56F00FE6093 /* Theme.swift in Sources */,

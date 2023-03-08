@@ -12,7 +12,7 @@ private var cellIdentifier = "ConcentrationCell"
 class ConcentrationViewController: UIViewController {
     
     //MARK: - Properties
-    private lazy var game = ConcentrationModel(numberOfPairsOfCards: 8)
+    private lazy var game = ConcentrationModel(numberOfPairsOfCards: ConcentrationConstants.numberOfPairsOfCards)
     private var emoji: [ConcentrationCard: String] = [:]
     private lazy var emojiChoices = theme.emojiChoices
     
@@ -137,6 +137,8 @@ extension ConcentrationViewController {
 }
 
 struct ConcentrationConstants {
+    static let numberOfPairsOfCards = 8
+    
     static let cellSizeModifier = 80.0
     static let itemsInRow = 4.0
 }

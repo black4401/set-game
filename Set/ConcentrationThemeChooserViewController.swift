@@ -29,9 +29,7 @@ class ConcentrationThemeChooserViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: themeCellIdentifier, for: indexPath) as? ThemeChooserTableViewCell else {
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: themeCellIdentifier, for: indexPath)
         
         var configutaion = cell.defaultContentConfiguration()
         configutaion.text = themes[indexPath.row].name

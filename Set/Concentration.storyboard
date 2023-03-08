@@ -35,28 +35,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Theme Cell" id="7Io-iD-q7u" customClass="ThemeChooserTableViewCell" customModule="Set" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Theme Cell" id="7Io-iD-q7u">
                                 <rect key="frame" x="0.0" y="50" width="430" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Io-iD-q7u" id="PkR-AK-mHF">
                                     <rect key="frame" x="0.0" y="0.0" width="430" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jK9-XI-otu">
-                                            <rect key="frame" x="194.66666666666666" y="11.333333333333336" width="41" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="jK9-XI-otu" firstAttribute="centerY" secondItem="PkR-AK-mHF" secondAttribute="centerY" id="9lm-6N-thj"/>
-                                        <constraint firstItem="jK9-XI-otu" firstAttribute="centerX" secondItem="PkR-AK-mHF" secondAttribute="centerX" id="nPm-d9-mB2"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="nameLabel" destination="jK9-XI-otu" id="biV-hE-BdO"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -192,7 +177,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Gfk-P4-pYF"/>
+        <segue reference="jMS-oS-bId"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="brain" catalog="system" width="128" height="107"/>
