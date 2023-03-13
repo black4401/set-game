@@ -107,9 +107,10 @@ extension ConcentrationViewController: UICollectionViewDelegate {
 //MARK: - UICollectionViewDelegateFlowLayout
 extension ConcentrationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.size.width - ConcentrationConstants.cellSizeModifier) / ConcentrationConstants.itemsInRow
-        let height = (collectionView.bounds.size.height - ConcentrationConstants.cellSizeModifier) / ConcentrationConstants.itemsInRow
-        return CGSize(width: width, height: height)
+        let totalSpacing = (ConcentrationConstants.itemsInRow + 1)*ConcentrationConstants.spacingBetweenCells
+        
+        let width = (concentrationCollectionView.bounds.width - totalSpacing)/ConcentrationConstants.itemsInRow
+        return CGSize(width: width, height: width)
     }
 }
 
@@ -128,7 +129,7 @@ extension ConcentrationViewController {
 struct ConcentrationConstants {
     static let numberOfPairsOfCards = 8
     
-    static let cellSizeModifier = 80.0
+    static let spacingBetweenCells = 16.0
     static let itemsInRow = 4.0
 }
 
