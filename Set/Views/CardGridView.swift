@@ -310,7 +310,7 @@ private extension CardGridView {
         
         NSLayoutConstraint.activate([
             deckView.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -100),
-            deckView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            deckView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             deckView.heightAnchor.constraint(equalToConstant: 100),
             deckView.widthAnchor.constraint(equalTo: deckView.heightAnchor, multiplier: CardViewConstant.aspectRatio)
         ])
@@ -325,7 +325,7 @@ private extension CardGridView {
         addSubview(discardPile)
         NSLayoutConstraint.activate([
             discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 105),
-            discardPile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            discardPile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             discardPile.heightAnchor.constraint(equalToConstant: 100),
             discardPile.widthAnchor.constraint(equalTo: discardPile.heightAnchor, multiplier: CardViewConstant.aspectRatio)
         ])
