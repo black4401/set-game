@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "cardBack.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "4f436ef5fad27a491bf384fb4ed9ab0f.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

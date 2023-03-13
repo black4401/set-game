@@ -9,15 +9,12 @@ import UIKit
 
 class DeckView: UIImageView {
     
-    var isEmpty: Bool = false {
-        didSet {
-            if !isEmpty {
-                image = UIImage(named: "cardBack")
-                setCornerRadius()
-            } else {
-                image = nil
-            }
-        }
+    func removeCardBack() {
+        self.image = nil
+    }
+    
+    func setUpCardBack() {
+        image = UIImage(named: "cardBack")
     }
     
     func setCornerRadius() {
