@@ -92,12 +92,10 @@ extension SetGameViewController: SetGameDelegate {
     
     func setGameDidReplaceCards(_ game: SetGame) {
         cardGridView.replaceCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
-        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGameDidRemoveCards(_ game: SetGame) {
         cardGridView.removeCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
-        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int) {
@@ -125,10 +123,6 @@ extension SetGameViewController: SetGameDelegate {
         if !isEnabled {
             cardGridView.removeDeckViewImage()
         }
-    }
-    
-    func setGameDidFindFirstSet(_ setGame: SetGame) {
-        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int]) {
