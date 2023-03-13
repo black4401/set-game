@@ -87,6 +87,7 @@ extension ConcentrationViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ConcentrationCollectionViewCell
         let card = game.cards[indexPath.item]
+        cardCell.layer.cornerRadius = ConcentrationConstants.cornerRadius
         if card.isFaceUp {
             cardCell.configure(text: emojiModel.getEmoji(for: card), backgroundColor: theme.backgroundColour)
         } else {
@@ -131,5 +132,6 @@ struct ConcentrationConstants {
     
     static let spacingBetweenCells = 16.0
     static let itemsInRow = 4.0
+    static let cornerRadius: CGFloat = 5
 }
 
