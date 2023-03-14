@@ -20,6 +20,11 @@ class ConcentrationThemeChooserViewController: UITableViewController {
         tableView.backgroundColor = .customBaseColor
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        splitViewController?.delegate = self
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -66,5 +71,12 @@ class ConcentrationThemeChooserViewController: UITableViewController {
             vc.theme = theme
             concentrationVC = vc
         }
+    }
+}
+
+// MARK: - UISplitViewControllerDelegate
+extension ConcentrationThemeChooserViewController: UISplitViewControllerDelegate {
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        true
     }
 }
