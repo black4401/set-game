@@ -23,6 +23,14 @@ class ConcentrationViewController: UIViewController {
     }
     
     //MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        newGameButton.tintColor = .customBaseColor
+        pointsLabel.textColor = .black
+        flipsLabel.textColor = .black
+        splitViewController?.navigationController?.navigationBar.tintColor = .customBaseColor
+        splitViewController?.displayModeButtonItem.tintColor = .customBaseColor
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateTheme()
@@ -47,6 +55,7 @@ class ConcentrationViewController: UIViewController {
     
     @IBAction func tapNewGame(_ sender: UIButton) {
         showNewGameAlert()
+        newGameButton.tintAdjustmentMode = .normal
     }
 }
 
@@ -89,7 +98,7 @@ extension ConcentrationViewController: UICollectionViewDataSource {
         let card = game.cards[indexPath.item]
         cardCell.layer.cornerRadius = ConcentrationConstants.cornerRadius
         if card.isFaceUp {
-            cardCell.configure(text: emojiModel.getEmoji(for: card), backgroundColor: theme.backgroundColour)
+            cardCell.configure(text: emojiModel.getEmoji(for: card), backgroundColor: .white)
         } else {
             cardCell.configure(text: "", backgroundColor: card.isMatched ? UIColor.clear : theme.cardColour)
         }
@@ -111,7 +120,18 @@ extension ConcentrationViewController: UICollectionViewDelegateFlowLayout {
         let totalSpacing = (ConcentrationConstants.itemsInRow + 1)*ConcentrationConstants.spacingBetweenCells
         
         let width = (concentrationCollectionView.bounds.width - totalSpacing)/ConcentrationConstants.itemsInRow
-        return CGSize(width: width, height: width)
+        
+        switch UIDevice.current.userInterfaceIdiom {
+            case .pad:
+                return CGSize(width: width, height: width)
+            default:
+                if concentrationCollectionView.bounds.width > concentrationCollectionView.bounds.height {
+                    let width = width * ConcentrationConstants.cellModifierForHorizontalModeIphone
+                    return CGSize(width: width, height: width)
+                } else {
+                    return CGSize(width: width, height: width)
+                }
+        }
     }
 }
 
@@ -130,6 +150,7 @@ extension ConcentrationViewController {
 struct ConcentrationConstants {
     static let numberOfPairsOfCards = 8
     
+    static let cellModifierForHorizontalModeIphone = 0.4
     static let spacingBetweenCells = 16.0
     static let itemsInRow = 4.0
     static let cornerRadius: CGFloat = 5
