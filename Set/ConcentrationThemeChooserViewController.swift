@@ -17,6 +17,7 @@ class ConcentrationThemeChooserViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = .customBaseColor
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,6 +36,7 @@ class ConcentrationThemeChooserViewController: UITableViewController {
         configutaion.text = themes[indexPath.row].name
         configutaion.textProperties.font = .systemFont(ofSize: 30)
         configutaion.textProperties.alignment = .center
+        cell.backgroundColor = .customBaseSecondaryColor
         cell.contentConfiguration = configutaion
         
         return cell

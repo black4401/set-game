@@ -215,7 +215,7 @@ class CardGridView: UIView {
     }
     
     func updateCardViewBorder(at index: Int, to color: UIColor) {
-        cardViews[index].backgroundColor = .lightGray
+        cardViews[index].backgroundColor = .setGameSelectedColor
     }
     
     func removeCardViewBorder(at index: Int) {
@@ -241,10 +241,6 @@ class CardGridView: UIView {
     func removeDeckViewImage() {
         deckView.removeCardBack()
     }
-    
-//    func addCardBackToDiscardPile() {
-//        discardPile.isEmpty = false
-//    }
     
     @objc func didTap (_ sender: UITapGestureRecognizer) {
         delegate?.cardGridViewDidTapDeck(self)

@@ -47,15 +47,15 @@ enum Theme : CaseIterable {
     var backgroundColour: UIColor {
         switch self {
             case .halloween:
-                return .black
+                return .customGray
             case .numbers:
                 return .lightGray
             case .animals:
-                return .systemGreen
+                return .animalsBackground
             case .weather:
-                return .systemPurple
+                return .weatherBackground
             case .astrology:
-                return .cyan
+                return .astrologyBackground
         }
     }
     var cardColour: UIColor {
@@ -65,11 +65,11 @@ enum Theme : CaseIterable {
             case .numbers:
                 return .white
             case .animals:
-                return .darkGray
+                return .customBaseColor
             case .weather:
-                return .white
+                return .weatherCardColor
             case .astrology:
-                return .blue
+                return .astrologyCardColor
         }
     }
     

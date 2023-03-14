@@ -21,6 +21,11 @@ class SetGameViewController: UIViewController {
         super.viewDidLoad()
         game.delegate = self
         cardGridView.delegate = self
+        
+        newGameButton.tintColor = .customBaseColor
+        hintButton.tintColor = .customBaseColor
+        tabBarController?.tabBar.tintColor = .customBaseColor
+        tabBarController?.tabBar.backgroundColor = .customBaseSecondaryColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,7 +74,7 @@ extension SetGameViewController: SetGameDelegate {
     
     func setGameDidFindHint(_ setGame: SetGame, at indices: [Int]) {
         for index in indices {
-            cardGridView.updateCardViewBackground(at: index, to: .systemYellow)
+            cardGridView.updateCardViewBackground(at: index, to: .setGameHintColor)
         }
         cardGridView.isUserInteractionEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
