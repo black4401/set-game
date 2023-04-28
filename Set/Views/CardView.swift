@@ -81,8 +81,15 @@ class CardView: UIView {
     
     func showBackSide(isDiscarded: Bool) {
         if isDiscarded {
-            darkenView(view: cardBack)
+            //darkenView(view: cardBack)
         }
+        setupCardView()
+        cardBack.image = UIImage(named: "cardBack")
+        addSubview(cardBack)
+    }
+    
+    func darkenCardBack() {
+        darkenView(view: cardBack)
         setupCardView()
         cardBack.image = UIImage(named: "cardBack")
         addSubview(cardBack)

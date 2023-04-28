@@ -16,6 +16,7 @@ class CardGridView: UIView {
     private var cardViews: [CardView] = []
     private var deckView = DeckView()
     private var discardPile = DeckView()
+    var discardedCardViews: [CardView] = []
     private lazy var grid: Grid = {
         let grid = Grid(layout: .aspectRatio(CardViewConstant.aspectRatio), frame: gridFrame)
         return grid
@@ -153,6 +154,7 @@ class CardGridView: UIView {
             
             zoomIn(cardView: cardView)
             animateMatchMovement(of: cardView, delay: delay)
+            discardedCardViews.append(cardView)
             iteration += 1
         }
         relayoutCardViews(at: indices, cards: cards, oldFrames: oldFrames)
@@ -235,6 +237,9 @@ class CardGridView: UIView {
     }
     
     func resetDiscardPile() {
+        for cardView in discardedCardViews {
+            cardView.removeFromSuperview()
+        }
         discardPile.removeCardBack()
     }
     
@@ -255,7 +260,9 @@ private extension CardGridView {
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationConstants.standardDuration, delay: delay, animations: {
             cardView.frame = self.discardPile.frame
             self.animateShowBackSide(of: cardView, delay: delay, frame: self.discardPile.frame)
-        })
+        }) {  _ in
+            cardView.darkenCardBack()
+        }
     }
     
     func animateMatchMovement(of cardView: CardView, delay: Double) {
