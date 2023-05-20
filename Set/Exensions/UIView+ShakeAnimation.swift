@@ -7,9 +7,9 @@
 
 import UIKit
 
-extension UIView{
+extension UIView {
     
-    func shake(){
+    func shake() {
         let animation = CABasicAnimation()
         animation.duration = 0.04
         animation.repeatCount = 5

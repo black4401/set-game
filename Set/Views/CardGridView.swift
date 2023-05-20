@@ -16,6 +16,7 @@ class CardGridView: UIView {
     private var cardViews: [CardView] = []
     private var deckView = DeckView()
     private var discardPile = DeckView()
+    var discardedCardViews: [CardView] = []
     private lazy var grid: Grid = {
         let grid = Grid(layout: .aspectRatio(CardViewConstant.aspectRatio), frame: gridFrame)
         return grid
@@ -56,7 +57,7 @@ class CardGridView: UIView {
             let cardView = CardView(frame: frame)
             
             cardView.frame = deckView.frame
-            cardView.showBackSide()
+            cardView.showBackSide(isDiscarded: false)
             cardView.alpha = 0
             let delay = Double(index)/AnimationConstants.initialDealingDelayModifier
             
@@ -97,7 +98,7 @@ class CardGridView: UIView {
                 })
             } else {
                 cardView.frame = deckView.frame
-                cardView.showBackSide()
+                cardView.showBackSide(isDiscarded: false)
                 cardView.alpha = 0
                 let delay = iterations/AnimationConstants.standardDelayModifier
                 
@@ -129,7 +130,7 @@ class CardGridView: UIView {
             let cardView = CardView(frame: frame)
             
             cardView.frame = deckView.frame
-            cardView.showBackSide()
+            cardView.showBackSide(isDiscarded: false)
             cardView.alpha = 0
             let dealingDelay = iteration/AnimationConstants.standardDelayModifier
             
@@ -153,6 +154,7 @@ class CardGridView: UIView {
             
             zoomIn(cardView: cardView)
             animateMatchMovement(of: cardView, delay: delay)
+            discardedCardViews.append(cardView)
             iteration += 1
         }
         relayoutCardViews(at: indices, cards: cards, oldFrames: oldFrames)
@@ -215,7 +217,7 @@ class CardGridView: UIView {
     }
     
     func updateCardViewBorder(at index: Int, to color: UIColor) {
-        cardViews[index].backgroundColor = .lightGray
+        cardViews[index].backgroundColor = .setGameSelectedColor
     }
     
     func removeCardViewBorder(at index: Int) {
@@ -231,19 +233,18 @@ class CardGridView: UIView {
     }
     
     func resetDeck() {
-        deckView.isEmpty = false
+        deckView.setUpCardBack()
     }
     
     func resetDiscardPile() {
-        discardPile.isEmpty = true
+        for cardView in discardedCardViews {
+            cardView.removeFromSuperview()
+        }
+        discardPile.removeCardBack()
     }
     
     func removeDeckViewImage() {
-        deckView.image = nil
-    }
-    
-    func addCardBackToDiscardPile() {
-        discardPile.isEmpty = false
+        deckView.removeCardBack()
     }
     
     @objc func didTap (_ sender: UITapGestureRecognizer) {
@@ -258,9 +259,9 @@ private extension CardGridView {
         cardView.layer.zPosition = 10
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationConstants.standardDuration, delay: delay, animations: {
             cardView.frame = self.discardPile.frame
-            cardView.alpha = 0
-        }) { _ in
-            cardView.removeFromSuperview()
+            self.animateShowBackSide(of: cardView, delay: delay, frame: self.discardPile.frame)
+        }) {  _ in
+            cardView.darkenCardBack()
         }
     }
     
@@ -275,12 +276,25 @@ private extension CardGridView {
     }
     
     func animateDealing(of cardView: CardView, delay: Double, frame: CGRect) {
+        cardView.backgroundColor = .clear
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationConstants.standardDuration, delay: delay, animations: {
             cardView.frame = frame
             cardView.alpha = 1
         }) { _ in
             UIView.transition(with: cardView, duration: AnimationConstants.standardDuration, options: .transitionFlipFromRight, animations: {
                 cardView.removeBackSide()
+            })
+            cardView.backgroundColor = .white
+        }
+    }
+    
+    func animateShowBackSide(of cardView: CardView, delay: Double, frame: CGRect) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: AnimationConstants.standardDuration, delay: delay, animations: {
+            cardView.frame = frame
+            cardView.alpha = 1
+        }) { _ in
+            UIView.transition(with: cardView, duration: AnimationConstants.standardDuration, options: .transitionFlipFromLeft, animations: {
+                cardView.showBackSide(isDiscarded: true)
             })
         }
     }
@@ -299,7 +313,7 @@ private extension CardGridView {
         
         NSLayoutConstraint.activate([
             deckView.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -100),
-            deckView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            deckView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             deckView.heightAnchor.constraint(equalToConstant: 100),
             deckView.widthAnchor.constraint(equalTo: deckView.heightAnchor, multiplier: CardViewConstant.aspectRatio)
         ])
@@ -309,13 +323,12 @@ private extension CardGridView {
     }
     
     func setupDiscardPile() {
-        discardPile.isEmpty = true
         discardPile.configure()
         discardPile.setBorder(borderWidth: 1.0, borderColor: .white)
         addSubview(discardPile)
         NSLayoutConstraint.activate([
             discardPile.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 105),
-            discardPile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            discardPile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             discardPile.heightAnchor.constraint(equalToConstant: 100),
             discardPile.widthAnchor.constraint(equalTo: discardPile.heightAnchor, multiplier: CardViewConstant.aspectRatio)
         ])

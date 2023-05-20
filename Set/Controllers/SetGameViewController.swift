@@ -21,6 +21,11 @@ class SetGameViewController: UIViewController {
         super.viewDidLoad()
         game.delegate = self
         cardGridView.delegate = self
+        
+        newGameButton.tintColor = .customBaseColor
+        hintButton.tintColor = .customBaseColor
+        tabBarController?.tabBar.tintColor = .customBaseColor
+        tabBarController?.tabBar.backgroundColor = .customBaseSecondaryColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +50,8 @@ class SetGameViewController: UIViewController {
     
     @IBAction func tapOnNewGame(_ sender: UIButton) {
         showNewGameAlert()
+        hintButton.tintAdjustmentMode = .normal
+        newGameButton.tintAdjustmentMode = .normal
     }
     
     @objc func didTap(_ sender: UITapGestureRecognizer) {
@@ -67,7 +74,7 @@ extension SetGameViewController: SetGameDelegate {
     
     func setGameDidFindHint(_ setGame: SetGame, at indices: [Int]) {
         for index in indices {
-            cardGridView.updateCardViewBackground(at: index, to: .systemYellow)
+            cardGridView.updateCardViewBackground(at: index, to: .setGameHintColor)
         }
         cardGridView.isUserInteractionEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
@@ -90,12 +97,10 @@ extension SetGameViewController: SetGameDelegate {
     
     func setGameDidReplaceCards(_ game: SetGame) {
         cardGridView.replaceCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
-        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGameDidRemoveCards(_ game: SetGame) {
         cardGridView.removeCardViews(at: game.selectedCardsIndices, cards: game.dealtCards)
-        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int) {
@@ -123,10 +128,6 @@ extension SetGameViewController: SetGameDelegate {
         if !isEnabled {
             cardGridView.removeDeckViewImage()
         }
-    }
-    
-    func setGameDidFindFirstSet(_ setGame: SetGame) {
-        cardGridView.addCardBackToDiscardPile()
     }
     
     func setGameDidShuffleCardsOnField(_ setGame: SetGame, indices: [Int]) {

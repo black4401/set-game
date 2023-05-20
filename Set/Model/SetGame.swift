@@ -20,7 +20,6 @@ protocol SetGameDelegate: AnyObject {
     
     func setGame(_ setGame: SetGame, didSelectCardAt index: Int)
     func setGame(_ setGame: SetGame, didFindMissmatchAt indices: [Int])
-    func setGameDidFindFirstSet(_ setGame: SetGame)
 }
 
 class SetGame {

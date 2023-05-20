@@ -9,18 +9,21 @@ import UIKit
 
 class DeckView: UIImageView {
     
-    var isEmpty: Bool = false {
-        didSet {
-            if !isEmpty {
-                image = UIImage(named: "cardBack")
-            } else {
-                image = nil
-            }
-        }
+    func removeCardBack() {
+        self.image = nil
+    }
+    
+    func setUpCardBack() {
+        image = UIImage(named: "cardBack")
+    }
+    
+    func setCornerRadius() {
+        layer.cornerRadius = CardViewConstant.cornerRadius
+        layer.masksToBounds = true
     }
     
     func configure() {
-        layer.cornerRadius = CardViewConstant.cornerRadius
+        setCornerRadius()
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = true
     }

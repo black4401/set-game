@@ -79,10 +79,30 @@ class CardView: UIView {
         }
     }
     
-    func showBackSide() {
+    func showBackSide(isDiscarded: Bool) {
+        if isDiscarded {
+            //darkenView(view: cardBack)
+        }
         setupCardView()
         cardBack.image = UIImage(named: "cardBack")
         addSubview(cardBack)
+    }
+    
+    func darkenCardBack() {
+        darkenView(view: cardBack)
+        setupCardView()
+        cardBack.image = UIImage(named: "cardBack")
+        addSubview(cardBack)
+    }
+    
+    func darkenView(view: UIImageView) {
+        let coverLayer = CALayer()
+        coverLayer.frame = view.bounds;
+        coverLayer.backgroundColor = UIColor.black.cgColor
+        coverLayer.opacity = 0.15
+        coverLayer.cornerRadius = CardViewConstant.cornerRadius
+        view.backgroundColor = .black
+        view.layer.addSublayer(coverLayer)
     }
     
     func removeBackSide() {
